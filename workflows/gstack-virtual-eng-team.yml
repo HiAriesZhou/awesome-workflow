@@ -1,0 +1,54 @@
+id: gstack-virtual-eng-team
+title: gstack Virtual Engineering Team
+summary: >-
+  Opinionated Claude Code skill pack that role-plays CEO, design, eng, release,
+  docs, and QA reviews — including autoplan pipelines that chain review phases
+  with checklists and acceptance criteria.
+domain: agent-engineering
+maturity: verified
+tools: [claude-code, skills]
+model_tiers: [premium]
+automation: assisted
+authors: ["Garry Tan"]
+tags: [virtual-team, review-pipeline, skills]
+not_for:
+  - Solo experiments that do not want multi-role ceremony
+  - Non-Claude-Code-only stacks without adaptation
+steps:
+  - id: intake
+    name: Intake change request
+    actor: human
+    human_gate: true
+    inputs: [idea or PR]
+    outputs: [work brief]
+    evidence_url: https://github.com/garrytan/gstack
+  - id: autoplan
+    name: Autoplan review chain
+    actor: agent
+    human_gate: true
+    model_tier: premium
+    inputs: [work brief]
+    outputs: [CEO / design / eng review artifacts]
+    notes: Each phase has its own checklist; humans remain approval gates.
+  - id: build
+    name: Build under eng review norms
+    actor: agent
+    human_gate: false
+    model_tier: premium
+    inputs: [approved plan]
+    outputs: [implementation]
+  - id: qa-ship
+    name: QA and ship checks
+    actor: agent
+    human_gate: true
+    model_tier: standard
+    inputs: [implementation]
+    outputs: [QA notes, release readiness]
+sources:
+  - label: garrytan/gstack
+    url: https://github.com/garrytan/gstack
+    stars: 135767
+  - label: Cookbook citation
+    url: https://github.com/ithiria894/awesome-claude-code-workflows
+added: "2026-10-10"
+verified: "2026-10-10"

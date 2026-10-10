@@ -1,0 +1,51 @@
+id: oneredoak-design-review
+title: Browser Design Review with Playwright MCP
+summary: >-
+  Front-end review loop that drives a real browser via Playwright MCP and
+  specialized Claude Code agents to check UI consistency, a11y, and polish.
+domain: design-review
+maturity: verified
+tools: [claude-code, playwright, mcp]
+model_tiers: [premium]
+automation: assisted
+authors: ["Patrick Ellis (OneRedOak)"]
+tags: [ui, accessibility, playwright]
+not_for:
+  - Pure backend PRs with no UI surface
+steps:
+  - id: prepare
+    name: Boot preview surface
+    actor: human
+    human_gate: true
+    inputs: [local or preview URL]
+    outputs: [reachable UI]
+    evidence_url: https://github.com/OneRedOak/claude-code-workflows/tree/main/design-review
+  - id: browse
+    name: Agent browser walkthrough
+    actor: agent
+    human_gate: false
+    model_tier: premium
+    inputs: [URL, design standards]
+    outputs: [screenshots, a11y notes]
+    notes: Uses Microsoft Playwright MCP for browser automation.
+  - id: critique
+    name: Design critique
+    actor: agent
+    human_gate: false
+    model_tier: premium
+    inputs: [screenshots, component diffs]
+    outputs: [actionable UI findings]
+  - id: apply
+    name: Human accepts visual fixes
+    actor: human
+    human_gate: true
+    inputs: [findings]
+    outputs: [UI patches]
+sources:
+  - label: OneRedOak/claude-code-workflows (design-review)
+    url: https://github.com/OneRedOak/claude-code-workflows
+    stars: 3900
+  - label: Playwright MCP
+    url: https://github.com/microsoft/playwright-mcp
+added: "2026-10-10"
+verified: "2026-10-10"

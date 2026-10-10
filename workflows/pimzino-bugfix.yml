@@ -1,0 +1,51 @@
+id: pimzino-bugfix
+title: Bug Fix Loop (Report → Analyze → Fix → Verify)
+summary: >-
+  A short, gated loop for defects: document the bug, find root cause, implement,
+  then verify — paired with the same Claude Code spec-workflow toolkit.
+domain: ai-coding
+maturity: verified
+tools: [claude-code]
+model_tiers: [standard, premium]
+automation: assisted
+authors: [Pimzino]
+tags: [bugfix, root-cause, verify]
+not_for:
+  - Greenfield features (use spec-driven instead)
+steps:
+  - id: report
+    name: Document the bug
+    actor: human
+    human_gate: true
+    model_tier: unknown
+    inputs: [repro steps, expected vs actual]
+    outputs: [bug brief]
+    evidence_url: https://github.com/Pimzino/claude-code-spec-workflow
+  - id: analyze
+    name: Analyze root cause
+    actor: agent
+    human_gate: true
+    model_tier: premium
+    inputs: [bug brief, codebase]
+    outputs: [root-cause notes]
+    notes: /bug-analyze — keep humans in the loop before code changes.
+  - id: fix
+    name: Implement fix
+    actor: agent
+    human_gate: false
+    model_tier: standard
+    inputs: [root-cause notes]
+    outputs: [patch]
+  - id: verify
+    name: Verify resolution
+    actor: agent
+    human_gate: true
+    model_tier: standard
+    inputs: [patch, repro steps]
+    outputs: [verification evidence]
+sources:
+  - label: Pimzino/claude-code-spec-workflow (bug workflow)
+    url: https://github.com/Pimzino/claude-code-spec-workflow
+    stars: 3860
+added: "2026-10-10"
+verified: "2026-10-10"

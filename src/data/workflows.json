@@ -1,0 +1,956 @@
+{
+  "generated_at": "2026-10-10T08:33:16.634Z",
+  "count": 10,
+  "workflows": [
+    {
+      "id": "oneredoak-security-review",
+      "title": "Automated Security Review Pass",
+      "summary": "On-demand and PR-tied security scanning inspired by Anthropic practice and OWASP Top 10, producing severity-classified findings with remediation hints.",
+      "domain": "ai-coding",
+      "maturity": "verified",
+      "tools": [
+        "claude-code",
+        "github-actions"
+      ],
+      "model_tiers": [
+        "premium",
+        "standard"
+      ],
+      "automation": "semi-auto",
+      "authors": [
+        "Patrick Ellis (OneRedOak)"
+      ],
+      "tags": [
+        "security",
+        "owasp",
+        "pr"
+      ],
+      "not_for": [
+        "Formal penetration testing or compliance attestation"
+      ],
+      "steps": [
+        {
+          "id": "scope",
+          "name": "Choose scan scope",
+          "actor": "human",
+          "human_gate": true,
+          "inputs": [
+            "repo path or PR"
+          ],
+          "outputs": [
+            "scan target"
+          ],
+          "evidence_url": "https://github.com/OneRedOak/claude-code-workflows/tree/main/security-review"
+        },
+        {
+          "id": "scan",
+          "name": "Agent security scan",
+          "actor": "agent",
+          "human_gate": false,
+          "model_tier": "premium",
+          "inputs": [
+            "code",
+            "OWASP heuristics"
+          ],
+          "outputs": [
+            "severity-classified findings"
+          ]
+        },
+        {
+          "id": "remediate",
+          "name": "Remediate or accept risk",
+          "actor": "human",
+          "human_gate": true,
+          "inputs": [
+            "findings"
+          ],
+          "outputs": [
+            "patches",
+            "accepted risks"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "label": "OneRedOak/claude-code-workflows (security-review)",
+          "url": "https://github.com/OneRedOak/claude-code-workflows",
+          "stars": 3900
+        }
+      ],
+      "added": "2026-10-10",
+      "verified": "2026-10-10"
+    },
+    {
+      "id": "oneredoak-design-review",
+      "title": "Browser Design Review with Playwright MCP",
+      "summary": "Front-end review loop that drives a real browser via Playwright MCP and specialized Claude Code agents to check UI consistency, a11y, and polish.",
+      "domain": "design-review",
+      "maturity": "verified",
+      "tools": [
+        "claude-code",
+        "playwright",
+        "mcp"
+      ],
+      "model_tiers": [
+        "premium"
+      ],
+      "automation": "assisted",
+      "authors": [
+        "Patrick Ellis (OneRedOak)"
+      ],
+      "tags": [
+        "ui",
+        "accessibility",
+        "playwright"
+      ],
+      "not_for": [
+        "Pure backend PRs with no UI surface"
+      ],
+      "steps": [
+        {
+          "id": "prepare",
+          "name": "Boot preview surface",
+          "actor": "human",
+          "human_gate": true,
+          "inputs": [
+            "local or preview URL"
+          ],
+          "outputs": [
+            "reachable UI"
+          ],
+          "evidence_url": "https://github.com/OneRedOak/claude-code-workflows/tree/main/design-review"
+        },
+        {
+          "id": "browse",
+          "name": "Agent browser walkthrough",
+          "actor": "agent",
+          "human_gate": false,
+          "model_tier": "premium",
+          "inputs": [
+            "URL",
+            "design standards"
+          ],
+          "outputs": [
+            "screenshots",
+            "a11y notes"
+          ],
+          "notes": "Uses Microsoft Playwright MCP for browser automation."
+        },
+        {
+          "id": "critique",
+          "name": "Design critique",
+          "actor": "agent",
+          "human_gate": false,
+          "model_tier": "premium",
+          "inputs": [
+            "screenshots",
+            "component diffs"
+          ],
+          "outputs": [
+            "actionable UI findings"
+          ]
+        },
+        {
+          "id": "apply",
+          "name": "Human accepts visual fixes",
+          "actor": "human",
+          "human_gate": true,
+          "inputs": [
+            "findings"
+          ],
+          "outputs": [
+            "UI patches"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "label": "OneRedOak/claude-code-workflows (design-review)",
+          "url": "https://github.com/OneRedOak/claude-code-workflows",
+          "stars": 3900
+        },
+        {
+          "label": "Playwright MCP",
+          "url": "https://github.com/microsoft/playwright-mcp"
+        }
+      ],
+      "added": "2026-10-10",
+      "verified": "2026-10-10"
+    },
+    {
+      "id": "pimzino-bugfix",
+      "title": "Bug Fix Loop (Report → Analyze → Fix → Verify)",
+      "summary": "A short, gated loop for defects: document the bug, find root cause, implement, then verify — paired with the same Claude Code spec-workflow toolkit.",
+      "domain": "ai-coding",
+      "maturity": "verified",
+      "tools": [
+        "claude-code"
+      ],
+      "model_tiers": [
+        "standard",
+        "premium"
+      ],
+      "automation": "assisted",
+      "authors": [
+        "Pimzino"
+      ],
+      "tags": [
+        "bugfix",
+        "root-cause",
+        "verify"
+      ],
+      "not_for": [
+        "Greenfield features (use spec-driven instead)"
+      ],
+      "steps": [
+        {
+          "id": "report",
+          "name": "Document the bug",
+          "actor": "human",
+          "human_gate": true,
+          "model_tier": "unknown",
+          "inputs": [
+            "repro steps",
+            "expected vs actual"
+          ],
+          "outputs": [
+            "bug brief"
+          ],
+          "evidence_url": "https://github.com/Pimzino/claude-code-spec-workflow"
+        },
+        {
+          "id": "analyze",
+          "name": "Analyze root cause",
+          "actor": "agent",
+          "human_gate": true,
+          "model_tier": "premium",
+          "inputs": [
+            "bug brief",
+            "codebase"
+          ],
+          "outputs": [
+            "root-cause notes"
+          ],
+          "notes": "/bug-analyze — keep humans in the loop before code changes."
+        },
+        {
+          "id": "fix",
+          "name": "Implement fix",
+          "actor": "agent",
+          "human_gate": false,
+          "model_tier": "standard",
+          "inputs": [
+            "root-cause notes"
+          ],
+          "outputs": [
+            "patch"
+          ]
+        },
+        {
+          "id": "verify",
+          "name": "Verify resolution",
+          "actor": "agent",
+          "human_gate": true,
+          "model_tier": "standard",
+          "inputs": [
+            "patch",
+            "repro steps"
+          ],
+          "outputs": [
+            "verification evidence"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "label": "Pimzino/claude-code-spec-workflow (bug workflow)",
+          "url": "https://github.com/Pimzino/claude-code-spec-workflow",
+          "stars": 3860
+        }
+      ],
+      "added": "2026-10-10",
+      "verified": "2026-10-10"
+    },
+    {
+      "id": "oneredoak-code-review",
+      "title": "Dual-Loop AI Code Review",
+      "summary": "Automate routine PR review (syntax, completeness, style, bugs) with Claude Code slash commands plus GitHub Actions, freeing humans for architecture judgment.",
+      "domain": "ai-coding",
+      "maturity": "verified",
+      "tools": [
+        "claude-code",
+        "github-actions"
+      ],
+      "model_tiers": [
+        "standard"
+      ],
+      "automation": "semi-auto",
+      "authors": [
+        "Patrick Ellis (OneRedOak)"
+      ],
+      "tags": [
+        "code-review",
+        "pr",
+        "ci"
+      ],
+      "not_for": [
+        "Replacing human architectural review on high-risk changes"
+      ],
+      "steps": [
+        {
+          "id": "trigger",
+          "name": "Open or update PR",
+          "actor": "human",
+          "human_gate": true,
+          "inputs": [
+            "diff"
+          ],
+          "outputs": [
+            "pull request"
+          ],
+          "evidence_url": "https://github.com/OneRedOak/claude-code-workflows/tree/main/code-review"
+        },
+        {
+          "id": "agent-review",
+          "name": "Agent blocking-and-tackling review",
+          "actor": "agent",
+          "human_gate": false,
+          "model_tier": "standard",
+          "inputs": [
+            "diff",
+            "style guide"
+          ],
+          "outputs": [
+            "findings comments"
+          ],
+          "notes": "Dual-loop — slash command on demand and Actions on PR events."
+        },
+        {
+          "id": "human-triage",
+          "name": "Human triage of findings",
+          "actor": "human",
+          "human_gate": true,
+          "inputs": [
+            "agent findings"
+          ],
+          "outputs": [
+            "accepted fixes",
+            "deferred items"
+          ]
+        },
+        {
+          "id": "merge-gate",
+          "name": "Merge when clear",
+          "actor": "human",
+          "human_gate": true,
+          "inputs": [
+            "resolved threads"
+          ],
+          "outputs": [
+            "merged PR"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "label": "OneRedOak/claude-code-workflows (code-review)",
+          "url": "https://github.com/OneRedOak/claude-code-workflows",
+          "stars": 3900
+        },
+        {
+          "label": "Tutorial (YouTube)",
+          "url": "https://www.youtube.com/watch?v=nItsfXwujjg"
+        }
+      ],
+      "added": "2026-10-10",
+      "verified": "2026-10-10"
+    },
+    {
+      "id": "github-agentic-workflows",
+      "title": "GitHub Agentic Workflows (Markdown → Actions)",
+      "summary": "Define repo automations in Markdown with YAML frontmatter, compile them with `gh aw` into lockfiles, and run coding agents inside GitHub Actions with guardrails.",
+      "domain": "repo-ops",
+      "maturity": "verified",
+      "tools": [
+        "github-actions",
+        "other"
+      ],
+      "model_tiers": [
+        "standard",
+        "unknown"
+      ],
+      "automation": "automated",
+      "authors": [
+        "GitHub"
+      ],
+      "tags": [
+        "agentic",
+        "actions",
+        "ospo",
+        "markdown"
+      ],
+      "not_for": [
+        "Local interactive coding sessions (this is CI-hosted automation)",
+        "Workflows that need continuous human chat mid-run"
+      ],
+      "steps": [
+        {
+          "id": "author",
+          "name": "Author workflow Markdown",
+          "actor": "human",
+          "human_gate": true,
+          "inputs": [
+            "natural-language instructions",
+            "triggers"
+          ],
+          "outputs": [
+            "markdown workflow file"
+          ],
+          "evidence_url": "https://github.com/github/awesome-copilot/blob/main/docs/README.workflows.md"
+        },
+        {
+          "id": "compile",
+          "name": "Compile with gh aw",
+          "actor": "tool",
+          "human_gate": false,
+          "inputs": [
+            "markdown workflow"
+          ],
+          "outputs": [
+            "lock.yml Actions file"
+          ],
+          "notes": "Use gh extension install github/gh-aw then gh aw compile."
+        },
+        {
+          "id": "commit",
+          "name": "Commit source + lockfile",
+          "actor": "human",
+          "human_gate": true,
+          "inputs": [
+            "markdown source",
+            "lock.yml"
+          ],
+          "outputs": [
+            "repo commit"
+          ]
+        },
+        {
+          "id": "run",
+          "name": "Event or schedule run",
+          "actor": "ci",
+          "human_gate": false,
+          "model_tier": "standard",
+          "inputs": [
+            "trigger"
+          ],
+          "outputs": [
+            "agent run logs",
+            "issues/PRs as configured"
+          ],
+          "notes": "Monitor with gh aw status / logs; examples include daily issues reports and OSPO health."
+        }
+      ],
+      "sources": [
+        {
+          "label": "github/awesome-copilot Agentic Workflows docs",
+          "url": "https://github.com/github/awesome-copilot/blob/main/docs/README.workflows.md",
+          "stars": 39879
+        },
+        {
+          "label": "GitHub Agentic Workflows spec",
+          "url": "https://github.github.com/gh-aw"
+        }
+      ],
+      "added": "2026-10-10",
+      "verified": "2026-10-10"
+    },
+    {
+      "id": "gstack-virtual-eng-team",
+      "title": "gstack Virtual Engineering Team",
+      "summary": "Opinionated Claude Code skill pack that role-plays CEO, design, eng, release, docs, and QA reviews — including autoplan pipelines that chain review phases with checklists and acceptance criteria.",
+      "domain": "agent-engineering",
+      "maturity": "verified",
+      "tools": [
+        "claude-code",
+        "skills"
+      ],
+      "model_tiers": [
+        "premium"
+      ],
+      "automation": "assisted",
+      "authors": [
+        "Garry Tan"
+      ],
+      "tags": [
+        "virtual-team",
+        "review-pipeline",
+        "skills"
+      ],
+      "not_for": [
+        "Solo experiments that do not want multi-role ceremony",
+        "Non-Claude-Code-only stacks without adaptation"
+      ],
+      "steps": [
+        {
+          "id": "intake",
+          "name": "Intake change request",
+          "actor": "human",
+          "human_gate": true,
+          "inputs": [
+            "idea or PR"
+          ],
+          "outputs": [
+            "work brief"
+          ],
+          "evidence_url": "https://github.com/garrytan/gstack"
+        },
+        {
+          "id": "autoplan",
+          "name": "Autoplan review chain",
+          "actor": "agent",
+          "human_gate": true,
+          "model_tier": "premium",
+          "inputs": [
+            "work brief"
+          ],
+          "outputs": [
+            "CEO / design / eng review artifacts"
+          ],
+          "notes": "Each phase has its own checklist; humans remain approval gates."
+        },
+        {
+          "id": "build",
+          "name": "Build under eng review norms",
+          "actor": "agent",
+          "human_gate": false,
+          "model_tier": "premium",
+          "inputs": [
+            "approved plan"
+          ],
+          "outputs": [
+            "implementation"
+          ]
+        },
+        {
+          "id": "qa-ship",
+          "name": "QA and ship checks",
+          "actor": "agent",
+          "human_gate": true,
+          "model_tier": "standard",
+          "inputs": [
+            "implementation"
+          ],
+          "outputs": [
+            "QA notes",
+            "release readiness"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "label": "garrytan/gstack",
+          "url": "https://github.com/garrytan/gstack",
+          "stars": 135767
+        },
+        {
+          "label": "Cookbook citation",
+          "url": "https://github.com/ithiria894/awesome-claude-code-workflows"
+        }
+      ],
+      "added": "2026-10-10",
+      "verified": "2026-10-10"
+    },
+    {
+      "id": "claude-mem-session-continuity",
+      "title": "Persistent Agent Memory Across Sessions",
+      "summary": "Capture what the agent does during a session, compress with AI, and reinject relevant context into future sessions — a continuity workflow for Claude Code and other agents that otherwise forget between chats.",
+      "domain": "agent-engineering",
+      "maturity": "verified",
+      "tools": [
+        "claude-code",
+        "mcp",
+        "skills",
+        "other"
+      ],
+      "model_tiers": [
+        "standard",
+        "cheap"
+      ],
+      "automation": "semi-auto",
+      "authors": [
+        "thedotmack"
+      ],
+      "tags": [
+        "memory",
+        "context",
+        "continuity"
+      ],
+      "not_for": [
+        "Highly sensitive repos without a clear retention/redaction policy",
+        "One-off disposable sandboxes"
+      ],
+      "steps": [
+        {
+          "id": "capture",
+          "name": "Auto-capture session activity",
+          "actor": "tool",
+          "human_gate": false,
+          "inputs": [
+            "agent actions",
+            "tool results"
+          ],
+          "outputs": [
+            "raw session trace"
+          ],
+          "evidence_url": "https://github.com/thedotmack/claude-mem"
+        },
+        {
+          "id": "compress",
+          "name": "Compress with AI",
+          "actor": "agent",
+          "human_gate": false,
+          "model_tier": "cheap",
+          "inputs": [
+            "raw trace"
+          ],
+          "outputs": [
+            "memory artifacts"
+          ]
+        },
+        {
+          "id": "reinject",
+          "name": "Reinject on next session",
+          "actor": "tool",
+          "human_gate": false,
+          "inputs": [
+            "memory index",
+            "new task"
+          ],
+          "outputs": [
+            "relevant context block"
+          ]
+        },
+        {
+          "id": "human-audit",
+          "name": "Periodic human audit",
+          "actor": "human",
+          "human_gate": true,
+          "inputs": [
+            "stored memories"
+          ],
+          "outputs": [
+            "redactions",
+            "retention decisions"
+          ],
+          "notes": "Anti-example reminder — memory without governance becomes a liability."
+        }
+      ],
+      "sources": [
+        {
+          "label": "thedotmack/claude-mem",
+          "url": "https://github.com/thedotmack/claude-mem",
+          "stars": 99062
+        }
+      ],
+      "added": "2026-10-10",
+      "verified": "2026-10-10"
+    },
+    {
+      "id": "pimzino-spec-driven",
+      "title": "Spec-Driven Feature Workflow",
+      "summary": "Structure new features as Requirements → Design → Tasks → Implementation with Claude Code slash commands, document templates, and optional per-task agents.",
+      "domain": "ai-coding",
+      "maturity": "verified",
+      "tools": [
+        "claude-code",
+        "skills"
+      ],
+      "model_tiers": [
+        "premium",
+        "standard"
+      ],
+      "automation": "assisted",
+      "authors": [
+        "Pimzino"
+      ],
+      "tags": [
+        "spec-driven",
+        "slash-commands",
+        "feature"
+      ],
+      "not_for": [
+        "Tiny one-line fixes (use the bug-fix workflow instead)",
+        "Teams that refuse written requirements before coding"
+      ],
+      "steps": [
+        {
+          "id": "requirements",
+          "name": "Capture requirements",
+          "actor": "agent",
+          "human_gate": true,
+          "model_tier": "premium",
+          "inputs": [
+            "feature idea",
+            "constraints"
+          ],
+          "outputs": [
+            "user stories",
+            "acceptance criteria"
+          ],
+          "notes": "Typically started with /spec-create; human reviews stories before design.",
+          "evidence_url": "https://github.com/Pimzino/claude-code-spec-workflow"
+        },
+        {
+          "id": "design",
+          "name": "Technical design",
+          "actor": "agent",
+          "human_gate": true,
+          "model_tier": "premium",
+          "inputs": [
+            "requirements doc"
+          ],
+          "outputs": [
+            "architecture notes",
+            "diagrams"
+          ]
+        },
+        {
+          "id": "tasks",
+          "name": "Break into atomic tasks",
+          "actor": "agent",
+          "human_gate": false,
+          "model_tier": "standard",
+          "inputs": [
+            "design doc"
+          ],
+          "outputs": [
+            "task list",
+            "optional auto-generated commands"
+          ]
+        },
+        {
+          "id": "implement",
+          "name": "Execute tasks",
+          "actor": "agent",
+          "human_gate": true,
+          "model_tier": "standard",
+          "inputs": [
+            "task id",
+            "feature name"
+          ],
+          "outputs": [
+            "code changes",
+            "verification notes"
+          ],
+          "notes": "Manual /spec-execute or generated task commands; human gates between risky tasks."
+        }
+      ],
+      "sources": [
+        {
+          "label": "Pimzino/claude-code-spec-workflow",
+          "url": "https://github.com/Pimzino/claude-code-spec-workflow",
+          "stars": 3860
+        }
+      ],
+      "added": "2026-10-10",
+      "verified": "2026-10-10"
+    },
+    {
+      "id": "obra-superpowers-plan-execute",
+      "title": "Superpowers Plan-Then-Execute",
+      "summary": "Composable Claude Code plugin skills for brainstorming, writing a structured plan, executing step-by-step with verification gates, plus optional parallel subagent dispatch and review loops.",
+      "domain": "agent-engineering",
+      "maturity": "verified",
+      "tools": [
+        "claude-code",
+        "skills"
+      ],
+      "model_tiers": [
+        "premium",
+        "standard"
+      ],
+      "automation": "assisted",
+      "authors": [
+        "Jesse Vincent (obra)"
+      ],
+      "tags": [
+        "plan-execute",
+        "tdd",
+        "subagents",
+        "hooks"
+      ],
+      "not_for": [
+        "Fire-and-forget prompts with no verification gates"
+      ],
+      "steps": [
+        {
+          "id": "brainstorm",
+          "name": "Brainstorm / clarify intent",
+          "actor": "agent",
+          "human_gate": true,
+          "model_tier": "premium",
+          "inputs": [
+            "rough idea"
+          ],
+          "outputs": [
+            "aligned goal"
+          ],
+          "evidence_url": "https://github.com/obra/superpowers"
+        },
+        {
+          "id": "write-plan",
+          "name": "Write structured plan",
+          "actor": "agent",
+          "human_gate": true,
+          "model_tier": "premium",
+          "inputs": [
+            "goal"
+          ],
+          "outputs": [
+            "plan document"
+          ],
+          "notes": "/write-plan style skill — human approves before execution."
+        },
+        {
+          "id": "execute",
+          "name": "Execute plan stepwise",
+          "actor": "agent",
+          "human_gate": false,
+          "model_tier": "standard",
+          "inputs": [
+            "approved plan"
+          ],
+          "outputs": [
+            "incremental diffs"
+          ],
+          "notes": "Verification gates between steps; parallel subagents when tasks are independent."
+        },
+        {
+          "id": "review",
+          "name": "Review loop",
+          "actor": "agent",
+          "human_gate": true,
+          "model_tier": "standard",
+          "inputs": [
+            "diffs"
+          ],
+          "outputs": [
+            "review notes",
+            "follow-ups"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "label": "obra/superpowers",
+          "url": "https://github.com/obra/superpowers",
+          "stars": 297010
+        },
+        {
+          "label": "Cited in awesome-claude-code-workflows",
+          "url": "https://github.com/ithiria894/awesome-claude-code-workflows"
+        }
+      ],
+      "added": "2026-10-10",
+      "verified": "2026-10-10"
+    },
+    {
+      "id": "tw93-waza-think-check",
+      "title": "Waza Think → Implement → Check",
+      "summary": "Engineering-habit skills for AI assistants: turn rough ideas into decision-complete plans (/think), implement, then review diffs and release readiness (/check) before shipping — without inventing a new platform.",
+      "domain": "agent-engineering",
+      "maturity": "verified",
+      "tools": [
+        "skills",
+        "claude-code",
+        "codex",
+        "cursor"
+      ],
+      "model_tiers": [
+        "premium",
+        "standard"
+      ],
+      "automation": "assisted",
+      "authors": [
+        "tw93"
+      ],
+      "tags": [
+        "waza",
+        "plan",
+        "review",
+        "skills"
+      ],
+      "not_for": [
+        "Tiny typos where a full think/check cycle is overhead"
+      ],
+      "steps": [
+        {
+          "id": "think",
+          "name": "Plan with /think",
+          "actor": "agent",
+          "human_gate": true,
+          "model_tier": "premium",
+          "inputs": [
+            "rough idea",
+            "repo constraints"
+          ],
+          "outputs": [
+            "decision-complete plan"
+          ],
+          "notes": "No scaffolding until the plan is approved.",
+          "evidence_url": "https://github.com/tw93/Waza"
+        },
+        {
+          "id": "implement",
+          "name": "Implement approved plan",
+          "actor": "agent",
+          "human_gate": false,
+          "model_tier": "standard",
+          "inputs": [
+            "approved plan"
+          ],
+          "outputs": [
+            "code diff"
+          ]
+        },
+        {
+          "id": "check",
+          "name": "Review with /check",
+          "actor": "agent",
+          "human_gate": true,
+          "model_tier": "standard",
+          "inputs": [
+            "diff",
+            "CI signals"
+          ],
+          "outputs": [
+            "findings",
+            "ship/no-ship"
+          ],
+          "notes": "Report-only by default; fixes need explicit repair authorization."
+        },
+        {
+          "id": "ship",
+          "name": "Ship follow-through",
+          "actor": "human",
+          "human_gate": true,
+          "inputs": [
+            "check sign-off"
+          ],
+          "outputs": [
+            "commit / PR / release"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "label": "tw93/Waza",
+          "url": "https://github.com/tw93/Waza",
+          "stars": 7222
+        }
+      ],
+      "added": "2026-10-10",
+      "verified": "2026-10-10"
+    }
+  ]
+}

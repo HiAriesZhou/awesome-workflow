@@ -1,0 +1,41 @@
+id: oneredoak-security-review
+title: Automated Security Review Pass
+summary: >-
+  On-demand and PR-tied security scanning inspired by Anthropic practice and
+  OWASP Top 10, producing severity-classified findings with remediation hints.
+domain: ai-coding
+maturity: verified
+tools: [claude-code, github-actions]
+model_tiers: [premium, standard]
+automation: semi-auto
+authors: ["Patrick Ellis (OneRedOak)"]
+tags: [security, owasp, pr]
+not_for:
+  - Formal penetration testing or compliance attestation
+steps:
+  - id: scope
+    name: Choose scan scope
+    actor: human
+    human_gate: true
+    inputs: [repo path or PR]
+    outputs: [scan target]
+    evidence_url: https://github.com/OneRedOak/claude-code-workflows/tree/main/security-review
+  - id: scan
+    name: Agent security scan
+    actor: agent
+    human_gate: false
+    model_tier: premium
+    inputs: [code, OWASP heuristics]
+    outputs: [severity-classified findings]
+  - id: remediate
+    name: Remediate or accept risk
+    actor: human
+    human_gate: true
+    inputs: [findings]
+    outputs: [patches, accepted risks]
+sources:
+  - label: OneRedOak/claude-code-workflows (security-review)
+    url: https://github.com/OneRedOak/claude-code-workflows
+    stars: 3900
+added: "2026-10-10"
+verified: "2026-10-10"

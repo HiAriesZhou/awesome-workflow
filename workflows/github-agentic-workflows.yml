@@ -1,0 +1,52 @@
+id: github-agentic-workflows
+title: GitHub Agentic Workflows (Markdown → Actions)
+summary: >-
+  Define repo automations in Markdown with YAML frontmatter, compile them with
+  `gh aw` into lockfiles, and run coding agents inside GitHub Actions with guardrails.
+domain: repo-ops
+maturity: verified
+tools: [github-actions, other]
+model_tiers: [standard, unknown]
+automation: automated
+authors: [GitHub]
+tags: [agentic, actions, ospo, markdown]
+not_for:
+  - Local interactive coding sessions (this is CI-hosted automation)
+  - Workflows that need continuous human chat mid-run
+steps:
+  - id: author
+    name: Author workflow Markdown
+    actor: human
+    human_gate: true
+    inputs: [natural-language instructions, triggers]
+    outputs: ["markdown workflow file"]
+    evidence_url: https://github.com/github/awesome-copilot/blob/main/docs/README.workflows.md
+  - id: compile
+    name: Compile with gh aw
+    actor: tool
+    human_gate: false
+    inputs: ["markdown workflow"]
+    outputs: ["lock.yml Actions file"]
+    notes: "Use gh extension install github/gh-aw then gh aw compile."
+  - id: commit
+    name: Commit source + lockfile
+    actor: human
+    human_gate: true
+    inputs: [markdown source, lock.yml]
+    outputs: [repo commit]
+  - id: run
+    name: Event or schedule run
+    actor: ci
+    human_gate: false
+    model_tier: standard
+    inputs: [trigger]
+    outputs: [agent run logs, issues/PRs as configured]
+    notes: Monitor with gh aw status / logs; examples include daily issues reports and OSPO health.
+sources:
+  - label: github/awesome-copilot Agentic Workflows docs
+    url: https://github.com/github/awesome-copilot/blob/main/docs/README.workflows.md
+    stars: 39879
+  - label: GitHub Agentic Workflows spec
+    url: https://github.github.com/gh-aw
+added: "2026-10-10"
+verified: "2026-10-10"

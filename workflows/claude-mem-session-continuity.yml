@@ -1,0 +1,50 @@
+id: claude-mem-session-continuity
+title: Persistent Agent Memory Across Sessions
+summary: >-
+  Capture what the agent does during a session, compress with AI, and reinject
+  relevant context into future sessions — a continuity workflow for Claude Code
+  and other agents that otherwise forget between chats.
+domain: agent-engineering
+maturity: verified
+tools: [claude-code, mcp, skills, other]
+model_tiers: [standard, cheap]
+automation: semi-auto
+authors: [thedotmack]
+tags: [memory, context, continuity]
+not_for:
+  - Highly sensitive repos without a clear retention/redaction policy
+  - One-off disposable sandboxes
+steps:
+  - id: capture
+    name: Auto-capture session activity
+    actor: tool
+    human_gate: false
+    inputs: [agent actions, tool results]
+    outputs: [raw session trace]
+    evidence_url: https://github.com/thedotmack/claude-mem
+  - id: compress
+    name: Compress with AI
+    actor: agent
+    human_gate: false
+    model_tier: cheap
+    inputs: [raw trace]
+    outputs: [memory artifacts]
+  - id: reinject
+    name: Reinject on next session
+    actor: tool
+    human_gate: false
+    inputs: [memory index, new task]
+    outputs: [relevant context block]
+  - id: human-audit
+    name: Periodic human audit
+    actor: human
+    human_gate: true
+    inputs: [stored memories]
+    outputs: [redactions, retention decisions]
+    notes: Anti-example reminder — memory without governance becomes a liability.
+sources:
+  - label: thedotmack/claude-mem
+    url: https://github.com/thedotmack/claude-mem
+    stars: 99062
+added: "2026-10-10"
+verified: "2026-10-10"

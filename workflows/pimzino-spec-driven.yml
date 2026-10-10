@@ -1,0 +1,53 @@
+id: pimzino-spec-driven
+title: Spec-Driven Feature Workflow
+summary: >-
+  Structure new features as Requirements → Design → Tasks → Implementation with
+  Claude Code slash commands, document templates, and optional per-task agents.
+domain: ai-coding
+maturity: verified
+tools: [claude-code, skills]
+model_tiers: [premium, standard]
+automation: assisted
+authors: [Pimzino]
+tags: [spec-driven, slash-commands, feature]
+not_for:
+  - Tiny one-line fixes (use the bug-fix workflow instead)
+  - Teams that refuse written requirements before coding
+steps:
+  - id: requirements
+    name: Capture requirements
+    actor: agent
+    human_gate: true
+    model_tier: premium
+    inputs: [feature idea, constraints]
+    outputs: [user stories, acceptance criteria]
+    notes: Typically started with /spec-create; human reviews stories before design.
+    evidence_url: https://github.com/Pimzino/claude-code-spec-workflow
+  - id: design
+    name: Technical design
+    actor: agent
+    human_gate: true
+    model_tier: premium
+    inputs: [requirements doc]
+    outputs: [architecture notes, diagrams]
+  - id: tasks
+    name: Break into atomic tasks
+    actor: agent
+    human_gate: false
+    model_tier: standard
+    inputs: [design doc]
+    outputs: [task list, optional auto-generated commands]
+  - id: implement
+    name: Execute tasks
+    actor: agent
+    human_gate: true
+    model_tier: standard
+    inputs: [task id, feature name]
+    outputs: [code changes, verification notes]
+    notes: Manual /spec-execute or generated task commands; human gates between risky tasks.
+sources:
+  - label: Pimzino/claude-code-spec-workflow
+    url: https://github.com/Pimzino/claude-code-spec-workflow
+    stars: 3860
+added: "2026-10-10"
+verified: "2026-10-10"

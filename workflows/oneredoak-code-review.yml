@@ -1,0 +1,50 @@
+id: oneredoak-code-review
+title: Dual-Loop AI Code Review
+summary: >-
+  Automate routine PR review (syntax, completeness, style, bugs) with Claude Code
+  slash commands plus GitHub Actions, freeing humans for architecture judgment.
+domain: ai-coding
+maturity: verified
+tools: [claude-code, github-actions]
+model_tiers: [standard]
+automation: semi-auto
+authors: ["Patrick Ellis (OneRedOak)"]
+tags: [code-review, pr, ci]
+not_for:
+  - Replacing human architectural review on high-risk changes
+steps:
+  - id: trigger
+    name: Open or update PR
+    actor: human
+    human_gate: true
+    inputs: [diff]
+    outputs: [pull request]
+    evidence_url: https://github.com/OneRedOak/claude-code-workflows/tree/main/code-review
+  - id: agent-review
+    name: Agent blocking-and-tackling review
+    actor: agent
+    human_gate: false
+    model_tier: standard
+    inputs: [diff, style guide]
+    outputs: [findings comments]
+    notes: Dual-loop — slash command on demand and Actions on PR events.
+  - id: human-triage
+    name: Human triage of findings
+    actor: human
+    human_gate: true
+    inputs: [agent findings]
+    outputs: [accepted fixes, deferred items]
+  - id: merge-gate
+    name: Merge when clear
+    actor: human
+    human_gate: true
+    inputs: [resolved threads]
+    outputs: [merged PR]
+sources:
+  - label: OneRedOak/claude-code-workflows (code-review)
+    url: https://github.com/OneRedOak/claude-code-workflows
+    stars: 3900
+  - label: Tutorial (YouTube)
+    url: https://www.youtube.com/watch?v=nItsfXwujjg
+added: "2026-10-10"
+verified: "2026-10-10"

@@ -1,0 +1,52 @@
+id: tw93-waza-think-check
+title: Waza Think → Implement → Check
+summary: >-
+  Engineering-habit skills for AI assistants: turn rough ideas into
+  decision-complete plans (/think), implement, then review diffs and release
+  readiness (/check) before shipping — without inventing a new platform.
+domain: agent-engineering
+maturity: verified
+tools: [skills, claude-code, codex, cursor]
+model_tiers: [premium, standard]
+automation: assisted
+authors: [tw93]
+tags: [waza, plan, review, skills]
+not_for:
+  - Tiny typos where a full think/check cycle is overhead
+steps:
+  - id: think
+    name: Plan with /think
+    actor: agent
+    human_gate: true
+    model_tier: premium
+    inputs: [rough idea, repo constraints]
+    outputs: [decision-complete plan]
+    notes: No scaffolding until the plan is approved.
+    evidence_url: https://github.com/tw93/Waza
+  - id: implement
+    name: Implement approved plan
+    actor: agent
+    human_gate: false
+    model_tier: standard
+    inputs: [approved plan]
+    outputs: [code diff]
+  - id: check
+    name: Review with /check
+    actor: agent
+    human_gate: true
+    model_tier: standard
+    inputs: [diff, CI signals]
+    outputs: [findings, ship/no-ship]
+    notes: Report-only by default; fixes need explicit repair authorization.
+  - id: ship
+    name: Ship follow-through
+    actor: human
+    human_gate: true
+    inputs: [check sign-off]
+    outputs: [commit / PR / release]
+sources:
+  - label: tw93/Waza
+    url: https://github.com/tw93/Waza
+    stars: 7222
+added: "2026-10-10"
+verified: "2026-10-10"

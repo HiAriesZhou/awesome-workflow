@@ -1,0 +1,55 @@
+id: obra-superpowers-plan-execute
+title: Superpowers Plan-Then-Execute
+summary: >-
+  Composable Claude Code plugin skills for brainstorming, writing a structured
+  plan, executing step-by-step with verification gates, plus optional parallel
+  subagent dispatch and review loops.
+domain: agent-engineering
+maturity: verified
+tools: [claude-code, skills]
+model_tiers: [premium, standard]
+automation: assisted
+authors: ["Jesse Vincent (obra)"]
+tags: [plan-execute, tdd, subagents, hooks]
+not_for:
+  - Fire-and-forget prompts with no verification gates
+steps:
+  - id: brainstorm
+    name: Brainstorm / clarify intent
+    actor: agent
+    human_gate: true
+    model_tier: premium
+    inputs: [rough idea]
+    outputs: [aligned goal]
+    evidence_url: https://github.com/obra/superpowers
+  - id: write-plan
+    name: Write structured plan
+    actor: agent
+    human_gate: true
+    model_tier: premium
+    inputs: [goal]
+    outputs: [plan document]
+    notes: /write-plan style skill — human approves before execution.
+  - id: execute
+    name: Execute plan stepwise
+    actor: agent
+    human_gate: false
+    model_tier: standard
+    inputs: [approved plan]
+    outputs: [incremental diffs]
+    notes: Verification gates between steps; parallel subagents when tasks are independent.
+  - id: review
+    name: Review loop
+    actor: agent
+    human_gate: true
+    model_tier: standard
+    inputs: [diffs]
+    outputs: [review notes, follow-ups]
+sources:
+  - label: obra/superpowers
+    url: https://github.com/obra/superpowers
+    stars: 297010
+  - label: Cited in awesome-claude-code-workflows
+    url: https://github.com/ithiria894/awesome-claude-code-workflows
+added: "2026-10-10"
+verified: "2026-10-10"

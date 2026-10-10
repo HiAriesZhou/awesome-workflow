@@ -1,0 +1,7 @@
+# Agent notes
+
+- Source of truth: `workflows/*.yml`
+- Never hand-edit the generated Contents in `README.md` or `src/data/workflows.json`; run `npm run build:data`
+- This project is a **library**, not a workflow generator or runner
+- Prefer Waza `/think` for structure changes, `/check` before release
+- No paid APIs in default build/preview path
