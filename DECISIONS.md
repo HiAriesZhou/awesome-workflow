@@ -33,13 +33,13 @@ Documented with Waza `/think` before coding. Date: 2026-10-10 (Asia/Shanghai).
 
 | ID | Decision | Choice |
 |----|----------|--------|
-| C1 | Seed count | 8 verified notable workflows (GitHub primary; stars as of 2026-10-10) |
-| C2 | Evidence | Every step may cite `source_url`; workflow requires primary `sources[]` |
+| C1 | Seed count | 8 verified notable workflows planned; v0.1.0 shipped with 10 (GitHub primary; stars as of 2026-10-10) |
+| C2 | Evidence | Every step may cite `evidence_url`; workflow requires primary `sources[]` |
 | C3 | Anti-example | At least one entry documents `not_for` / limits |
 
 ## Ops
 
 | ID | Decision | Choice |
 |----|----------|--------|
-| O1 | Pages | `main` → build → `gh-pages` via Actions (or `/docs` fallback) |
+| O1 | Pages | `main` → build → `actions/deploy-pages` artifact (no `gh-pages` branch); PRs run the Check workflow |
 | O2 | Ingest automation | Not in v1 (plan Phase C; needs separate approval) |

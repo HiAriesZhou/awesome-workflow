@@ -57,6 +57,11 @@ if (files.length === 0) {
 const workflows = []
 const errors = []
 
+// Values used as React keys or ids must not repeat within their list.
+function duplicates(values) {
+  return [...new Set(values.filter((v, i) => values.indexOf(v) !== i))]
+}
+
 for (const file of files) {
   const full = path.join(workflowsDir, file)
   const raw = fs.readFileSync(full, 'utf8')
@@ -80,7 +85,20 @@ for (const file of files) {
     )
     continue
   }
+  const keyedLists = [
+    ['steps[].id', data.steps.map((s) => s.id)],
+    ['sources[].url', data.sources.map((s) => s.url)],
+    ['not_for', data.not_for ?? []]
+  ]
+  for (const [field, values] of keyedLists) {
+    const dup = duplicates(values)
+    if (dup.length) errors.push(`${file}: duplicate ${field}: ${dup.join(', ')}`)
+  }
   workflows.push(data)
+}
+
+for (const id of duplicates(workflows.map((w) => w.id))) {
+  errors.push(`duplicate workflow id across files: ${id}`)
 }
 
 if (errors.length) {

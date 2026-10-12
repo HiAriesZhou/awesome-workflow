@@ -40,12 +40,12 @@ export function WorkflowDetail({ workflow }: { workflow: Workflow }) {
                   <span className="badge amber">{step.model_tier} model</span>
                 ) : null}
               </div>
-              {(step.inputs?.length || step.outputs?.length) && (
+              {step.inputs?.length || step.outputs?.length ? (
                 <div className="io">
                   {step.inputs?.length ? <>in: {step.inputs.join(', ')} · </> : null}
                   {step.outputs?.length ? <>out: {step.outputs.join(', ')}</> : null}
                 </div>
-              )}
+              ) : null}
               {step.notes ? <p className="step-notes">{step.notes}</p> : null}
               {step.evidence_url ? (
                 <p className="step-notes">

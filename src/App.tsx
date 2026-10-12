@@ -193,7 +193,8 @@ export default function App() {
 
       <footer className="footer">
         MIT · Contributions welcome via YAML PRs · Not affiliated with the
-        upstream projects we cite · Stars captured 2026-10-10 via GitHub API
+        upstream projects we cite · Stars as of last verification
+        ({data.generated_at})
       </footer>
     </div>
   )
