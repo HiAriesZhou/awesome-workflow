@@ -1,28 +1,7 @@
-export const domainLabel: Record<string, string> = {
-  'ai-coding': 'AI Coding',
-  'agent-engineering': 'Agent Engineering',
-  'repo-ops': 'Repo Ops',
-  research: 'Research',
-  'design-review': 'Design Review',
-  other: 'Other',
-}
+import taxonomy from './taxonomy.json'
 
-export const actorLabel: Record<string, string> = {
-  human: 'Human',
-  agent: 'Agent',
-  tool: 'Tool',
-  ci: 'CI',
-}
-
-export const toolLabel: Record<string, string> = {
-  'claude-code': 'Claude Code',
-  codex: 'Codex',
-  cursor: 'Cursor',
-  grok: 'Grok',
-  'github-actions': 'GitHub Actions',
-  n8n: 'n8n',
-  playwright: 'Playwright',
-  mcp: 'MCP',
-  skills: 'Skills',
-  other: 'Other',
-}
+// Single source for ids and display names; scripts/build.mjs checks the
+// schema enums against the same file.
+export const domainLabel: Record<string, string> = taxonomy.domains
+export const actorLabel: Record<string, string> = taxonomy.actors
+export const toolLabel: Record<string, string> = taxonomy.tools

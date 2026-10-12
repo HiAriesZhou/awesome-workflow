@@ -17,11 +17,32 @@ const workflowsDir = path.join(root, 'workflows')
 const schemaPath = path.join(root, 'schema', 'workflow.schema.json')
 const outJson = path.join(root, 'src', 'data', 'workflows.json')
 const readmePath = path.join(root, 'README.md')
+const taxonomyPath = path.join(root, 'src', 'lib', 'taxonomy.json')
 
 const schema = JSON.parse(fs.readFileSync(schemaPath, 'utf8'))
 const ajv = new Ajv({ allErrors: true, strict: false })
 addFormats(ajv)
 const validate = ajv.compile(schema)
+
+// taxonomy.json owns display names; the schema enums must list the same ids.
+const taxonomy = JSON.parse(fs.readFileSync(taxonomyPath, 'utf8'))
+const enumChecks = [
+  ['domains', schema.properties.domain.enum],
+  ['tools', schema.properties.tools.items.enum],
+  ['actors', schema.properties.steps.items.properties.actor.enum]
+]
+for (const [key, schemaIds] of enumChecks) {
+  const taxonomyIds = Object.keys(taxonomy[key])
+  const same =
+    taxonomyIds.length === schemaIds.length &&
+    taxonomyIds.every((id) => schemaIds.includes(id))
+  if (!same) {
+    console.error(
+      `taxonomy.json ${key} [${taxonomyIds.join(', ')}] does not match schema enum [${schemaIds.join(', ')}]`
+    )
+    process.exit(1)
+  }
+}
 
 const files = fs
   .readdirSync(workflowsDir)
@@ -69,12 +90,17 @@ if (errors.length) {
 
 workflows.sort((a, b) => a.title.localeCompare(b.title))
 
+// Derive the date from the data so unchanged YAML regenerates byte-identical output.
+const dataDate = workflows
+  .map((w) => w.verified)
+  .reduce((a, b) => (a > b ? a : b))
+
 fs.mkdirSync(path.dirname(outJson), { recursive: true })
 fs.writeFileSync(
   outJson,
   JSON.stringify(
     {
-      generated_at: new Date().toISOString(),
+      generated_at: dataDate,
       count: workflows.length,
       workflows
     },
@@ -89,13 +115,12 @@ for (const w of workflows) {
   byDomain.get(w.domain).push(w)
 }
 
-const domainTitle = {
-  'ai-coding': 'AI Coding',
-  'agent-engineering': 'Agent Engineering',
-  'repo-ops': 'Repository Ops',
-  research: 'Research',
-  'design-review': 'Design Review',
-  other: 'Other'
+// GitHub heading anchor: lowercase, drop punctuation, spaces to hyphens.
+function slug(heading) {
+  return heading
+    .toLowerCase()
+    .replace(/[^a-z0-9 -]/g, '')
+    .replace(/ /g, '-')
 }
 
 function stars(w) {
@@ -109,9 +134,9 @@ let body = ''
 for (const [domain, list] of [...byDomain.entries()].sort((a, b) =>
   a[0].localeCompare(b[0])
 )) {
-  const anchor = domain
-  toc += `- [${domainTitle[domain] || domain}](#${anchor})\n`
-  body += `\n## ${domainTitle[domain] || domain}\n\n`
+  const heading = taxonomy.domains[domain]
+  toc += `- [${heading}](#${slug(heading)})\n`
+  body += `\n## ${heading}\n\n`
   for (const w of list) {
     const primary = w.sources[0]
     body += `- **[${w.title}](${primary.url})**${stars(w)} — ${w.summary}  \n`
@@ -187,7 +212,7 @@ MIT © Aries Zhou and contributors.
 
 ---
 
-*Generated ${new Date().toISOString().slice(0, 10)} from ${workflows.length} workflow files. Do not hand-edit the Contents section; edit YAML and run \`npm run build:data\`.*
+*Generated ${dataDate} from ${workflows.length} workflow files. Do not hand-edit the Contents section; edit YAML and run \`npm run build:data\`.*
 `
 
 fs.writeFileSync(readmePath, readme)

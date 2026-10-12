@@ -1,0 +1,28 @@
+{
+  "domains": {
+    "ai-coding": "AI Coding",
+    "agent-engineering": "Agent Engineering",
+    "repo-ops": "Repository Ops",
+    "research": "Research",
+    "design-review": "Design Review",
+    "other": "Other"
+  },
+  "tools": {
+    "claude-code": "Claude Code",
+    "codex": "Codex",
+    "cursor": "Cursor",
+    "grok": "Grok",
+    "github-actions": "GitHub Actions",
+    "n8n": "n8n",
+    "playwright": "Playwright",
+    "mcp": "MCP",
+    "skills": "Skills",
+    "other": "Other"
+  },
+  "actors": {
+    "human": "Human",
+    "agent": "Agent",
+    "tool": "Tool",
+    "ci": "CI"
+  }
+}

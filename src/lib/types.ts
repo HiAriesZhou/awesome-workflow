@@ -1,4 +1,8 @@
-export type Actor = 'human' | 'agent' | 'tool' | 'ci'
+import type taxonomy from './taxonomy.json'
+
+export type Actor = keyof typeof taxonomy.actors
+export type Domain = keyof typeof taxonomy.domains
+export type Tool = keyof typeof taxonomy.tools
 export type Maturity = 'draft' | 'verified' | 'archived'
 export type ModelTier = 'premium' | 'standard' | 'cheap' | 'unknown'
 
@@ -24,9 +28,9 @@ export interface Workflow {
   id: string
   title: string
   summary: string
-  domain: string
+  domain: Domain
   maturity: Maturity
-  tools: string[]
+  tools: Tool[]
   model_tiers?: ModelTier[]
   automation?: string
   authors?: string[]

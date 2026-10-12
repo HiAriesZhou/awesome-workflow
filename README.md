@@ -33,7 +33,7 @@ Static site build: `npm run build` → `dist/` (GitHub Pages).
 - [Agent Engineering](#agent-engineering)
 - [AI Coding](#ai-coding)
 - [Design Review](#design-review)
-- [Repository Ops](#repo-ops)
+- [Repository Ops](#repository-ops)
 
 
 ## Agent Engineering

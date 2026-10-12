@@ -1,19 +1,19 @@
 import { useMemo, useState } from 'react'
 import bundle from './data/workflows.json'
-import type { Workflow, WorkflowBundle } from './lib/types'
+import type { Domain, Maturity, Tool, Workflow, WorkflowBundle } from './lib/types'
 import { domainLabel, toolLabel } from './lib/labels'
 import { WorkflowCard } from './components/WorkflowCard'
 import { WorkflowDetail } from './components/WorkflowDetail'
 
 const data = bundle as WorkflowBundle
 
-const ALL = 'all'
+const ALL = 'all' as const
 
 export default function App() {
   const [query, setQuery] = useState('')
-  const [domain, setDomain] = useState(ALL)
-  const [tool, setTool] = useState(ALL)
-  const [maturity, setMaturity] = useState(ALL)
+  const [domain, setDomain] = useState<Domain | typeof ALL>(ALL)
+  const [tool, setTool] = useState<Tool | typeof ALL>(ALL)
+  const [maturity, setMaturity] = useState<Maturity | typeof ALL>(ALL)
   const [selectedId, setSelectedId] = useState<string | null>(
     data.workflows[0]?.id ?? null
   )
