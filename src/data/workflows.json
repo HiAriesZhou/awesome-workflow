@@ -312,7 +312,7 @@
         },
         {
           "id": "agent-review",
-          "name": "Agent blocking-and-tackling review",
+          "name": "Agent blocking-and-tackling",
           "actor": "agent",
           "human_gate": false,
           "model_tier": "standard",

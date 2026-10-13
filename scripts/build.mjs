@@ -3,6 +3,7 @@
  * Validate workflows/*.yml against schema, emit:
  * - src/data/workflows.json
  * - README.md (awesome-style index)
+ * - docs/diagrams/<id>.svg (see DESIGN.md)
  */
 import fs from 'node:fs'
 import path from 'node:path'
@@ -10,6 +11,8 @@ import { fileURLToPath } from 'node:url'
 import YAML from 'yaml'
 import Ajv from 'ajv'
 import addFormats from 'ajv-formats'
+import { compileDiagram, DiagramError } from './diagram/compile.mjs'
+import { colors } from './diagram/theme.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const root = path.resolve(__dirname, '..')
@@ -18,6 +21,8 @@ const schemaPath = path.join(root, 'schema', 'workflow.schema.json')
 const outJson = path.join(root, 'src', 'data', 'workflows.json')
 const readmePath = path.join(root, 'README.md')
 const taxonomyPath = path.join(root, 'src', 'lib', 'taxonomy.json')
+const designPath = path.join(root, 'DESIGN.md')
+const diagramsDir = path.join(root, 'docs', 'diagrams')
 
 const schema = JSON.parse(fs.readFileSync(schemaPath, 'utf8'))
 const ajv = new Ajv({ allErrors: true, strict: false })
@@ -108,6 +113,46 @@ if (errors.length) {
 
 workflows.sort((a, b) => a.title.localeCompare(b.title))
 
+// DESIGN.md's color table must mirror theme.mjs exactly.
+const designColors = Object.fromEntries(
+  [...fs.readFileSync(designPath, 'utf8').matchAll(/^\| `([a-z]+)` \| `(#[0-9a-f]{6})` \|/gm)].map(
+    (m) => [m[1], m[2]]
+  )
+)
+const sortedJson = (obj) => JSON.stringify(Object.entries(obj).sort())
+if (sortedJson(designColors) !== sortedJson(colors)) {
+  console.error(
+    `DESIGN.md color table ${JSON.stringify(designColors)} does not match scripts/diagram/theme.mjs ${JSON.stringify(colors)}`
+  )
+  process.exit(1)
+}
+
+// Compile every diagram before writing anything, so a failure leaves outputs untouched.
+const diagrams = new Map()
+const diagramErrors = []
+for (const w of workflows) {
+  try {
+    diagrams.set(w.id, compileDiagram(w))
+  } catch (e) {
+    if (!(e instanceof DiagramError)) throw e
+    diagramErrors.push(`workflows/${w.id}.yml: ${e.message}`)
+  }
+}
+if (diagramErrors.length) {
+  console.error('Diagram budget or layout check failed (see DESIGN.md):\n' + diagramErrors.join('\n'))
+  process.exit(1)
+}
+
+fs.mkdirSync(diagramsDir, { recursive: true })
+for (const file of fs.readdirSync(diagramsDir)) {
+  if (file.endsWith('.svg') && !diagrams.has(file.slice(0, -4))) {
+    fs.rmSync(path.join(diagramsDir, file))
+  }
+}
+for (const [id, svg] of diagrams) {
+  fs.writeFileSync(path.join(diagramsDir, `${id}.svg`), svg)
+}
+
 // Derive the date from the data so unchanged YAML regenerates byte-identical output.
 const dataDate = workflows
   .map((w) => w.verified)
@@ -159,6 +204,7 @@ for (const [domain, list] of [...byDomain.entries()].sort((a, b) =>
     const primary = w.sources[0]
     body += `- **[${w.title}](${primary.url})**${stars(w)} — ${w.summary}  \n`
     body += `  Tools: \`${w.tools.join('`, `')}\` · Maturity: \`${w.maturity}\` · Automation: \`${w.automation || 'n/a'}\` · [YAML](workflows/${w.id}.yml)\n`
+    body += `\n  ![${w.title.replace(/[[\]]/g, '')} workflow diagram](docs/diagrams/${w.id}.svg)\n\n`
   }
 }
 
@@ -234,4 +280,4 @@ MIT © Aries Zhou and contributors.
 `
 
 fs.writeFileSync(readmePath, readme)
-console.log(`OK: ${workflows.length} workflows → README.md + src/data/workflows.json`)
+console.log(`OK: ${workflows.length} workflows → README.md + src/data/workflows.json + docs/diagrams/`)

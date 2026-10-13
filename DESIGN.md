@@ -76,7 +76,8 @@ Layout:
 
 - Font stacks only: `"IBM Plex Sans", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif` and `"IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace`. No `@import` or remote fonts; GitHub shows the SVG as an image and would not load them anyway.
 - Mono is for technical content only (model tiers, lane ids, tool ids), never for atmosphere.
-- Width is estimated, not measured: 7.2 px per Latin character and 13 px per CJK character at 13 px, 6.6 px per character for 11 px mono. The estimates are deliberately wide for fallback fonts.
+- Width is estimated, not measured: 7.2 px per Latin character and 13 px per CJK character at 13 px, 6.4 px per character for 11 px sans, 6.6 px for 11 px mono. The estimates are deliberately wide for fallback fonts.
+- Names wrap at spaces and between CJK characters. A word that cannot fit on one line may break after a hyphen; otherwise the build fails.
 - No visible title. The README entry and the detail panel already show it; the SVG carries it in `<title>` for assistive technology.
 - The legend is a strip below the lanes, built from what the diagram actually uses. It never floats inside the lanes.
 
@@ -88,6 +89,7 @@ Layout:
 | Lanes | 4 | Guaranteed by the actor enum |
 | Gate markers | 3 | Build fails; decide which approvals matter |
 | Step name | 2 lines | Build fails; shorten the name, and keep the detail in `notes` |
+| Legend | One row inside the card | Build fails; usually too many `tools` for a short workflow |
 
 ## Accessibility
 

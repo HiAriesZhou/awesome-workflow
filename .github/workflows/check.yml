@@ -21,7 +21,10 @@ jobs:
       - run: npm run check
       - name: Generated files match workflows/*.yml
         run: |
-          git diff --exit-code -- README.md src/data/workflows.json || {
-            echo "::error::README.md or src/data/workflows.json is stale. Run 'npm run build:data' and commit the result."
+          # porcelain also catches new untracked diagrams that git diff would miss
+          stale=$(git status --porcelain -- README.md src/data docs/diagrams)
+          if [ -n "$stale" ]; then
+            echo "$stale"
+            echo "::error::Generated files are stale. Run 'npm run build:data' and commit the result."
             exit 1
-          }
+          fi

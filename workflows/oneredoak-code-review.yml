@@ -21,7 +21,7 @@ steps:
     outputs: [pull request]
     evidence_url: https://github.com/OneRedOak/claude-code-workflows/tree/main/code-review
   - id: agent-review
-    name: Agent blocking-and-tackling review
+    name: Agent blocking-and-tackling
     actor: agent
     human_gate: false
     model_tier: standard
