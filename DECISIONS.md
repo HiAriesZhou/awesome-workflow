@@ -25,9 +25,10 @@ Documented with Waza `/think` before coding. Date: 2026-10-10 (Asia/Shanghai).
 | ID | Decision | Choice | Why |
 |----|----------|--------|-----|
 | P1 | Stack | Vite + React + TypeScript, GitHub Pages | Matches plan-v1; zero paid APIs |
-| P2 | Graph lib | Custom swimlane / step timeline (CSS + React) | Faster v1; deterministic; React Flow+ELK deferred |
-| P3 | Aesthetic | "Ink library": deep ink bg, warm paper cards, teal accent | Distinctive vs generic AI purple; cookbook metaphor |
+| P2 | Graph lib | Custom swimlane / step timeline (CSS + React) | Faster v1; deterministic; React Flow+ELK deferred. **Superseded by P5** |
+| P3 | Aesthetic | "Ink library": deep ink bg, warm paper cards, teal accent | Distinctive vs generic AI purple; cookbook metaphor. Diagram rules now live in [DESIGN.md](DESIGN.md) |
 | P4 | Lenses v1 | Filters: domain, tool, maturity, human-gate | Cost-color lens deferred (Phase B+) |
+| P5 | Diagrams | Build-time compiler: YAML → static SVG swimlane (`docs/diagrams/<id>.svg`), reused by README and gallery; rules in [DESIGN.md](DESIGN.md) (2026-10-13) | Deterministic and diffable; four actor lanes and linear steps need no layout engine, so React Flow + ELK stay out |
 
 ## Content
 
