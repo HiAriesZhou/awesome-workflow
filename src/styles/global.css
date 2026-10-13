@@ -10,6 +10,11 @@
   --amber: #f5b94a;
   --rose: #fb7185;
   --muted: #8b95a8;
+  /* Light tints of the DESIGN.md actor hues, legible on ink. */
+  --actor-human: #f5b94a;
+  --actor-agent: #8fb0ec;
+  --actor-tool: #a9c46c;
+  --actor-ci: #a3acb9;
   --line: rgba(244, 239, 230, 0.08);
   --shadow: 0 18px 50px rgba(0, 0, 0, 0.35);
   --radius: 16px;
@@ -246,9 +251,30 @@ a:hover {
   color: var(--amber);
 }
 
-.badge.rose {
-  background: rgba(251, 113, 133, 0.14);
-  color: var(--rose);
+/* Echoes the diagram's gate marker: teal diamond, outline only. */
+.badge.gate {
+  background: transparent;
+  border: 1px solid var(--teal-dim);
+  color: var(--teal);
+}
+
+.diagram {
+  margin: 0 0 18px;
+}
+
+.diagram .eyebrow {
+  margin-bottom: 10px;
+}
+
+.diagram-scroll {
+  overflow-x: auto;
+  border-radius: 8px;
+}
+
+/* Natural size; scroll instead of shrinking text (DESIGN.md). */
+.diagram-scroll svg {
+  display: block;
+  max-width: none;
 }
 
 .layout {
@@ -317,20 +343,24 @@ a:hover {
   font-size: 11px;
   font-weight: 600;
   background: var(--ink-3);
-  border: 2px solid var(--teal-dim);
-  color: var(--teal);
+  border: 2px solid var(--actor-agent);
+  color: var(--actor-agent);
   z-index: 1;
 }
 
 .dot.human {
-  border-color: var(--amber);
-  color: var(--amber);
+  border-color: var(--actor-human);
+  color: var(--actor-human);
 }
 
-.dot.tool,
+.dot.tool {
+  border-color: var(--actor-tool);
+  color: var(--actor-tool);
+}
+
 .dot.ci {
-  border-color: var(--muted);
-  color: var(--paper-dim);
+  border-color: var(--actor-ci);
+  color: var(--actor-ci);
 }
 
 .step-body {
