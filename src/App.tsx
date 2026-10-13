@@ -1,9 +1,10 @@
-import { useMemo, useState } from 'react'
+import { useMemo, useRef, useState } from 'react'
 import bundle from './data/workflows.json'
 import type { Domain, Maturity, Tool, Workflow, WorkflowBundle } from './lib/types'
 import { domainLabel, toolLabel } from './lib/labels'
 import { WorkflowCard } from './components/WorkflowCard'
 import { WorkflowDetail } from './components/WorkflowDetail'
+import { WorkflowDiagram } from './components/WorkflowDiagram'
 
 const data = bundle as WorkflowBundle
 
@@ -54,6 +55,20 @@ export default function App() {
 
   const selected: Workflow | undefined =
     filtered.find((w) => w.id === selectedId) ?? filtered[0]
+
+  const diagramRef = useRef<HTMLDivElement>(null)
+  // The detail panel is sticky but the diagram band is not; bring it back
+  // into view when a card far down the grid is opened.
+  const selectWorkflow = (id: string) => {
+    setSelectedId(id)
+    requestAnimationFrame(() => {
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      diagramRef.current?.scrollIntoView({
+        block: 'nearest',
+        behavior: reduce ? 'auto' : 'smooth',
+      })
+    })
+  }
 
   return (
     <div className="app">
@@ -171,6 +186,10 @@ export default function App() {
         </div>
       </div>
 
+      <div ref={diagramRef}>
+        {selected ? <WorkflowDiagram workflow={selected} /> : null}
+      </div>
+
       <div className={`layout${selected ? ' split' : ''}`}>
         <section>
           {filtered.length === 0 ? (
@@ -182,7 +201,7 @@ export default function App() {
                   key={w.id}
                   workflow={w}
                   active={selected?.id === w.id}
-                  onSelect={() => setSelectedId(w.id)}
+                  onSelect={() => selectWorkflow(w.id)}
                 />
               ))}
             </div>

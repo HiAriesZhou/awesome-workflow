@@ -35,7 +35,7 @@ export function WorkflowDetail({ workflow }: { workflow: Workflow }) {
               <h4>{step.name}</h4>
               <div className="step-meta">
                 <span className="badge">{actorLabel[step.actor]}</span>
-                {step.human_gate ? <span className="badge rose">human gate</span> : null}
+                {step.human_gate ? <span className="badge gate"><span aria-hidden="true">◆ </span>human gate</span> : null}
                 {step.model_tier && step.model_tier !== 'unknown' ? (
                   <span className="badge amber">{step.model_tier} model</span>
                 ) : null}
