@@ -1,0 +1,193 @@
+{
+  "version": "3.0.1",
+  "browser": "145.0.7632.6",
+  "node": "v23.2.0",
+  "receipts": [
+    {
+      "id": "simple-chain",
+      "mode": "standalone-svg",
+      "font": "Times",
+      "fills": [
+        "rgb(0, 0, 0)",
+        "url(\"#grid\")"
+      ],
+      "paperToken": "",
+      "hasInlineStyle": false,
+      "nodeCount": 3,
+      "screenshot": "simple-chain-standalone-svg.png"
+    },
+    {
+      "id": "simple-chain",
+      "mode": "html-template",
+      "font": "\"JetBrains Mono\", ui-monospace, SFMono-Regular, Menlo, Consolas, \"DejaVu Sans Mono\", \"Liberation Mono\", \"Noto Sans Mono CJK SC\", \"PingFang SC\", \"Hiragino Sans GB\", \"Microsoft YaHei\", monospace",
+      "fills": [
+        "rgb(148, 163, 184)",
+        "rgb(5, 150, 105)",
+        "rgb(225, 29, 72)",
+        "rgb(124, 58, 237)",
+        "none",
+        "url(\"#grid\")",
+        "rgba(248, 250, 252, 0.65)",
+        "rgb(154, 163, 178)",
+        "rgb(255, 255, 255)",
+        "rgba(52, 211, 153, 0.18)",
+        "rgb(17, 24, 39)",
+        "rgba(0, 0, 0, 0)",
+        "rgb(91, 100, 116)"
+      ],
+      "paperToken": "#f4f5f7",
+      "hasInlineStyle": false,
+      "nodeCount": 3,
+      "screenshot": "simple-chain-html-template.png"
+    },
+    {
+      "id": "conditional-route",
+      "mode": "standalone-svg",
+      "font": "Times",
+      "fills": [
+        "rgb(0, 0, 0)",
+        "url(\"#grid\")"
+      ],
+      "paperToken": "",
+      "hasInlineStyle": false,
+      "nodeCount": 3,
+      "screenshot": "conditional-route-standalone-svg.png"
+    },
+    {
+      "id": "conditional-route",
+      "mode": "html-template",
+      "font": "\"JetBrains Mono\", ui-monospace, SFMono-Regular, Menlo, Consolas, \"DejaVu Sans Mono\", \"Liberation Mono\", \"Noto Sans Mono CJK SC\", \"PingFang SC\", \"Hiragino Sans GB\", \"Microsoft YaHei\", monospace",
+      "fills": [
+        "rgb(148, 163, 184)",
+        "rgb(5, 150, 105)",
+        "rgb(225, 29, 72)",
+        "rgb(124, 58, 237)",
+        "none",
+        "url(\"#grid\")",
+        "rgba(248, 250, 252, 0.65)",
+        "rgb(154, 163, 178)",
+        "rgb(255, 255, 255)",
+        "rgba(52, 211, 153, 0.18)",
+        "rgb(17, 24, 39)",
+        "rgba(0, 0, 0, 0)",
+        "rgb(91, 100, 116)"
+      ],
+      "paperToken": "#f4f5f7",
+      "hasInlineStyle": false,
+      "nodeCount": 3,
+      "screenshot": "conditional-route-html-template.png"
+    },
+    {
+      "id": "parallel-join",
+      "mode": "standalone-svg",
+      "font": "Times",
+      "fills": [
+        "rgb(0, 0, 0)",
+        "url(\"#grid\")"
+      ],
+      "paperToken": "",
+      "hasInlineStyle": false,
+      "nodeCount": 4,
+      "screenshot": "parallel-join-standalone-svg.png"
+    },
+    {
+      "id": "parallel-join",
+      "mode": "html-template",
+      "font": "\"JetBrains Mono\", ui-monospace, SFMono-Regular, Menlo, Consolas, \"DejaVu Sans Mono\", \"Liberation Mono\", \"Noto Sans Mono CJK SC\", \"PingFang SC\", \"Hiragino Sans GB\", \"Microsoft YaHei\", monospace",
+      "fills": [
+        "rgb(148, 163, 184)",
+        "rgb(5, 150, 105)",
+        "rgb(225, 29, 72)",
+        "rgb(124, 58, 237)",
+        "none",
+        "url(\"#grid\")",
+        "rgba(248, 250, 252, 0.65)",
+        "rgb(154, 163, 178)",
+        "rgb(255, 255, 255)",
+        "rgba(52, 211, 153, 0.18)",
+        "rgb(17, 24, 39)",
+        "rgba(0, 0, 0, 0)",
+        "rgb(91, 100, 116)"
+      ],
+      "paperToken": "#f4f5f7",
+      "hasInlineStyle": false,
+      "nodeCount": 4,
+      "screenshot": "parallel-join-html-template.png"
+    },
+    {
+      "id": "feedback-loop",
+      "mode": "standalone-svg",
+      "font": "Times",
+      "fills": [
+        "rgb(0, 0, 0)",
+        "url(\"#grid\")"
+      ],
+      "paperToken": "",
+      "hasInlineStyle": false,
+      "nodeCount": 3,
+      "screenshot": "feedback-loop-standalone-svg.png"
+    },
+    {
+      "id": "feedback-loop",
+      "mode": "html-template",
+      "font": "\"JetBrains Mono\", ui-monospace, SFMono-Regular, Menlo, Consolas, \"DejaVu Sans Mono\", \"Liberation Mono\", \"Noto Sans Mono CJK SC\", \"PingFang SC\", \"Hiragino Sans GB\", \"Microsoft YaHei\", monospace",
+      "fills": [
+        "rgb(148, 163, 184)",
+        "rgb(5, 150, 105)",
+        "rgb(225, 29, 72)",
+        "rgb(124, 58, 237)",
+        "none",
+        "url(\"#grid\")",
+        "rgba(248, 250, 252, 0.65)",
+        "rgb(154, 163, 178)",
+        "rgb(255, 255, 255)",
+        "rgba(52, 211, 153, 0.18)",
+        "rgb(17, 24, 39)",
+        "rgba(0, 0, 0, 0)",
+        "rgb(91, 100, 116)"
+      ],
+      "paperToken": "#f4f5f7",
+      "hasInlineStyle": false,
+      "nodeCount": 3,
+      "screenshot": "feedback-loop-html-template.png"
+    },
+    {
+      "id": "human-approval",
+      "mode": "standalone-svg",
+      "font": "Times",
+      "fills": [
+        "rgb(0, 0, 0)",
+        "url(\"#grid\")"
+      ],
+      "paperToken": "",
+      "hasInlineStyle": false,
+      "nodeCount": 3,
+      "screenshot": "human-approval-standalone-svg.png"
+    },
+    {
+      "id": "human-approval",
+      "mode": "html-template",
+      "font": "\"JetBrains Mono\", ui-monospace, SFMono-Regular, Menlo, Consolas, \"DejaVu Sans Mono\", \"Liberation Mono\", \"Noto Sans Mono CJK SC\", \"PingFang SC\", \"Hiragino Sans GB\", \"Microsoft YaHei\", monospace",
+      "fills": [
+        "rgb(148, 163, 184)",
+        "rgb(5, 150, 105)",
+        "rgb(225, 29, 72)",
+        "rgb(124, 58, 237)",
+        "none",
+        "url(\"#grid\")",
+        "rgba(248, 250, 252, 0.65)",
+        "rgb(154, 163, 178)",
+        "rgb(255, 255, 255)",
+        "rgba(52, 211, 153, 0.18)",
+        "rgb(17, 24, 39)",
+        "rgba(251, 113, 133, 0.15)",
+        "rgba(0, 0, 0, 0)",
+        "rgb(91, 100, 116)"
+      ],
+      "paperToken": "#f4f5f7",
+      "hasInlineStyle": false,
+      "nodeCount": 3,
+      "screenshot": "human-approval-html-template.png"
+    }
+  ]
+}

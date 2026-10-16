@@ -11,7 +11,8 @@ import { fileURLToPath } from 'node:url'
 import YAML from 'yaml'
 import Ajv from 'ajv'
 import addFormats from 'ajv-formats'
-import { compileDiagram, DiagramError } from './diagram/compile.mjs'
+import { compileDiagramSet, DiagramError } from './diagram/compile.mjs'
+import { validateWorkflow, normalizeWorkflow, compare } from './workflow.mjs'
 import { colors } from './diagram/theme.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
@@ -90,6 +91,7 @@ for (const file of files) {
     )
     continue
   }
+  try { validateWorkflow(data) } catch (e) { errors.push(`${file}: ${e.message}`); continue }
   const keyedLists = [
     ['steps[].id', data.steps.map((s) => s.id)],
     ['sources[].url', data.sources.map((s) => s.url)],
@@ -111,7 +113,7 @@ if (errors.length) {
   process.exit(1)
 }
 
-workflows.sort((a, b) => a.title.localeCompare(b.title))
+workflows.sort((a, b) => compare(a.title, b.title))
 
 // DESIGN.md's color table must mirror theme.mjs exactly.
 const designColors = Object.fromEntries(
@@ -129,10 +131,13 @@ if (sortedJson(designColors) !== sortedJson(colors)) {
 
 // Compile every diagram before writing anything, so a failure leaves outputs untouched.
 const diagrams = new Map()
+const viewsById = new Map()
 const diagramErrors = []
 for (const w of workflows) {
   try {
-    diagrams.set(w.id, compileDiagram(w))
+    const views = compileDiagramSet(w)
+    viewsById.set(w.id, views.map(({ svg, ...v }, i) => ({ ...v, file: i === 0 ? `${w.id}.svg` : `${w.id}--${v.id}.svg` })))
+    views.forEach((v, i) => diagrams.set(i === 0 ? w.id : `${w.id}--${v.id}`, v.svg))
   } catch (e) {
     if (!(e instanceof DiagramError)) throw e
     diagramErrors.push(`workflows/${w.id}.yml: ${e.message}`)
@@ -155,7 +160,7 @@ for (const [id, svg] of diagrams) {
 
 // Derive the date from the data so unchanged YAML regenerates byte-identical output.
 const dataDate = workflows
-  .map((w) => w.verified)
+  .map((w) => w.verified || w.evidence?.checked_at?.slice(0, 10) || w.added)
   .reduce((a, b) => (a > b ? a : b))
 
 fs.mkdirSync(path.dirname(outJson), { recursive: true })
@@ -165,7 +170,7 @@ fs.writeFileSync(
     {
       generated_at: dataDate,
       count: workflows.length,
-      workflows
+      workflows: workflows.map(w => ({ ...normalizeWorkflow(w), diagram_views: viewsById.get(w.id) }))
     },
     null,
     2
@@ -195,15 +200,15 @@ function stars(w) {
 let toc = ''
 let body = ''
 for (const [domain, list] of [...byDomain.entries()].sort((a, b) =>
-  a[0].localeCompare(b[0])
+  compare(a[0], b[0])
 )) {
   const heading = taxonomy.domains[domain]
   toc += `- [${heading}](#${slug(heading)})\n`
   body += `\n## ${heading}\n\n`
   for (const w of list) {
     const primary = w.sources[0]
-    body += `- **[${w.title}](${primary.url})**${stars(w)} — ${w.summary}  \n`
-    body += `  Tools: \`${w.tools.join('`, `')}\` · Maturity: \`${w.maturity}\` · Automation: \`${w.automation || 'n/a'}\` · [YAML](workflows/${w.id}.yml)\n`
+    body += `- **[${w.title}](${primary.url})**${stars(w)} — ${w.summary}<br>\n`
+    body += `  Tools: \`${w.tools.join('`, `')}\` · Publication: \`${normalizeWorkflow(w).lifecycle}\` · Evidence: \`${normalizeWorkflow(w).evidence.status}\` · Automation: \`${w.automation || 'n/a'}\` · [YAML](workflows/${w.id}.yml)\n`
     body += `\n  ![${w.title.replace(/[[\]]/g, '')} workflow diagram](docs/diagrams/${w.id}.svg)\n\n`
   }
 }
@@ -250,6 +255,8 @@ See [\`schema/workflow.schema.json\`](schema/workflow.schema.json). Validate + r
 \`\`\`bash
 npm run build:data
 \`\`\`
+
+Legacy \`maturity: verified\` remains available for compatibility and is not proof of reproduction. Publication and evidence are separate in v2. See [the content pipeline](docs/implementation/pipeline.md) for source import and review packages; drafts and synthetic fixtures stay outside the published gallery.
 
 ## Contributing
 

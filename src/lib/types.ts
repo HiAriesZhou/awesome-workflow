@@ -16,9 +16,15 @@ export interface Step {
   outputs?: string[]
   notes?: string
   evidence_url?: string
+  actor_id?: string
+  type?: string
+  evidence?: EvidenceRef[]
 }
 
+export interface EvidenceRef { source_id?: string; locator: string; support: string; reason?: string }
+
 export interface Source {
+  id?: string
   label: string
   url: string
   stars?: number
@@ -29,7 +35,7 @@ export interface Workflow {
   title: string
   summary: string
   domain: Domain
-  maturity: Maturity
+  maturity?: Maturity
   tools: Tool[]
   model_tiers?: ModelTier[]
   automation?: string
@@ -39,7 +45,14 @@ export interface Workflow {
   steps: Step[]
   sources: Source[]
   added: string
-  verified: string
+  verified?: string
+  schema_version?: number
+  lifecycle?: string
+  evidence?: { status: string; method: string; checked_at?: string; record?: string }
+  actors?: { id: string; kind: Actor; label: string }[]
+  edges?: { id: string; from: string; to: string; kind: string; condition?: string; evidence: EvidenceRef[] }[]
+  coverage?: { mode: string; unknowns: string[]; inferences?: string[] }
+  diagram_views?: { id: string; file: string; step_ids: string[]; edge_ids: string[] }[]
 }
 
 export interface WorkflowBundle {

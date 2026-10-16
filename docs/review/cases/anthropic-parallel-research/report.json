@@ -1,0 +1,61 @@
+{
+  "version": 1,
+  "id": "anthropic-parallel-research",
+  "candidate_id": "anthropic-parallel-research",
+  "draft_hash": "4bac5752d522bc51005ee88b18203454dc44df062c4d69eaf48a1b8d8b8f4eb5",
+  "renderer_fingerprint": "b937763d77458dfcda3d096dcb9a194b828fff291747a084aa7eacee7b57010f",
+  "source": {
+    "canonical_url": "https://www.anthropic.com/engineering/multi-agent-research-system",
+    "request_url": "https://www.anthropic.com/engineering/multi-agent-research-system",
+    "content_hash": "b2059d785ae34c94baed2033b6c2b88e9f0e1155eb8813a6562af2472634af17",
+    "checked_at": "2026-10-13T14:03:17.200Z",
+    "etag": null,
+    "content_type": "text/html; charset=utf-8",
+    "unchanged": true
+  },
+  "checks": {
+    "schema": "passed",
+    "semantics": "passed",
+    "source_binding": "passed_hash_and_locator_only",
+    "geometry": "passed",
+    "deterministic_render": "passed",
+    "browser": "passed",
+    "human_review": "not_confirmed",
+    "reproduction": "not_run"
+  },
+  "evidence_status": "source_checked",
+  "lifecycle": "draft",
+  "permission_review": "pending",
+  "warning": "Automated checks do not prove source claims, completeness, permissions or runtime behavior.",
+  "views": [
+    {
+      "id": "full",
+      "step_ids": [
+        "plan",
+        "research",
+        "synthesize",
+        "cite",
+        "answer"
+      ],
+      "edge_ids": [
+        "e1",
+        "e2",
+        "e3",
+        "e4",
+        "e5"
+      ],
+      "file": "full.svg",
+      "svg_hash": "13fc91bd681fa654aab769f38618fcfb56e39f9ca89786860e67b58f0001385d"
+    }
+  ],
+  "browser_report": "../../../implementation/visual/report.json",
+  "files_hashes": {
+    "browser-report.json": "1aea15b1d0d427fedf618cd6d3370aca1c1f18f87413df1f644af7be552fb2be",
+    "evidence.json": "f6aea1a0a6ab0a5201400b2df06e8b33984384bfaab24695f39d5a186c0d551b",
+    "full.png": "d51fabddf3fd22905891a01c9889a80a005d27b53549dfbce21bcd1dc049ea2a",
+    "full.svg": "13fc91bd681fa654aab769f38618fcfb56e39f9ca89786860e67b58f0001385d",
+    "index.html": "525644cadc56ca2248cb2ed2f2775d83de32c9e34661e77eee5c430e9c40acda",
+    "review.md": "908769eb75fcfc3618a5af26a3f915b930bcbcb0fecbfeb2f8637cb25673750b",
+    "workflow.yml": "ab96f9b2434a2cb91aa4ea9d2c1379e82ade7e85863e0ed1a9c236b99937e81f"
+  }
+}

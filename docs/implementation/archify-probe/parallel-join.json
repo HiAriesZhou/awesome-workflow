@@ -1,0 +1,75 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "Synthetic parallel-join",
+    "output": "parallel-join.html",
+    "animation": "none"
+  },
+  "lanes": [
+    {
+      "id": "agent-0",
+      "label": "agent"
+    },
+    {
+      "id": "agent-1",
+      "label": "agent"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "s0",
+      "lane": "agent-0",
+      "col": 0,
+      "width": 180,
+      "type": "backend",
+      "label": "Dispatch work"
+    },
+    {
+      "id": "s1",
+      "lane": "agent-0",
+      "col": 1,
+      "width": 180,
+      "type": "backend",
+      "label": "Research A"
+    },
+    {
+      "id": "s2",
+      "lane": "agent-1",
+      "col": 1,
+      "width": 180,
+      "type": "backend",
+      "label": "Research B"
+    },
+    {
+      "id": "s3",
+      "lane": "agent-0",
+      "col": 2,
+      "width": 180,
+      "type": "backend",
+      "label": "Gather results"
+    }
+  ],
+  "edges": [
+    {
+      "id": "e0",
+      "from": "s0",
+      "to": "s1"
+    },
+    {
+      "id": "e1",
+      "from": "s0",
+      "to": "s2"
+    },
+    {
+      "id": "e2",
+      "from": "s1",
+      "to": "s3"
+    },
+    {
+      "id": "e3",
+      "from": "s2",
+      "to": "s3"
+    }
+  ]
+}

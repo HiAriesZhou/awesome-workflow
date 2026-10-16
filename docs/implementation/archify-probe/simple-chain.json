@@ -1,0 +1,53 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "Synthetic simple-chain",
+    "output": "simple-chain.html",
+    "animation": "none"
+  },
+  "lanes": [
+    {
+      "id": "agent-0",
+      "label": "agent"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "s0",
+      "lane": "agent-0",
+      "col": 0,
+      "width": 180,
+      "type": "backend",
+      "label": "Read source"
+    },
+    {
+      "id": "s1",
+      "lane": "agent-0",
+      "col": 1,
+      "width": 180,
+      "type": "backend",
+      "label": "Prepare draft"
+    },
+    {
+      "id": "s2",
+      "lane": "agent-0",
+      "col": 2,
+      "width": 180,
+      "type": "backend",
+      "label": "Check output"
+    }
+  ],
+  "edges": [
+    {
+      "id": "e0",
+      "from": "s0",
+      "to": "s1"
+    },
+    {
+      "id": "e1",
+      "from": "s1",
+      "to": "s2"
+    }
+  ]
+}

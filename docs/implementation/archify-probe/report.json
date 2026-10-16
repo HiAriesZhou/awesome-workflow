@@ -1,0 +1,36 @@
+{
+  "version": "3.0.1",
+  "note": "Layout mapping is authored by this adapter. Semantics/evidence are not part of the Archify IR.",
+  "receipts": [
+    {
+      "id": "simple-chain",
+      "ok": true,
+      "stable": true,
+      "themeMatches": false
+    },
+    {
+      "id": "conditional-route",
+      "ok": true,
+      "stable": true,
+      "themeMatches": false
+    },
+    {
+      "id": "parallel-join",
+      "ok": true,
+      "stable": true,
+      "themeMatches": false
+    },
+    {
+      "id": "feedback-loop",
+      "ok": true,
+      "stable": true,
+      "themeMatches": false
+    },
+    {
+      "id": "human-approval",
+      "ok": true,
+      "stable": true,
+      "themeMatches": false
+    }
+  ]
+}

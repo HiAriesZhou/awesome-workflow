@@ -1,0 +1,10 @@
+{
+  "url": "http://127.0.0.1:5173/awesome-workflow/",
+  "expected": 10,
+  "passed": true,
+  "errors": [],
+  "galleryItems": 10,
+  "initialDiagrams": 10,
+  "initialDialogs": 0,
+  "browser": "145.0.7632.6"
+}

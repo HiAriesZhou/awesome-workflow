@@ -1,0 +1,58 @@
+{
+  "version": 1,
+  "id": "delivery-hero-account-recovery",
+  "candidate_id": "delivery-hero-account-recovery",
+  "draft_hash": "21023f9f8f6429f7555a3721f156157b20a1832e07acb77bd4dac38a433529c0",
+  "renderer_fingerprint": "b937763d77458dfcda3d096dcb9a194b828fff291747a084aa7eacee7b57010f",
+  "source": {
+    "canonical_url": "https://n8n.io/case-studies/delivery-hero",
+    "request_url": "https://n8n.io/case-studies/delivery-hero/",
+    "content_hash": "eca577a08477ea6a778fd247d8cde56d02d4c9a80194c756d2b3fbcbf3b5a137",
+    "checked_at": "2026-10-13T14:03:19.759Z",
+    "etag": null,
+    "content_type": "text/html; charset=utf-8",
+    "unchanged": true
+  },
+  "checks": {
+    "schema": "passed",
+    "semantics": "passed",
+    "source_binding": "passed_hash_and_locator_only",
+    "geometry": "passed",
+    "deterministic_render": "passed",
+    "browser": "passed",
+    "human_review": "not_confirmed",
+    "reproduction": "not_run"
+  },
+  "evidence_status": "source_checked",
+  "lifecycle": "draft",
+  "permission_review": "pending",
+  "warning": "Automated checks do not prove source claims, completeness, permissions or runtime behavior.",
+  "views": [
+    {
+      "id": "full",
+      "step_ids": [
+        "need",
+        "approve",
+        "recover",
+        "access"
+      ],
+      "edge_ids": [
+        "e1",
+        "e2",
+        "e3"
+      ],
+      "file": "full.svg",
+      "svg_hash": "cc8937bff2b77519fd1b11e45383f60d88cc1ae39a2a425550b4fff0a2f2a18a"
+    }
+  ],
+  "browser_report": "../../../implementation/visual/report.json",
+  "files_hashes": {
+    "browser-report.json": "60ffba36ea3e91ede68c823f9afdc2f33d20acc201cd675f85a5da2d243a4cb2",
+    "evidence.json": "b51ae0475d8517cd00bcb748c1cf9dad848f49f12c927877d04ddcd7c41bcfe0",
+    "full.png": "a14538be9e2341e0e8900b12d272938144e3a8be1f5cbf8289f331a4e7fb76b7",
+    "full.svg": "cc8937bff2b77519fd1b11e45383f60d88cc1ae39a2a425550b4fff0a2f2a18a",
+    "index.html": "5208532a9a46b1841452a1f4c08b4200edbfae53d1287acd097fd330eebbdaaf",
+    "review.md": "2a0540262b6121b74aed9cbdd129587a3a030ca6618a5b6672cb0be96a0c408d",
+    "workflow.yml": "2ca29180333504600c7e0bc7c9bd7023d71fee585e69e321ba6c18747abe78bb"
+  }
+}

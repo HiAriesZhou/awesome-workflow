@@ -1,0 +1,109 @@
+{
+  "sources": [
+    {
+      "id": "primary",
+      "label": "n8n official case study",
+      "url": "https://n8n.io/case-studies/delivery-hero",
+      "kind": "practitioner_report",
+      "locator": "Solution",
+      "checked_at": "2026-10-13T09:28:01.476Z",
+      "content_hash": "eca577a08477ea6a778fd247d8cde56d02d4c9a80194c756d2b3fbcbf3b5a137",
+      "reuse_status": "original_summary_only"
+    }
+  ],
+  "steps": [
+    {
+      "id": "need",
+      "evidence": [
+        {
+          "source_id": "primary",
+          "locator": "Challenge",
+          "support": "explicit"
+        }
+      ]
+    },
+    {
+      "id": "approve",
+      "evidence": [
+        {
+          "source_id": "primary",
+          "locator": "Solution",
+          "support": "explicit"
+        }
+      ]
+    },
+    {
+      "id": "recover",
+      "evidence": [
+        {
+          "source_id": "primary",
+          "locator": "Solution",
+          "support": "explicit"
+        }
+      ]
+    },
+    {
+      "id": "access",
+      "evidence": [
+        {
+          "source_id": "primary",
+          "locator": "Results",
+          "support": "explicit"
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "id": "e1",
+      "from": "need",
+      "to": "approve",
+      "evidence": [
+        {
+          "source_id": "primary",
+          "locator": "Solution",
+          "support": "inferred",
+          "reason": "从账号恢复需求与经理审批的叙事关系整理；没有取得原生触发器定义。"
+        }
+      ]
+    },
+    {
+      "id": "e2",
+      "from": "approve",
+      "to": "recover",
+      "condition": "approved",
+      "evidence": [
+        {
+          "source_id": "primary",
+          "locator": "Solution",
+          "support": "explicit"
+        }
+      ]
+    },
+    {
+      "id": "e3",
+      "from": "recover",
+      "to": "access",
+      "evidence": [
+        {
+          "source_id": "primary",
+          "locator": "Results",
+          "support": "explicit"
+        }
+      ]
+    }
+  ],
+  "coverage": {
+    "mode": "documented_narrative_overview",
+    "unknowns": [
+      "请求界面、触发器与身份核验机制未披露。",
+      "经理拒绝、超时和不响应时的处理未知。",
+      "接口失败、部分恢复、重试次数和接口之间的拓扑未知。",
+      "没有取得可运行的原生 n8n JSON。"
+    ],
+    "inferences": [
+      "需求到经理审批的连接是叙事整理。",
+      "多个恢复接口合并为一个子流程，未填补内部拓扑。"
+    ]
+  }
+}

@@ -1,0 +1,48 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><title>formula-bot-data-connectors-full</title><style>body{margin:0;background:#f4efe6}svg{display:block}</style><svg xmlns="http://www.w3.org/2000/svg" width="1328" height="584" viewBox="0 0 1328 584" role="img" aria-labelledby="wf-formula-bot-data-connectors-title wf-formula-bot-data-connectors-desc">
+<title id="wf-formula-bot-data-connectors-title">按用户数据生成结构化结果 workflow diagram</title>
+<desc id="wf-formula-bot-data-connectors-desc">{&quot;steps&quot;:[{&quot;id&quot;:&quot;connect&quot;,&quot;name&quot;:&quot;接入用户数据&quot;,&quot;actor&quot;:&quot;user&quot;,&quot;type&quot;:&quot;event&quot;},{&quot;id&quot;:&quot;metadata&quot;,&quot;name&quot;:&quot;读取连接信息&quot;,&quot;actor&quot;:&quot;n8n&quot;,&quot;type&quot;:&quot;action&quot;},{&quot;id&quot;:&quot;query&quot;,&quot;name&quot;:&quot;动态生成并查询&quot;,&quot;actor&quot;:&quot;query-agent&quot;,&quot;type&quot;:&quot;subprocess&quot;},{&quot;id&quot;:&quot;files&quot;,&quot;name&quot;:&quot;存储并返回文件&quot;,&quot;actor&quot;:&quot;n8n&quot;,&quot;type&quot;:&quot;subprocess&quot;}],&quot;edges&quot;:[{&quot;id&quot;:&quot;e1&quot;,&quot;from&quot;:&quot;connect&quot;,&quot;to&quot;:&quot;metadata&quot;,&quot;kind&quot;:&quot;sequence&quot;},{&quot;id&quot;:&quot;e2&quot;,&quot;from&quot;:&quot;metadata&quot;,&quot;to&quot;:&quot;query&quot;,&quot;kind&quot;:&quot;sequence&quot;},{&quot;id&quot;:&quot;e3&quot;,&quot;from&quot;:&quot;query&quot;,&quot;to&quot;:&quot;files&quot;,&quot;kind&quot;:&quot;sequence&quot;}],&quot;coverage&quot;:{&quot;mode&quot;:&quot;documented_narrative_overview&quot;,&quot;unknowns&quot;:[&quot;连接器内部节点、参数和错误处理未披露。&quot;,&quot;查询失败、超时和重试策略未知。&quot;,&quot;没有原生模板或本地复现记录。&quot;],&quot;inferences&quot;:[&quot;连接器选择与查询执行合并为动态子流程。&quot;]}}</desc>
+<defs><marker id="wf-formula-bot-data-connectors-arrow" viewBox="0 0 8 8" refX="8" refY="4" markerWidth="8" markerHeight="8" markerUnits="userSpaceOnUse" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#7a7266"/></marker></defs>
+<rect x="0" y="0" width="1328" height="584" rx="4" fill="#f4efe6" stroke="#d9d0c1" />
+<text x="24" y="216" font-family='"IBM Plex Sans", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif' font-size="11" fill="#a1460f" >用户</text>
+<text x="24" y="232" font-family='"IBM Plex Sans", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif' font-size="11" fill="#5c6370" >human · user</text>
+<line x1="24" y1="184" x2="1304" y2="184" stroke="#d9d0c1"/>
+<text x="24" y="320" font-family='"IBM Plex Sans", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif' font-size="11" fill="#1e4fa8" >查询 Agent</text>
+<text x="24" y="336" font-family='"IBM Plex Sans", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif' font-size="11" fill="#5c6370" >agent · query-agent</text>
+<line x1="24" y1="288" x2="1304" y2="288" stroke="#d9d0c1"/>
+<text x="24" y="424" font-family='"IBM Plex Sans", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif' font-size="11" fill="#4d6b14" >n8n</text>
+<text x="24" y="440" font-family='"IBM Plex Sans", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif' font-size="11" fill="#5c6370" >tool · n8n</text>
+<line x1="24" y1="392" x2="1304" y2="392" stroke="#d9d0c1"/>
+<path id="wf-formula-bot-data-connectors-edge-e1" data-edge-id="e1" data-from="connect" data-to="metadata" data-kind="sequence" d="M504 224L520 224L520 48L568 48L568 432L584 432" fill="none" stroke="#7a7266"  marker-end="url(#wf-formula-bot-data-connectors-arrow)"><title>e1: connect → metadata (sequence)</title></path>
+<text x="24" y="52" font-family='"IBM Plex Sans", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif' font-size="11" fill="#5c6370" >e1 · sequence</text>
+<path id="wf-formula-bot-data-connectors-edge-e2" data-edge-id="e2" data-from="metadata" data-to="query" data-kind="sequence" d="M744 432L776 432L776 96L792 96L792 328L824 328" fill="none" stroke="#7a7266"  marker-end="url(#wf-formula-bot-data-connectors-arrow)"><title>e2: metadata → query (sequence)</title></path>
+<text x="24" y="100" font-family='"IBM Plex Sans", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif' font-size="11" fill="#5c6370" >e2 · sequence</text>
+<path id="wf-formula-bot-data-connectors-edge-e3" data-edge-id="e3" data-from="query" data-to="files" data-kind="sequence" d="M984 328L1032 328L1032 144L1016 144L1016 432L1064 432" fill="none" stroke="#7a7266"  marker-end="url(#wf-formula-bot-data-connectors-arrow)"><title>e3: query → files (sequence)</title></path>
+<text x="24" y="148" font-family='"IBM Plex Sans", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif' font-size="11" fill="#5c6370" >e3 · sequence</text>
+<g id="wf-formula-bot-data-connectors-node-connect" data-node-id="connect">
+<rect x="344" y="200" width="160" height="72" rx="4" fill="#f4efe6" stroke="#a1460f" data-node-box="true"/>
+<rect x="344" y="200" width="4" height="72" rx="4" fill="#a1460f" stroke="none" />
+<text x="360" y="224" font-family='"IBM Plex Sans", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif' font-size="13" fill="#0c0f14" data-node-label="true">接入用户数据</text>
+<text x="360" y="260" font-family='"IBM Plex Sans", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif' font-size="11" fill="#5c6370" >EVENT</text>
+</g>
+<g id="wf-formula-bot-data-connectors-node-files" data-node-id="files">
+<rect x="1064" y="408" width="160" height="72" rx="4" fill="#f4efe6" stroke="#4d6b14" data-node-box="true"/>
+<rect x="1064" y="408" width="4" height="72" rx="4" fill="#4d6b14" stroke="none" />
+<text x="1080" y="432" font-family='"IBM Plex Sans", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif' font-size="13" fill="#0c0f14" data-node-label="true">存储并返回文件</text>
+<text x="1080" y="468" font-family='"IBM Plex Sans", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif' font-size="11" fill="#5c6370" >SUBPROCESS</text>
+</g>
+<g id="wf-formula-bot-data-connectors-node-metadata" data-node-id="metadata">
+<rect x="584" y="408" width="160" height="72" rx="4" fill="#f4efe6" stroke="#4d6b14" data-node-box="true"/>
+<rect x="584" y="408" width="4" height="72" rx="4" fill="#4d6b14" stroke="none" />
+<text x="600" y="432" font-family='"IBM Plex Sans", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif' font-size="13" fill="#0c0f14" data-node-label="true">读取连接信息</text>
+<text x="600" y="468" font-family='"IBM Plex Sans", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif' font-size="11" fill="#5c6370" >ACTION</text>
+</g>
+<g id="wf-formula-bot-data-connectors-node-query" data-node-id="query">
+<rect x="824" y="304" width="160" height="72" rx="4" fill="#f4efe6" stroke="#1e4fa8" data-node-box="true"/>
+<rect x="824" y="304" width="4" height="72" rx="4" fill="#1e4fa8" stroke="none" />
+<text x="840" y="328" font-family='"IBM Plex Sans", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif' font-size="13" fill="#0c0f14" data-node-label="true">动态生成并查询</text>
+<text x="840" y="364" font-family='"IBM Plex Sans", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif' font-size="11" fill="#5c6370" >SUBPROCESS</text>
+</g>
+<text x="24" y="528" font-family='"IBM Plex Sans", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif' font-size="11" fill="#5c6370" >Coverage: documented_narrative_overview. 3 unknown items; see review report.</text>
+<text x="24" y="568" font-family='"IBM Plex Sans", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif' font-size="11" fill="#5c6370" >Dashed: inferred / unknown / migrated / feedback. Diamond: human gate.</text>
+</svg>
+</html>

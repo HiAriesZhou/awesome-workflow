@@ -1,220 +1,65 @@
-import { useMemo, useRef, useState } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 import bundle from './data/workflows.json'
-import type { Domain, Maturity, Tool, Workflow, WorkflowBundle } from './lib/types'
-import { domainLabel, toolLabel } from './lib/labels'
+import type { WorkflowBundle } from './lib/types'
+import { actorLabel, domainLabel, toolLabel } from './lib/labels'
 import { WorkflowCard } from './components/WorkflowCard'
-import { WorkflowDetail } from './components/WorkflowDetail'
-import { WorkflowDiagram } from './components/WorkflowDiagram'
+import { WorkflowExplorer } from './components/WorkflowExplorer'
 
 const data = bundle as WorkflowBundle
 
-const ALL = 'all' as const
-
 export default function App() {
   const [query, setQuery] = useState('')
-  const [domain, setDomain] = useState<Domain | typeof ALL>(ALL)
-  const [tool, setTool] = useState<Tool | typeof ALL>(ALL)
-  const [maturity, setMaturity] = useState<Maturity | typeof ALL>(ALL)
-  const [selectedId, setSelectedId] = useState<string | null>(
-    data.workflows[0]?.id ?? null
-  )
-
-  const domains = useMemo(
-    () => [...new Set(data.workflows.map((w) => w.domain))].sort(),
-    []
-  )
-  const tools = useMemo(
-    () => [...new Set(data.workflows.flatMap((w) => w.tools))].sort(),
-    []
-  )
-  const maturities = useMemo(
-    () => [...new Set(data.workflows.map((w) => w.maturity))].sort(),
-    []
-  )
-
+  const [domain, setDomain] = useState('all')
+  const [tool, setTool] = useState('all')
+  const [evidence, setEvidence] = useState('all')
+  const [selectedId, setSelectedId] = useState<string | null>(null)
+  const close = useCallback(() => setSelectedId(null), [])
+  const domains = [...new Set(data.workflows.map(w => w.domain))].sort()
+  const tools = [...new Set(data.workflows.flatMap(w => w.tools))].sort()
+  const statuses = [...new Set(data.workflows.map(w => w.evidence?.status || 'unknown'))].sort()
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase()
-    return data.workflows.filter((w) => {
-      if (domain !== ALL && w.domain !== domain) return false
-      if (tool !== ALL && !w.tools.includes(tool)) return false
-      if (maturity !== ALL && w.maturity !== maturity) return false
-      if (!q) return true
-      const hay = [
-        w.title,
-        w.summary,
-        w.domain,
-        ...(w.tags ?? []),
-        ...w.tools,
-        ...w.steps.map((s) => s.name),
-      ]
-        .join(' ')
-        .toLowerCase()
-      return hay.includes(q)
+    return data.workflows.filter(w => {
+      if (domain !== 'all' && w.domain !== domain) return false
+      if (tool !== 'all' && !w.tools.some(t => t === tool)) return false
+      if (evidence !== 'all' && (w.evidence?.status || 'unknown') !== evidence) return false
+      return !q || [w.title, w.summary, w.domain, domainLabel[w.domain], ...(w.authors || []),
+        ...(w.tags || []), ...w.tools, ...w.tools.map(t => toolLabel[t]), ...w.steps.map(s => s.name)]
+        .join(' ').toLowerCase().includes(q)
     })
-  }, [query, domain, tool, maturity])
-
-  const selected: Workflow | undefined =
-    filtered.find((w) => w.id === selectedId) ?? filtered[0]
-
-  const diagramRef = useRef<HTMLDivElement>(null)
-  // The detail panel is sticky but the diagram band is not; bring it back
-  // into view when a card far down the grid is opened.
-  const selectWorkflow = (id: string) => {
-    setSelectedId(id)
-    requestAnimationFrame(() => {
-      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-      diagramRef.current?.scrollIntoView({
-        block: 'nearest',
-        behavior: reduce ? 'auto' : 'smooth',
-      })
-    })
-  }
+  }, [query, domain, tool, evidence])
+  const selected = data.workflows.find(w => w.id === selectedId)
+  const hasFilters = query !== '' || domain !== 'all' || tool !== 'all' || evidence !== 'all'
+  const reset = () => { setQuery(''); setDomain('all'); setTool('all'); setEvidence('all') }
 
   return (
     <div className="app">
-      <header className="hero">
-        <div className="eyebrow">Awesome Workflow · MIT library</div>
-        <h1>Study real agent workflows, don&apos;t invent them alone.</h1>
-        <p>
-          A curated gallery of structured recipes from notable GitHub projects.
-          Filter, open a case, and see who acts at each step, where humans gate,
-          and where the evidence lives. This is a library, not a one-click
-          generator and not a runtime engine.
-        </p>
-        <div className="hero-actions">
-          <a
-            className="btn primary"
-            href="https://github.com/HiAriesZhou/awesome-workflow"
-            target="_blank"
-            rel="noreferrer"
-          >
-            GitHub repo
-          </a>
-          <a
-            className="btn"
-            href="https://github.com/HiAriesZhou/awesome-workflow/tree/main/workflows"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Browse YAML
-          </a>
-          <button
-            type="button"
-            className="btn ghost"
-            onClick={() => {
-              setQuery('')
-              setDomain(ALL)
-              setTool(ALL)
-              setMaturity(ALL)
-            }}
-          >
-            Reset filters
-          </button>
-        </div>
+      <a className="skip-link" href="#gallery">Skip to workflows</a>
+      <header className="site-header">
+        <a className="wordmark" href={import.meta.env.BASE_URL}>awesome<span>workflow</span><span className="wordmark-dot" /></a>
+        <span className="site-note">Real workflows. In full view.</span>
+        <a className="repo-link" href="https://github.com/HiAriesZhou/awesome-workflow" target="_blank" rel="noreferrer">GitHub ↗</a>
       </header>
-
-      <div className="toolbar">
-        <input
-          className="search"
-          placeholder="Search title, tools, steps…"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          aria-label="Search workflows"
-        />
-        <div className="filters" role="group" aria-label="Domain">
-          <button
-            type="button"
-            className={`chip${domain === ALL ? ' active' : ''}`}
-            onClick={() => setDomain(ALL)}
-          >
-            All domains
-          </button>
-          {domains.map((d) => (
-            <button
-              type="button"
-              key={d}
-              className={`chip${domain === d ? ' active' : ''}`}
-              onClick={() => setDomain(d)}
-            >
-              {domainLabel[d] ?? d}
-            </button>
-          ))}
+      <section className="toolbar" aria-label="Search and filter workflows">
+        <label className="search-field">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" /><path d="m16 16 4 4" /></svg>
+          <input type="search" placeholder="Search workflows, authors, tools…" value={query} onChange={e => setQuery(e.target.value)} aria-label="Search workflows" />
+        </label>
+        <label className="filter-field"><span>Domain</span><select aria-label="Domain" value={domain} onChange={e => setDomain(e.target.value)}><option value="all">All domains</option>{domains.map(d => <option value={d} key={d}>{domainLabel[d] || d}</option>)}</select></label>
+        <label className="filter-field"><span>Tool</span><select aria-label="Tool" value={tool} onChange={e => setTool(e.target.value)}><option value="all">All tools</option>{tools.map(t => <option value={t} key={t}>{toolLabel[t] || t}</option>)}</select></label>
+        <label className="filter-field"><span>Evidence</span><select aria-label="Evidence" value={evidence} onChange={e => setEvidence(e.target.value)}><option value="all">All evidence</option>{statuses.map(s => <option value={s} key={s}>{s.replaceAll('_', ' ')}</option>)}</select></label>
+        <button className="text-button reset" onClick={reset} disabled={!hasFilters}>Reset filters</button>
+      </section>
+      <main id="gallery" tabIndex={-1}>
+        <div className="collection-heading">
+          <div><h1>Workflow gallery</h1><p aria-live="polite">{filtered.length} of {data.count} cases <span>· Open a diagram to explore its steps</span></p></div>
+          <div className="actor-key" aria-label="Diagram legend">{Object.entries(actorLabel).map(([id, label]) => <span key={id}><i className={`actor-dot ${id}`} />{label}</span>)}<span><i className="gate-symbol" />Approval</span></div>
         </div>
-        <div className="filters" role="group" aria-label="Tool">
-          <button
-            type="button"
-            className={`chip${tool === ALL ? ' active' : ''}`}
-            onClick={() => setTool(ALL)}
-          >
-            All tools
-          </button>
-          {tools.map((t) => (
-            <button
-              type="button"
-              key={t}
-              className={`chip${tool === t ? ' active' : ''}`}
-              onClick={() => setTool(t)}
-            >
-              {toolLabel[t] ?? t}
-            </button>
-          ))}
-        </div>
-        <div className="filters" role="group" aria-label="Maturity">
-          <button
-            type="button"
-            className={`chip${maturity === ALL ? ' active' : ''}`}
-            onClick={() => setMaturity(ALL)}
-          >
-            All maturity
-          </button>
-          {maturities.map((m) => (
-            <button
-              type="button"
-              key={m}
-              className={`chip${maturity === m ? ' active' : ''}`}
-              onClick={() => setMaturity(m)}
-            >
-              {m}
-            </button>
-          ))}
-        </div>
-        <div className="meta-row">
-          <span>
-            Showing {filtered.length} / {data.count} workflows
-          </span>
-          <span>Data generated {data.generated_at.slice(0, 10)}</span>
-        </div>
-      </div>
-
-      <div ref={diagramRef}>
-        {selected ? <WorkflowDiagram workflow={selected} /> : null}
-      </div>
-
-      <div className={`layout${selected ? ' split' : ''}`}>
-        <section>
-          {filtered.length === 0 ? (
-            <div className="empty">No workflows match these filters.</div>
-          ) : (
-            <div className="grid">
-              {filtered.map((w) => (
-                <WorkflowCard
-                  key={w.id}
-                  workflow={w}
-                  active={selected?.id === w.id}
-                  onSelect={() => selectWorkflow(w.id)}
-                />
-              ))}
-            </div>
-          )}
-        </section>
-        {selected ? <WorkflowDetail workflow={selected} /> : null}
-      </div>
-
-      <footer className="footer">
-        MIT · Contributions welcome via YAML PRs · Not affiliated with the
-        upstream projects we cite · Stars as of last verification
-        ({data.generated_at})
-      </footer>
+        {filtered.length ? <div className="gallery-grid">{filtered.map(w => <WorkflowCard key={w.id} workflow={w} onSelect={() => setSelectedId(w.id)} />)}</div> :
+          <div className="empty"><h2>No matching workflows</h2><p>Try another title, author or tool.</p><button className="btn" onClick={reset}>Reset filters</button></div>}
+      </main>
+      <footer className="footer"><span>Awesome Workflow · MIT</span><span>Sources are cited per case. Source checks and reproduction are recorded separately.</span></footer>
+      {selected ? <WorkflowExplorer key={selected.id} workflow={selected} onClose={close} /> : null}
     </div>
   )
 }

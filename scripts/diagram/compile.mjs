@@ -4,6 +4,8 @@
  * the same workflow always yields the same string.
  */
 import { colors, laneOrder, fonts, grid, type, budget } from './theme.mjs'
+import { compileGraph, graphViews } from './graph.mjs'
+import { normalizeWorkflow } from '../workflow.mjs'
 
 export class DiagramError extends Error {}
 
@@ -203,6 +205,7 @@ function describe(workflow, nodes) {
 }
 
 export function compileDiagram(workflow, g = grid) {
+  if (workflow.schema_version === 2 || workflow.edges) return compileGraph(workflow)
   const prefix = `wf-${workflow.id}`
   const { lanes, nodes, width, height } = layout(workflow, g)
   const problems = []
@@ -299,4 +302,9 @@ export function compileDiagram(workflow, g = grid) {
 
   if (problems.length) throw new DiagramError(problems.join('; '))
   return out.join('\n') + '\n'
+}
+
+export function compileDiagramSet(workflow) {
+  if (!workflow.schema_version && workflow.steps.length <= budget.steps && workflow.steps.filter(s => s.human_gate).length <= budget.gates) return [{ id: 'full', svg: compileDiagram(workflow), step_ids: workflow.steps.map(s => s.id), edge_ids: workflow.steps.slice(1).map((_, i) => `legacy-edge-${i + 1}`) }]
+  return graphViews(normalizeWorkflow(workflow)).map(({ workflow: view, ...manifest }) => ({ ...manifest, svg: compileGraph(view, manifest.layout_ranks ? { ranks: new Map(Object.entries(manifest.layout_ranks)) } : {}) }))
 }

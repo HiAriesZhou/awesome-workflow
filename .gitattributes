@@ -1,0 +1,2 @@
+# Preserve the upstream CLI's frozen HTML evidence, including its whitespace.
+docs/implementation/archify-probe/*.html linguist-generated=true whitespace=-blank-at-eol

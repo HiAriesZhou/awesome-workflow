@@ -1,0 +1,62 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "Synthetic human-approval",
+    "output": "human-approval.html",
+    "animation": "none"
+  },
+  "lanes": [
+    {
+      "id": "employee-0",
+      "label": "Employee"
+    },
+    {
+      "id": "manager-0",
+      "label": "Manager"
+    },
+    {
+      "id": "tool-0",
+      "label": "Automation"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "s0",
+      "lane": "employee-0",
+      "col": 0,
+      "width": 180,
+      "type": "backend",
+      "label": "Submit request"
+    },
+    {
+      "id": "s1",
+      "lane": "manager-0",
+      "col": 1,
+      "width": 180,
+      "type": "security",
+      "label": "Review request"
+    },
+    {
+      "id": "s2",
+      "lane": "tool-0",
+      "col": 2,
+      "width": 180,
+      "type": "backend",
+      "label": "Apply change"
+    }
+  ],
+  "edges": [
+    {
+      "id": "e0",
+      "from": "s0",
+      "to": "s1"
+    },
+    {
+      "id": "e1",
+      "from": "s1",
+      "to": "s2",
+      "label": "approved"
+    }
+  ]
+}

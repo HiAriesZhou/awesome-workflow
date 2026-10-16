@@ -1,0 +1,20 @@
+{
+  "playwright": "1.58.2",
+  "browser": "145.0.7632.6",
+  "node": "v23.2.0",
+  "platform": "darwin-arm64",
+  "receipts": [
+    {
+      "id": "full",
+      "failures": [],
+      "width": 1760,
+      "height": 784,
+      "node_count": 5,
+      "edge_count": 5,
+      "actual_fonts": "\"IBM Plex Sans\", -apple-system, \"Segoe UI\", Helvetica, Arial, sans-serif",
+      "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36",
+      "screenshot": "full.png"
+    }
+  ],
+  "passed": true
+}
