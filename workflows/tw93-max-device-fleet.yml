@@ -1,0 +1,85 @@
+id: tw93-max-device-fleet
+title: Dual Claude Max + Device Fleet Hub
+summary: >-
+  Tw93's public Ops habit for burning two Claude Max accounts plus ChatGPT Pro:
+  always pick current top models, keep one Mac as the sole agent context hub,
+  fan out computer-use across Windows VM / real PC / Android / iOS sim, run
+  many parallel tabs, and close the loop with /loop intake plus weekly Waza
+  skill distillation.
+domain: agent-engineering
+maturity: draft
+tools: [claude-code, codex, skills, mcp, other]
+model_tiers: [premium]
+automation: assisted
+authors: [tw93]
+tags: [claude-max, computer-use, multi-device, loop, waza, kaku]
+not_for:
+  - Teams that cannot afford dual Max / Pro spend
+  - Single-file edits where a multi-device lab is pure overhead
+  - Workflows that need every machine to hold its own long chat context
+steps:
+  - id: model-policy
+    name: Pick best models first
+    actor: human
+    human_gate: true
+    model_tier: premium
+    inputs: [task difficulty, subscription pool]
+    outputs: [model + effort choice]
+    notes: >-
+      Everyday Claude tasks → Opus 5.5 medium; hard tasks → high. Codex defaults
+      to GPT-6-Astra medium. Same Max pool also absorbs personal ops (investing /
+      bookkeeping) that burn tokens. Author frames this as time-poor “best model
+      first” rather than cheapest-model engineering.
+    evidence_url: https://x.com/HiTw93/status/2110901581667516821
+  - id: bridge-computer-use
+    name: Bridge to Codex CU
+    actor: agent
+    human_gate: false
+    model_tier: premium
+    inputs: [Claude session, lcu bridge]
+    outputs: [desktop / GUI actions via Codex CU]
+    notes: Author routes Codex computer use from Claude via lcu for better GUI driving.
+  - id: device-fleet
+    name: Drive device fleet
+    actor: agent
+    human_gate: false
+    model_tier: premium
+    inputs: [Mac hub, Parallels VM, ThinkPad+UU, Android ADB, iOS sim]
+    outputs: [multi-OS verification evidence]
+    notes: >-
+      Mac keeps the only durable agent context. Computer-use hits a Parallels
+      Windows VM, an always-on ThinkPad over UU remote/SSH, an Android tablet
+      over USB debug (for no-API UI), and Xcode’s iPhone simulator. Optional
+      later: Linux guest inside Windows.
+  - id: parallel-tabs
+    name: Run parallel agent tabs
+    actor: agent
+    human_gate: false
+    model_tier: premium
+    inputs: [issue backlog, Kaku / IDE tabs]
+    outputs: [parallel diffs / cleared issues]
+    notes: Author attributes clearing GitHub issues to many concurrent agent tabs.
+  - id: social-loop
+    name: Loop feedback to Notion
+    actor: agent
+    human_gate: true
+    model_tier: standard
+    inputs: [social mentions, bug reports]
+    outputs: [Notion triage list, auto-marked fixes]
+    notes: Collect → enrich context → fix → mark done; human stays for priority calls.
+  - id: weekly-waza
+    name: Distill weekly Waza
+    actor: agent
+    human_gate: true
+    model_tier: premium
+    inputs: [week of chats, pitfalls, best practices]
+    outputs: [updated open-source skills]
+    notes: Best models re-read the week's work and precipitate reusable skills into Waza.
+    evidence_url: https://github.com/tw93/Waza
+sources:
+  - label: HiTw93 — dual Max + device fleet (2026-10-16)
+    url: https://x.com/HiTw93/status/2110901581667516821
+  - label: tw93/Waza
+    url: https://github.com/tw93/Waza
+added: "2026-10-16"
+verified: "2026-10-16"

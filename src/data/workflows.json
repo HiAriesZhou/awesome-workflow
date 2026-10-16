@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-10-10",
-  "count": 10,
+  "generated_at": "2026-10-16",
+  "count": 11,
   "workflows": [
     {
       "id": "oneredoak-security-review",
@@ -618,6 +618,328 @@
             "legacy-edge-3"
           ],
           "file": "pimzino-bugfix.svg"
+        }
+      ]
+    },
+    {
+      "id": "tw93-max-device-fleet",
+      "title": "Dual Claude Max + Device Fleet Hub",
+      "summary": "Tw93's public Ops habit for burning two Claude Max accounts plus ChatGPT Pro: always pick current top models, keep one Mac as the sole agent context hub, fan out computer-use across Windows VM / real PC / Android / iOS sim, run many parallel tabs, and close the loop with /loop intake plus weekly Waza skill distillation.",
+      "domain": "agent-engineering",
+      "maturity": "draft",
+      "tools": [
+        "claude-code",
+        "codex",
+        "skills",
+        "mcp",
+        "other"
+      ],
+      "model_tiers": [
+        "premium"
+      ],
+      "automation": "assisted",
+      "authors": [
+        "tw93"
+      ],
+      "tags": [
+        "claude-max",
+        "computer-use",
+        "multi-device",
+        "loop",
+        "waza",
+        "kaku"
+      ],
+      "not_for": [
+        "Teams that cannot afford dual Max / Pro spend",
+        "Single-file edits where a multi-device lab is pure overhead",
+        "Workflows that need every machine to hold its own long chat context"
+      ],
+      "steps": [
+        {
+          "id": "model-policy",
+          "name": "Pick best models first",
+          "actor": "human",
+          "human_gate": true,
+          "model_tier": "premium",
+          "inputs": [
+            "task difficulty",
+            "subscription pool"
+          ],
+          "outputs": [
+            "model + effort choice"
+          ],
+          "notes": "Everyday Claude tasks → Opus 5.5 medium; hard tasks → high. Codex defaults to GPT-6-Astra medium. Same Max pool also absorbs personal ops (investing / bookkeeping) that burn tokens. Author frames this as time-poor “best model first” rather than cheapest-model engineering.",
+          "evidence_url": "https://x.com/HiTw93/status/2110901581667516821",
+          "actor_id": "human",
+          "type": "action",
+          "evidence": [
+            {
+              "support": "migrated",
+              "locator": "steps[id=model-policy]",
+              "reason": "Imported unchanged from legacy YAML; not independently checked.",
+              "source_id": "legacy-source-1"
+            }
+          ]
+        },
+        {
+          "id": "bridge-computer-use",
+          "name": "Bridge to Codex CU",
+          "actor": "agent",
+          "human_gate": false,
+          "model_tier": "premium",
+          "inputs": [
+            "Claude session",
+            "lcu bridge"
+          ],
+          "outputs": [
+            "desktop / GUI actions via Codex CU"
+          ],
+          "notes": "Author routes Codex computer use from Claude via lcu for better GUI driving.",
+          "actor_id": "agent",
+          "type": "action",
+          "evidence": [
+            {
+              "support": "migrated",
+              "locator": "steps[id=bridge-computer-use]",
+              "reason": "Imported unchanged from legacy YAML; not independently checked."
+            }
+          ]
+        },
+        {
+          "id": "device-fleet",
+          "name": "Drive device fleet",
+          "actor": "agent",
+          "human_gate": false,
+          "model_tier": "premium",
+          "inputs": [
+            "Mac hub",
+            "Parallels VM",
+            "ThinkPad+UU",
+            "Android ADB",
+            "iOS sim"
+          ],
+          "outputs": [
+            "multi-OS verification evidence"
+          ],
+          "notes": "Mac keeps the only durable agent context. Computer-use hits a Parallels Windows VM, an always-on ThinkPad over UU remote/SSH, an Android tablet over USB debug (for no-API UI), and Xcode’s iPhone simulator. Optional later: Linux guest inside Windows.",
+          "actor_id": "agent",
+          "type": "action",
+          "evidence": [
+            {
+              "support": "migrated",
+              "locator": "steps[id=device-fleet]",
+              "reason": "Imported unchanged from legacy YAML; not independently checked."
+            }
+          ]
+        },
+        {
+          "id": "parallel-tabs",
+          "name": "Run parallel agent tabs",
+          "actor": "agent",
+          "human_gate": false,
+          "model_tier": "premium",
+          "inputs": [
+            "issue backlog",
+            "Kaku / IDE tabs"
+          ],
+          "outputs": [
+            "parallel diffs / cleared issues"
+          ],
+          "notes": "Author attributes clearing GitHub issues to many concurrent agent tabs.",
+          "actor_id": "agent",
+          "type": "action",
+          "evidence": [
+            {
+              "support": "migrated",
+              "locator": "steps[id=parallel-tabs]",
+              "reason": "Imported unchanged from legacy YAML; not independently checked."
+            }
+          ]
+        },
+        {
+          "id": "social-loop",
+          "name": "Loop feedback to Notion",
+          "actor": "agent",
+          "human_gate": true,
+          "model_tier": "standard",
+          "inputs": [
+            "social mentions",
+            "bug reports"
+          ],
+          "outputs": [
+            "Notion triage list",
+            "auto-marked fixes"
+          ],
+          "notes": "Collect → enrich context → fix → mark done; human stays for priority calls.",
+          "actor_id": "agent",
+          "type": "action",
+          "evidence": [
+            {
+              "support": "migrated",
+              "locator": "steps[id=social-loop]",
+              "reason": "Imported unchanged from legacy YAML; not independently checked."
+            }
+          ]
+        },
+        {
+          "id": "weekly-waza",
+          "name": "Distill weekly Waza",
+          "actor": "agent",
+          "human_gate": true,
+          "model_tier": "premium",
+          "inputs": [
+            "week of chats",
+            "pitfalls",
+            "best practices"
+          ],
+          "outputs": [
+            "updated open-source skills"
+          ],
+          "notes": "Best models re-read the week's work and precipitate reusable skills into Waza.",
+          "evidence_url": "https://github.com/tw93/Waza",
+          "actor_id": "agent",
+          "type": "action",
+          "evidence": [
+            {
+              "support": "migrated",
+              "locator": "steps[id=weekly-waza]",
+              "reason": "Imported unchanged from legacy YAML; not independently checked.",
+              "source_id": "legacy-source-2"
+            }
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "label": "HiTw93 — dual Max + device fleet (2026-10-16)",
+          "url": "https://x.com/HiTw93/status/2110901581667516821",
+          "id": "legacy-source-1",
+          "kind": "unknown",
+          "locator": "Legacy sources[]",
+          "reuse_status": "unknown"
+        },
+        {
+          "label": "tw93/Waza",
+          "url": "https://github.com/tw93/Waza",
+          "id": "legacy-source-2",
+          "kind": "unknown",
+          "locator": "Legacy sources[]",
+          "reuse_status": "unknown"
+        }
+      ],
+      "added": "2026-10-16",
+      "verified": "2026-10-16",
+      "schema_version": 2,
+      "lifecycle": "published",
+      "evidence": {
+        "status": "unknown",
+        "method": "Legacy verified/maturity retained; no new source check or reproduction performed."
+      },
+      "actors": [
+        {
+          "id": "human",
+          "kind": "human",
+          "label": "human"
+        },
+        {
+          "id": "agent",
+          "kind": "agent",
+          "label": "agent"
+        }
+      ],
+      "edges": [
+        {
+          "id": "legacy-edge-1",
+          "from": "model-policy",
+          "to": "bridge-computer-use",
+          "kind": "sequence",
+          "evidence": [
+            {
+              "support": "migrated",
+              "locator": "steps[0] -> steps[1]",
+              "reason": "Derived solely from legacy array order, matching the old renderer; not reverified."
+            }
+          ]
+        },
+        {
+          "id": "legacy-edge-2",
+          "from": "bridge-computer-use",
+          "to": "device-fleet",
+          "kind": "sequence",
+          "evidence": [
+            {
+              "support": "migrated",
+              "locator": "steps[1] -> steps[2]",
+              "reason": "Derived solely from legacy array order, matching the old renderer; not reverified."
+            }
+          ]
+        },
+        {
+          "id": "legacy-edge-3",
+          "from": "device-fleet",
+          "to": "parallel-tabs",
+          "kind": "sequence",
+          "evidence": [
+            {
+              "support": "migrated",
+              "locator": "steps[2] -> steps[3]",
+              "reason": "Derived solely from legacy array order, matching the old renderer; not reverified."
+            }
+          ]
+        },
+        {
+          "id": "legacy-edge-4",
+          "from": "parallel-tabs",
+          "to": "social-loop",
+          "kind": "sequence",
+          "evidence": [
+            {
+              "support": "migrated",
+              "locator": "steps[3] -> steps[4]",
+              "reason": "Derived solely from legacy array order, matching the old renderer; not reverified."
+            }
+          ]
+        },
+        {
+          "id": "legacy-edge-5",
+          "from": "social-loop",
+          "to": "weekly-waza",
+          "kind": "sequence",
+          "evidence": [
+            {
+              "support": "migrated",
+              "locator": "steps[4] -> steps[5]",
+              "reason": "Derived solely from legacy array order, matching the old renderer; not reverified."
+            }
+          ]
+        }
+      ],
+      "coverage": {
+        "mode": "legacy_order_projection",
+        "unknowns": [
+          "Actual branching, parallelism, failures and retries have not been rechecked.",
+          "Legacy actor categories are placeholders; separate role instances were not reconstructed."
+        ]
+      },
+      "diagram_views": [
+        {
+          "id": "full",
+          "step_ids": [
+            "model-policy",
+            "bridge-computer-use",
+            "device-fleet",
+            "parallel-tabs",
+            "social-loop",
+            "weekly-waza"
+          ],
+          "edge_ids": [
+            "legacy-edge-1",
+            "legacy-edge-2",
+            "legacy-edge-3",
+            "legacy-edge-4",
+            "legacy-edge-5"
+          ],
+          "file": "tw93-max-device-fleet.svg"
         }
       ]
     },
