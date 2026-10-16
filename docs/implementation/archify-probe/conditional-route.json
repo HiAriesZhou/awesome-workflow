@@ -1,0 +1,59 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "Synthetic conditional-route",
+    "output": "conditional-route.html",
+    "animation": "none"
+  },
+  "lanes": [
+    {
+      "id": "agent-0",
+      "label": "agent"
+    },
+    {
+      "id": "human-0",
+      "label": "human"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "s0",
+      "lane": "agent-0",
+      "col": 0,
+      "width": 180,
+      "type": "backend",
+      "label": "Check request"
+    },
+    {
+      "id": "s1",
+      "lane": "agent-0",
+      "col": 1,
+      "width": 180,
+      "type": "backend",
+      "label": "Accept request"
+    },
+    {
+      "id": "s2",
+      "lane": "human-0",
+      "col": 1,
+      "width": 180,
+      "type": "backend",
+      "label": "Ask for details"
+    }
+  ],
+  "edges": [
+    {
+      "id": "e0",
+      "from": "s0",
+      "to": "s1",
+      "label": "complete"
+    },
+    {
+      "id": "e1",
+      "from": "s0",
+      "to": "s2",
+      "label": "incomplete"
+    }
+  ]
+}

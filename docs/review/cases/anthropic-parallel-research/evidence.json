@@ -1,0 +1,142 @@
+{
+  "sources": [
+    {
+      "id": "primary",
+      "label": "Anthropic engineering article",
+      "url": "https://www.anthropic.com/engineering/multi-agent-research-system",
+      "kind": "practitioner_report",
+      "locator": "Architecture overview for Research",
+      "checked_at": "2026-10-13T09:28:22.092Z",
+      "content_hash": "b2059d785ae34c94baed2033b6c2b88e9f0e1155eb8813a6562af2472634af17",
+      "reuse_status": "original_summary_only"
+    }
+  ],
+  "steps": [
+    {
+      "id": "plan",
+      "evidence": [
+        {
+          "source_id": "primary",
+          "locator": "Architecture overview for Research",
+          "support": "explicit"
+        }
+      ]
+    },
+    {
+      "id": "research",
+      "evidence": [
+        {
+          "source_id": "primary",
+          "locator": "Architecture overview for Research",
+          "support": "explicit"
+        }
+      ]
+    },
+    {
+      "id": "synthesize",
+      "evidence": [
+        {
+          "source_id": "primary",
+          "locator": "Architecture overview for Research",
+          "support": "explicit"
+        }
+      ]
+    },
+    {
+      "id": "cite",
+      "evidence": [
+        {
+          "source_id": "primary",
+          "locator": "Architecture overview for Research",
+          "support": "explicit"
+        }
+      ]
+    },
+    {
+      "id": "answer",
+      "evidence": [
+        {
+          "source_id": "primary",
+          "locator": "Architecture overview for Research",
+          "support": "explicit"
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "id": "e1",
+      "from": "plan",
+      "to": "research",
+      "evidence": [
+        {
+          "source_id": "primary",
+          "locator": "Architecture overview for Research",
+          "support": "explicit"
+        }
+      ]
+    },
+    {
+      "id": "e2",
+      "from": "research",
+      "to": "synthesize",
+      "evidence": [
+        {
+          "source_id": "primary",
+          "locator": "Architecture overview for Research",
+          "support": "explicit"
+        }
+      ]
+    },
+    {
+      "id": "e3",
+      "from": "synthesize",
+      "to": "research",
+      "condition": "more research",
+      "evidence": [
+        {
+          "source_id": "primary",
+          "locator": "Architecture overview for Research",
+          "support": "explicit"
+        }
+      ]
+    },
+    {
+      "id": "e4",
+      "from": "synthesize",
+      "to": "cite",
+      "condition": "sufficient information",
+      "evidence": [
+        {
+          "source_id": "primary",
+          "locator": "Architecture overview for Research",
+          "support": "explicit"
+        }
+      ]
+    },
+    {
+      "id": "e5",
+      "from": "cite",
+      "to": "answer",
+      "evidence": [
+        {
+          "source_id": "primary",
+          "locator": "Architecture overview for Research",
+          "support": "explicit"
+        }
+      ]
+    }
+  ],
+  "coverage": {
+    "mode": "documented_narrative_overview",
+    "unknowns": [
+      "动态研究子 Agent 的实际数量、各轮工具顺序与执行时长未知。",
+      "更多研究和停止的具体判断规则未公开。",
+      "中断、失败和引用无法定位时的完整处理未知。",
+      "此库未执行该系统，也未独立核验原文的效果数字。"
+    ],
+    "inferences": [
+      "动态子 Agent 与内部搜索迭代合并为并行集合节点。"
+    ]
+  }
+}

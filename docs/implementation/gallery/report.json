@@ -1,0 +1,51 @@
+{
+  "passed": true,
+  "checks": [
+    "Every published case has a visible SVG before selection; desktop gallery has no overflow.",
+    "All legacy nodes map to exact recorded details; all connections map; case authors/sources/toolchain present; Escape returns focus.",
+    "Node Enter selection, line hover/click, migrated evidence, button/wheel zoom, pointer pan/fit, focus containment and namespaced SVG references.",
+    "Search includes author names; domain/tool/evidence filters combine; empty state and reset work.",
+    "320/375/760/1024px: no page overflow; overlay fits; node selection, zoom, fit and close remain usable.",
+    "Touch context: tap tile/node/connection and close; connection details remain pinned without hover.",
+    "Synthetic five topologies: all edge details keyboard accessible; conditions shown; Chinese/English labels; overview opens detail; step index switches to matching view; invalid SVG shows an explicit error.",
+    "Development React StrictMode: dialog opens and closes with focus returned to gallery."
+  ],
+  "opened": [
+    "oneredoak-security-review",
+    "oneredoak-design-review",
+    "pimzino-bugfix",
+    "oneredoak-code-review",
+    "github-agentic-workflows",
+    "claude-mem-session-continuity",
+    "pimzino-spec-driven",
+    "obra-superpowers-plan-execute",
+    "tw93-waza-think-check",
+    "gstack-virtual-eng-team"
+  ],
+  "synthetic": [
+    "simple-chain",
+    "conditional-route",
+    "parallel-join",
+    "feedback-loop",
+    "human-approval",
+    "long-labels",
+    "complex-split",
+    "invalid-svg"
+  ],
+  "errors": [],
+  "browser": "145.0.7632.6",
+  "node": "v23.2.0",
+  "screenshots": [
+    "gallery.png",
+    "gallery-full.png",
+    "connection.png",
+    "node-detail.png",
+    "gallery-mobile.png",
+    "explorer-mobile.png",
+    "node-mobile.png",
+    "synthetic-parallel.png",
+    "synthetic-long-labels.png",
+    "synthetic-split.png"
+  ],
+  "visual_review": "Screenshots generated; see implementation-status.md for Agent image inspection. User acceptance pending."
+}

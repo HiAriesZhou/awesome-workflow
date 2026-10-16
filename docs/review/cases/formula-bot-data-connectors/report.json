@@ -1,0 +1,58 @@
+{
+  "version": 1,
+  "id": "formula-bot-data-connectors",
+  "candidate_id": "formula-bot-data-connectors",
+  "draft_hash": "fa5efb436a473bae4ecdef9c222023885147ea4aa96d9cfc45d43d17c2c2775e",
+  "renderer_fingerprint": "b937763d77458dfcda3d096dcb9a194b828fff291747a084aa7eacee7b57010f",
+  "source": {
+    "canonical_url": "https://n8n.io/case-studies/formula-bot",
+    "request_url": "https://n8n.io/case-studies/formula-bot/",
+    "content_hash": "aa7fe817478eab642cc2a54e04a25887a768e236a67c1bf55a5f8321e2cf82cf",
+    "checked_at": "2026-10-13T14:03:22.070Z",
+    "etag": null,
+    "content_type": "text/html; charset=utf-8",
+    "unchanged": true
+  },
+  "checks": {
+    "schema": "passed",
+    "semantics": "passed",
+    "source_binding": "passed_hash_and_locator_only",
+    "geometry": "passed",
+    "deterministic_render": "passed",
+    "browser": "passed",
+    "human_review": "not_confirmed",
+    "reproduction": "not_run"
+  },
+  "evidence_status": "source_checked",
+  "lifecycle": "draft",
+  "permission_review": "pending",
+  "warning": "Automated checks do not prove source claims, completeness, permissions or runtime behavior.",
+  "views": [
+    {
+      "id": "full",
+      "step_ids": [
+        "connect",
+        "metadata",
+        "query",
+        "files"
+      ],
+      "edge_ids": [
+        "e1",
+        "e2",
+        "e3"
+      ],
+      "file": "full.svg",
+      "svg_hash": "3df84a27d1391723659cd8dd26aeebecc2465563da34850b5fb4877075a85496"
+    }
+  ],
+  "browser_report": "../../../implementation/visual/report.json",
+  "files_hashes": {
+    "browser-report.json": "60ffba36ea3e91ede68c823f9afdc2f33d20acc201cd675f85a5da2d243a4cb2",
+    "evidence.json": "1bbc108e2202e03426f86e6f87e6caf69114669d58c9afa9d3802f05dddba6f1",
+    "full.png": "cbcd9038f59e2368c6ef78135c46499e1e910769ef79b8720234696e0ddb94c0",
+    "full.svg": "3df84a27d1391723659cd8dd26aeebecc2465563da34850b5fb4877075a85496",
+    "index.html": "51524ac820e8d38b86e2192c2217c063e512b30b85b155ab42693b96db2bcf58",
+    "review.md": "e096ce2a11d51192c9cf72fb4ece26cfcc0af183e722225d5696b16a00a4cc04",
+    "workflow.yml": "82ffad20d05e4d8c3dee6ec54ae0b33db5ae29da4bb89b5aca31fa2493aa54cd"
+  }
+}

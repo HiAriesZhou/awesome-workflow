@@ -1,0 +1,10 @@
+{
+  "url": "http://127.0.0.1:5173/awesome-workflow/",
+  "expected": 10,
+  "passed": false,
+  "errors": [],
+  "galleryItems": 0,
+  "initialDiagrams": 0,
+  "initialDialogs": 0,
+  "failure": "Running preview must show every workflow without selection\n\n0 !== 10\n"
+}

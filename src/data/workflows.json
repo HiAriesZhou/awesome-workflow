@@ -40,7 +40,16 @@
           "outputs": [
             "scan target"
           ],
-          "evidence_url": "https://github.com/OneRedOak/claude-code-workflows/tree/main/security-review"
+          "evidence_url": "https://github.com/OneRedOak/claude-code-workflows/tree/main/security-review",
+          "actor_id": "human",
+          "type": "action",
+          "evidence": [
+            {
+              "support": "migrated",
+              "locator": "steps[id=scope]",
+              "reason": "Imported unchanged from legacy YAML; not independently checked."
+            }
+          ]
         },
         {
           "id": "scan",
@@ -54,6 +63,15 @@
           ],
           "outputs": [
             "severity-classified findings"
+          ],
+          "actor_id": "agent",
+          "type": "action",
+          "evidence": [
+            {
+              "support": "migrated",
+              "locator": "steps[id=scan]",
+              "reason": "Imported unchanged from legacy YAML; not independently checked."
+            }
           ]
         },
         {
@@ -67,6 +85,15 @@
           "outputs": [
             "patches",
             "accepted risks"
+          ],
+          "actor_id": "human",
+          "type": "action",
+          "evidence": [
+            {
+              "support": "migrated",
+              "locator": "steps[id=remediate]",
+              "reason": "Imported unchanged from legacy YAML; not independently checked."
+            }
           ]
         }
       ],
@@ -74,11 +101,83 @@
         {
           "label": "OneRedOak/claude-code-workflows (security-review)",
           "url": "https://github.com/OneRedOak/claude-code-workflows",
-          "stars": 3900
+          "stars": 3900,
+          "id": "legacy-source-1",
+          "kind": "unknown",
+          "locator": "Legacy sources[]",
+          "reuse_status": "unknown"
         }
       ],
       "added": "2026-10-10",
-      "verified": "2026-10-10"
+      "verified": "2026-10-10",
+      "schema_version": 2,
+      "lifecycle": "published",
+      "evidence": {
+        "status": "unknown",
+        "method": "Legacy verified/maturity retained; no new source check or reproduction performed."
+      },
+      "actors": [
+        {
+          "id": "human",
+          "kind": "human",
+          "label": "human"
+        },
+        {
+          "id": "agent",
+          "kind": "agent",
+          "label": "agent"
+        }
+      ],
+      "edges": [
+        {
+          "id": "legacy-edge-1",
+          "from": "scope",
+          "to": "scan",
+          "kind": "sequence",
+          "evidence": [
+            {
+              "support": "migrated",
+              "locator": "steps[0] -> steps[1]",
+              "reason": "Derived solely from legacy array order, matching the old renderer; not reverified."
+            }
+          ]
+        },
+        {
+          "id": "legacy-edge-2",
+          "from": "scan",
+          "to": "remediate",
+          "kind": "sequence",
+          "evidence": [
+            {
+              "support": "migrated",
+              "locator": "steps[1] -> steps[2]",
+              "reason": "Derived solely from legacy array order, matching the old renderer; not reverified."
+            }
+          ]
+        }
+      ],
+      "coverage": {
+        "mode": "legacy_order_projection",
+        "unknowns": [
+          "Actual branching, parallelism, failures and retries have not been rechecked.",
+          "Legacy actor categories are placeholders; separate role instances were not reconstructed."
+        ]
+      },
+      "diagram_views": [
+        {
+          "id": "full",
+          "step_ids": [
+            "scope",
+            "scan",
+            "remediate"
+          ],
+          "edge_ids": [
+            "legacy-edge-1",
+            "legacy-edge-2"
+          ],
+          "file": "oneredoak-security-review.svg"
+        }
+      ]
     },
     {
       "id": "oneredoak-design-review",
@@ -118,7 +217,16 @@
           "outputs": [
             "reachable UI"
           ],
-          "evidence_url": "https://github.com/OneRedOak/claude-code-workflows/tree/main/design-review"
+          "evidence_url": "https://github.com/OneRedOak/claude-code-workflows/tree/main/design-review",
+          "actor_id": "human",
+          "type": "action",
+          "evidence": [
+            {
+              "support": "migrated",
+              "locator": "steps[id=prepare]",
+              "reason": "Imported unchanged from legacy YAML; not independently checked."
+            }
+          ]
         },
         {
           "id": "browse",
@@ -134,7 +242,16 @@
             "screenshots",
             "a11y notes"
           ],
-          "notes": "Uses Microsoft Playwright MCP for browser automation."
+          "notes": "Uses Microsoft Playwright MCP for browser automation.",
+          "actor_id": "agent",
+          "type": "action",
+          "evidence": [
+            {
+              "support": "migrated",
+              "locator": "steps[id=browse]",
+              "reason": "Imported unchanged from legacy YAML; not independently checked."
+            }
+          ]
         },
         {
           "id": "critique",
@@ -148,6 +265,15 @@
           ],
           "outputs": [
             "actionable UI findings"
+          ],
+          "actor_id": "agent",
+          "type": "action",
+          "evidence": [
+            {
+              "support": "migrated",
+              "locator": "steps[id=critique]",
+              "reason": "Imported unchanged from legacy YAML; not independently checked."
+            }
           ]
         },
         {
@@ -160,6 +286,15 @@
           ],
           "outputs": [
             "UI patches"
+          ],
+          "actor_id": "human",
+          "type": "action",
+          "evidence": [
+            {
+              "support": "migrated",
+              "locator": "steps[id=apply]",
+              "reason": "Imported unchanged from legacy YAML; not independently checked."
+            }
           ]
         }
       ],
@@ -167,15 +302,106 @@
         {
           "label": "OneRedOak/claude-code-workflows (design-review)",
           "url": "https://github.com/OneRedOak/claude-code-workflows",
-          "stars": 3900
+          "stars": 3900,
+          "id": "legacy-source-1",
+          "kind": "unknown",
+          "locator": "Legacy sources[]",
+          "reuse_status": "unknown"
         },
         {
           "label": "Playwright MCP",
-          "url": "https://github.com/microsoft/playwright-mcp"
+          "url": "https://github.com/microsoft/playwright-mcp",
+          "id": "legacy-source-2",
+          "kind": "unknown",
+          "locator": "Legacy sources[]",
+          "reuse_status": "unknown"
         }
       ],
       "added": "2026-10-10",
-      "verified": "2026-10-10"
+      "verified": "2026-10-10",
+      "schema_version": 2,
+      "lifecycle": "published",
+      "evidence": {
+        "status": "unknown",
+        "method": "Legacy verified/maturity retained; no new source check or reproduction performed."
+      },
+      "actors": [
+        {
+          "id": "human",
+          "kind": "human",
+          "label": "human"
+        },
+        {
+          "id": "agent",
+          "kind": "agent",
+          "label": "agent"
+        }
+      ],
+      "edges": [
+        {
+          "id": "legacy-edge-1",
+          "from": "prepare",
+          "to": "browse",
+          "kind": "sequence",
+          "evidence": [
+            {
+              "support": "migrated",
+              "locator": "steps[0] -> steps[1]",
+              "reason": "Derived solely from legacy array order, matching the old renderer; not reverified."
+            }
+          ]
+        },
+        {
+          "id": "legacy-edge-2",
+          "from": "browse",
+          "to": "critique",
+          "kind": "sequence",
+          "evidence": [
+            {
+              "support": "migrated",
+              "locator": "steps[1] -> steps[2]",
+              "reason": "Derived solely from legacy array order, matching the old renderer; not reverified."
+            }
+          ]
+        },
+        {
+          "id": "legacy-edge-3",
+          "from": "critique",
+          "to": "apply",
+          "kind": "sequence",
+          "evidence": [
+            {
+              "support": "migrated",
+              "locator": "steps[2] -> steps[3]",
+              "reason": "Derived solely from legacy array order, matching the old renderer; not reverified."
+            }
+          ]
+        }
+      ],
+      "coverage": {
+        "mode": "legacy_order_projection",
+        "unknowns": [
+          "Actual branching, parallelism, failures and retries have not been rechecked.",
+          "Legacy actor categories are placeholders; separate role instances were not reconstructed."
+        ]
+      },
+      "diagram_views": [
+        {
+          "id": "full",
+          "step_ids": [
+            "prepare",
+            "browse",
+            "critique",
+            "apply"
+          ],
+          "edge_ids": [
+            "legacy-edge-1",
+            "legacy-edge-2",
+            "legacy-edge-3"
+          ],
+          "file": "oneredoak-design-review.svg"
+        }
+      ]
     },
     {
       "id": "pimzino-bugfix",
@@ -216,7 +442,17 @@
           "outputs": [
             "bug brief"
           ],
-          "evidence_url": "https://github.com/Pimzino/claude-code-spec-workflow"
+          "evidence_url": "https://github.com/Pimzino/claude-code-spec-workflow",
+          "actor_id": "human",
+          "type": "action",
+          "evidence": [
+            {
+              "support": "migrated",
+              "locator": "steps[id=report]",
+              "reason": "Imported unchanged from legacy YAML; not independently checked.",
+              "source_id": "legacy-source-1"
+            }
+          ]
         },
         {
           "id": "analyze",
@@ -231,7 +467,16 @@
           "outputs": [
             "root-cause notes"
           ],
-          "notes": "/bug-analyze — keep humans in the loop before code changes."
+          "notes": "/bug-analyze — keep humans in the loop before code changes.",
+          "actor_id": "agent",
+          "type": "action",
+          "evidence": [
+            {
+              "support": "migrated",
+              "locator": "steps[id=analyze]",
+              "reason": "Imported unchanged from legacy YAML; not independently checked."
+            }
+          ]
         },
         {
           "id": "fix",
@@ -244,6 +489,15 @@
           ],
           "outputs": [
             "patch"
+          ],
+          "actor_id": "agent",
+          "type": "action",
+          "evidence": [
+            {
+              "support": "migrated",
+              "locator": "steps[id=fix]",
+              "reason": "Imported unchanged from legacy YAML; not independently checked."
+            }
           ]
         },
         {
@@ -258,6 +512,15 @@
           ],
           "outputs": [
             "verification evidence"
+          ],
+          "actor_id": "agent",
+          "type": "action",
+          "evidence": [
+            {
+              "support": "migrated",
+              "locator": "steps[id=verify]",
+              "reason": "Imported unchanged from legacy YAML; not independently checked."
+            }
           ]
         }
       ],
@@ -265,11 +528,98 @@
         {
           "label": "Pimzino/claude-code-spec-workflow (bug workflow)",
           "url": "https://github.com/Pimzino/claude-code-spec-workflow",
-          "stars": 3860
+          "stars": 3860,
+          "id": "legacy-source-1",
+          "kind": "unknown",
+          "locator": "Legacy sources[]",
+          "reuse_status": "unknown"
         }
       ],
       "added": "2026-10-10",
-      "verified": "2026-10-10"
+      "verified": "2026-10-10",
+      "schema_version": 2,
+      "lifecycle": "published",
+      "evidence": {
+        "status": "unknown",
+        "method": "Legacy verified/maturity retained; no new source check or reproduction performed."
+      },
+      "actors": [
+        {
+          "id": "human",
+          "kind": "human",
+          "label": "human"
+        },
+        {
+          "id": "agent",
+          "kind": "agent",
+          "label": "agent"
+        }
+      ],
+      "edges": [
+        {
+          "id": "legacy-edge-1",
+          "from": "report",
+          "to": "analyze",
+          "kind": "sequence",
+          "evidence": [
+            {
+              "support": "migrated",
+              "locator": "steps[0] -> steps[1]",
+              "reason": "Derived solely from legacy array order, matching the old renderer; not reverified."
+            }
+          ]
+        },
+        {
+          "id": "legacy-edge-2",
+          "from": "analyze",
+          "to": "fix",
+          "kind": "sequence",
+          "evidence": [
+            {
+              "support": "migrated",
+              "locator": "steps[1] -> steps[2]",
+              "reason": "Derived solely from legacy array order, matching the old renderer; not reverified."
+            }
+          ]
+        },
+        {
+          "id": "legacy-edge-3",
+          "from": "fix",
+          "to": "verify",
+          "kind": "sequence",
+          "evidence": [
+            {
+              "support": "migrated",
+              "locator": "steps[2] -> steps[3]",
+              "reason": "Derived solely from legacy array order, matching the old renderer; not reverified."
+            }
+          ]
+        }
+      ],
+      "coverage": {
+        "mode": "legacy_order_projection",
+        "unknowns": [
+          "Actual branching, parallelism, failures and retries have not been rechecked.",
+          "Legacy actor categories are placeholders; separate role instances were not reconstructed."
+        ]
+      },
+      "diagram_views": [
+        {
+          "id": "full",
+          "step_ids": [
+            "report",
+            "analyze",
+            "fix",
+            "verify"
+          ],
+          "edge_ids": [
+            "legacy-edge-1",
+            "legacy-edge-2",
+            "legacy-edge-3"
+          ],
+          "file": "pimzino-bugfix.svg"
+        }
+      ]
     },
     {
       "id": "oneredoak-code-review",
@@ -308,7 +658,16 @@
           "outputs": [
             "pull request"
           ],
-          "evidence_url": "https://github.com/OneRedOak/claude-code-workflows/tree/main/code-review"
+          "evidence_url": "https://github.com/OneRedOak/claude-code-workflows/tree/main/code-review",
+          "actor_id": "human",
+          "type": "action",
+          "evidence": [
+            {
+              "support": "migrated",
+              "locator": "steps[id=trigger]",
+              "reason": "Imported unchanged from legacy YAML; not independently checked."
+            }
+          ]
         },
         {
           "id": "agent-review",
@@ -323,7 +682,16 @@
           "outputs": [
             "findings comments"
           ],
-          "notes": "Dual-loop — slash command on demand and Actions on PR events."
+          "notes": "Dual-loop — slash command on demand and Actions on PR events.",
+          "actor_id": "agent",
+          "type": "action",
+          "evidence": [
+            {
+              "support": "migrated",
+              "locator": "steps[id=agent-review]",
+              "reason": "Imported unchanged from legacy YAML; not independently checked."
+            }
+          ]
         },
         {
           "id": "human-triage",
@@ -336,6 +704,15 @@
           "outputs": [
             "accepted fixes",
             "deferred items"
+          ],
+          "actor_id": "human",
+          "type": "action",
+          "evidence": [
+            {
+              "support": "migrated",
+              "locator": "steps[id=human-triage]",
+              "reason": "Imported unchanged from legacy YAML; not independently checked."
+            }
           ]
         },
         {
@@ -348,6 +725,15 @@
           ],
           "outputs": [
             "merged PR"
+          ],
+          "actor_id": "human",
+          "type": "action",
+          "evidence": [
+            {
+              "support": "migrated",
+              "locator": "steps[id=merge-gate]",
+              "reason": "Imported unchanged from legacy YAML; not independently checked."
+            }
           ]
         }
       ],
@@ -355,15 +741,106 @@
         {
           "label": "OneRedOak/claude-code-workflows (code-review)",
           "url": "https://github.com/OneRedOak/claude-code-workflows",
-          "stars": 3900
+          "stars": 3900,
+          "id": "legacy-source-1",
+          "kind": "unknown",
+          "locator": "Legacy sources[]",
+          "reuse_status": "unknown"
         },
         {
           "label": "Tutorial (YouTube)",
-          "url": "https://www.youtube.com/watch?v=nItsfXwujjg"
+          "url": "https://www.youtube.com/watch?v=nItsfXwujjg",
+          "id": "legacy-source-2",
+          "kind": "unknown",
+          "locator": "Legacy sources[]",
+          "reuse_status": "unknown"
         }
       ],
       "added": "2026-10-10",
-      "verified": "2026-10-10"
+      "verified": "2026-10-10",
+      "schema_version": 2,
+      "lifecycle": "published",
+      "evidence": {
+        "status": "unknown",
+        "method": "Legacy verified/maturity retained; no new source check or reproduction performed."
+      },
+      "actors": [
+        {
+          "id": "human",
+          "kind": "human",
+          "label": "human"
+        },
+        {
+          "id": "agent",
+          "kind": "agent",
+          "label": "agent"
+        }
+      ],
+      "edges": [
+        {
+          "id": "legacy-edge-1",
+          "from": "trigger",
+          "to": "agent-review",
+          "kind": "sequence",
+          "evidence": [
+            {
+              "support": "migrated",
+              "locator": "steps[0] -> steps[1]",
+              "reason": "Derived solely from legacy array order, matching the old renderer; not reverified."
+            }
+          ]
+        },
+        {
+          "id": "legacy-edge-2",
+          "from": "agent-review",
+          "to": "human-triage",
+          "kind": "sequence",
+          "evidence": [
+            {
+              "support": "migrated",
+              "locator": "steps[1] -> steps[2]",
+              "reason": "Derived solely from legacy array order, matching the old renderer; not reverified."
+            }
+          ]
+        },
+        {
+          "id": "legacy-edge-3",
+          "from": "human-triage",
+          "to": "merge-gate",
+          "kind": "sequence",
+          "evidence": [
+            {
+              "support": "migrated",
+              "locator": "steps[2] -> steps[3]",
+              "reason": "Derived solely from legacy array order, matching the old renderer; not reverified."
+            }
+          ]
+        }
+      ],
+      "coverage": {
+        "mode": "legacy_order_projection",
+        "unknowns": [
+          "Actual branching, parallelism, failures and retries have not been rechecked.",
+          "Legacy actor categories are placeholders; separate role instances were not reconstructed."
+        ]
+      },
+      "diagram_views": [
+        {
+          "id": "full",
+          "step_ids": [
+            "trigger",
+            "agent-review",
+            "human-triage",
+            "merge-gate"
+          ],
+          "edge_ids": [
+            "legacy-edge-1",
+            "legacy-edge-2",
+            "legacy-edge-3"
+          ],
+          "file": "oneredoak-code-review.svg"
+        }
+      ]
     },
     {
       "id": "github-agentic-workflows",
@@ -406,7 +883,17 @@
           "outputs": [
             "markdown workflow file"
           ],
-          "evidence_url": "https://github.com/github/awesome-copilot/blob/main/docs/README.workflows.md"
+          "evidence_url": "https://github.com/github/awesome-copilot/blob/main/docs/README.workflows.md",
+          "actor_id": "human",
+          "type": "action",
+          "evidence": [
+            {
+              "support": "migrated",
+              "locator": "steps[id=author]",
+              "reason": "Imported unchanged from legacy YAML; not independently checked.",
+              "source_id": "legacy-source-1"
+            }
+          ]
         },
         {
           "id": "compile",
@@ -419,7 +906,16 @@
           "outputs": [
             "lock.yml Actions file"
           ],
-          "notes": "Use gh extension install github/gh-aw then gh aw compile."
+          "notes": "Use gh extension install github/gh-aw then gh aw compile.",
+          "actor_id": "tool",
+          "type": "action",
+          "evidence": [
+            {
+              "support": "migrated",
+              "locator": "steps[id=compile]",
+              "reason": "Imported unchanged from legacy YAML; not independently checked."
+            }
+          ]
         },
         {
           "id": "commit",
@@ -432,6 +928,15 @@
           ],
           "outputs": [
             "repo commit"
+          ],
+          "actor_id": "human",
+          "type": "action",
+          "evidence": [
+            {
+              "support": "migrated",
+              "locator": "steps[id=commit]",
+              "reason": "Imported unchanged from legacy YAML; not independently checked."
+            }
           ]
         },
         {
@@ -447,118 +952,127 @@
             "agent run logs",
             "issues/PRs as configured"
           ],
-          "notes": "Monitor with gh aw status / logs; examples include daily issues reports and OSPO health."
+          "notes": "Monitor with gh aw status / logs; examples include daily issues reports and OSPO health.",
+          "actor_id": "ci",
+          "type": "action",
+          "evidence": [
+            {
+              "support": "migrated",
+              "locator": "steps[id=run]",
+              "reason": "Imported unchanged from legacy YAML; not independently checked."
+            }
+          ]
         }
       ],
       "sources": [
         {
           "label": "github/awesome-copilot Agentic Workflows docs",
           "url": "https://github.com/github/awesome-copilot/blob/main/docs/README.workflows.md",
-          "stars": 39879
+          "stars": 39879,
+          "id": "legacy-source-1",
+          "kind": "unknown",
+          "locator": "Legacy sources[]",
+          "reuse_status": "unknown"
         },
         {
           "label": "GitHub Agentic Workflows spec",
-          "url": "https://github.github.com/gh-aw"
+          "url": "https://github.github.com/gh-aw",
+          "id": "legacy-source-2",
+          "kind": "unknown",
+          "locator": "Legacy sources[]",
+          "reuse_status": "unknown"
         }
       ],
       "added": "2026-10-10",
-      "verified": "2026-10-10"
-    },
-    {
-      "id": "gstack-virtual-eng-team",
-      "title": "gstack Virtual Engineering Team",
-      "summary": "Opinionated Claude Code skill pack that role-plays CEO, design, eng, release, docs, and QA reviews — including autoplan pipelines that chain review phases with checklists and acceptance criteria.",
-      "domain": "agent-engineering",
-      "maturity": "verified",
-      "tools": [
-        "claude-code",
-        "skills"
-      ],
-      "model_tiers": [
-        "premium"
-      ],
-      "automation": "assisted",
-      "authors": [
-        "Garry Tan"
-      ],
-      "tags": [
-        "virtual-team",
-        "review-pipeline",
-        "skills"
-      ],
-      "not_for": [
-        "Solo experiments that do not want multi-role ceremony",
-        "Non-Claude-Code-only stacks without adaptation"
-      ],
-      "steps": [
+      "verified": "2026-10-10",
+      "schema_version": 2,
+      "lifecycle": "published",
+      "evidence": {
+        "status": "unknown",
+        "method": "Legacy verified/maturity retained; no new source check or reproduction performed."
+      },
+      "actors": [
         {
-          "id": "intake",
-          "name": "Intake change request",
-          "actor": "human",
-          "human_gate": true,
-          "inputs": [
-            "idea or PR"
-          ],
-          "outputs": [
-            "work brief"
-          ],
-          "evidence_url": "https://github.com/garrytan/gstack"
+          "id": "human",
+          "kind": "human",
+          "label": "human"
         },
         {
-          "id": "autoplan",
-          "name": "Autoplan review chain",
-          "actor": "agent",
-          "human_gate": true,
-          "model_tier": "premium",
-          "inputs": [
-            "work brief"
-          ],
-          "outputs": [
-            "CEO / design / eng review artifacts"
-          ],
-          "notes": "Each phase has its own checklist; humans remain approval gates."
+          "id": "tool",
+          "kind": "tool",
+          "label": "tool"
         },
         {
-          "id": "build",
-          "name": "Build under eng review norms",
-          "actor": "agent",
-          "human_gate": false,
-          "model_tier": "premium",
-          "inputs": [
-            "approved plan"
-          ],
-          "outputs": [
-            "implementation"
+          "id": "ci",
+          "kind": "ci",
+          "label": "ci"
+        }
+      ],
+      "edges": [
+        {
+          "id": "legacy-edge-1",
+          "from": "author",
+          "to": "compile",
+          "kind": "sequence",
+          "evidence": [
+            {
+              "support": "migrated",
+              "locator": "steps[0] -> steps[1]",
+              "reason": "Derived solely from legacy array order, matching the old renderer; not reverified."
+            }
           ]
         },
         {
-          "id": "qa-ship",
-          "name": "QA and ship checks",
-          "actor": "agent",
-          "human_gate": true,
-          "model_tier": "standard",
-          "inputs": [
-            "implementation"
-          ],
-          "outputs": [
-            "QA notes",
-            "release readiness"
+          "id": "legacy-edge-2",
+          "from": "compile",
+          "to": "commit",
+          "kind": "sequence",
+          "evidence": [
+            {
+              "support": "migrated",
+              "locator": "steps[1] -> steps[2]",
+              "reason": "Derived solely from legacy array order, matching the old renderer; not reverified."
+            }
+          ]
+        },
+        {
+          "id": "legacy-edge-3",
+          "from": "commit",
+          "to": "run",
+          "kind": "sequence",
+          "evidence": [
+            {
+              "support": "migrated",
+              "locator": "steps[2] -> steps[3]",
+              "reason": "Derived solely from legacy array order, matching the old renderer; not reverified."
+            }
           ]
         }
       ],
-      "sources": [
+      "coverage": {
+        "mode": "legacy_order_projection",
+        "unknowns": [
+          "Actual branching, parallelism, failures and retries have not been rechecked.",
+          "Legacy actor categories are placeholders; separate role instances were not reconstructed."
+        ]
+      },
+      "diagram_views": [
         {
-          "label": "garrytan/gstack",
-          "url": "https://github.com/garrytan/gstack",
-          "stars": 135767
-        },
-        {
-          "label": "Cookbook citation",
-          "url": "https://github.com/ithiria894/awesome-claude-code-workflows"
+          "id": "full",
+          "step_ids": [
+            "author",
+            "compile",
+            "commit",
+            "run"
+          ],
+          "edge_ids": [
+            "legacy-edge-1",
+            "legacy-edge-2",
+            "legacy-edge-3"
+          ],
+          "file": "github-agentic-workflows.svg"
         }
-      ],
-      "added": "2026-10-10",
-      "verified": "2026-10-10"
+      ]
     },
     {
       "id": "claude-mem-session-continuity",
@@ -602,7 +1116,17 @@
           "outputs": [
             "raw session trace"
           ],
-          "evidence_url": "https://github.com/thedotmack/claude-mem"
+          "evidence_url": "https://github.com/thedotmack/claude-mem",
+          "actor_id": "tool",
+          "type": "action",
+          "evidence": [
+            {
+              "support": "migrated",
+              "locator": "steps[id=capture]",
+              "reason": "Imported unchanged from legacy YAML; not independently checked.",
+              "source_id": "legacy-source-1"
+            }
+          ]
         },
         {
           "id": "compress",
@@ -615,6 +1139,15 @@
           ],
           "outputs": [
             "memory artifacts"
+          ],
+          "actor_id": "agent",
+          "type": "action",
+          "evidence": [
+            {
+              "support": "migrated",
+              "locator": "steps[id=compress]",
+              "reason": "Imported unchanged from legacy YAML; not independently checked."
+            }
           ]
         },
         {
@@ -628,6 +1161,15 @@
           ],
           "outputs": [
             "relevant context block"
+          ],
+          "actor_id": "tool",
+          "type": "action",
+          "evidence": [
+            {
+              "support": "migrated",
+              "locator": "steps[id=reinject]",
+              "reason": "Imported unchanged from legacy YAML; not independently checked."
+            }
           ]
         },
         {
@@ -642,18 +1184,119 @@
             "redactions",
             "retention decisions"
           ],
-          "notes": "Anti-example reminder — memory without governance becomes a liability."
+          "notes": "Anti-example reminder — memory without governance becomes a liability.",
+          "actor_id": "human",
+          "type": "action",
+          "evidence": [
+            {
+              "support": "migrated",
+              "locator": "steps[id=human-audit]",
+              "reason": "Imported unchanged from legacy YAML; not independently checked."
+            }
+          ]
         }
       ],
       "sources": [
         {
           "label": "thedotmack/claude-mem",
           "url": "https://github.com/thedotmack/claude-mem",
-          "stars": 99062
+          "stars": 99062,
+          "id": "legacy-source-1",
+          "kind": "unknown",
+          "locator": "Legacy sources[]",
+          "reuse_status": "unknown"
         }
       ],
       "added": "2026-10-10",
-      "verified": "2026-10-10"
+      "verified": "2026-10-10",
+      "schema_version": 2,
+      "lifecycle": "published",
+      "evidence": {
+        "status": "unknown",
+        "method": "Legacy verified/maturity retained; no new source check or reproduction performed."
+      },
+      "actors": [
+        {
+          "id": "tool",
+          "kind": "tool",
+          "label": "tool"
+        },
+        {
+          "id": "agent",
+          "kind": "agent",
+          "label": "agent"
+        },
+        {
+          "id": "human",
+          "kind": "human",
+          "label": "human"
+        }
+      ],
+      "edges": [
+        {
+          "id": "legacy-edge-1",
+          "from": "capture",
+          "to": "compress",
+          "kind": "sequence",
+          "evidence": [
+            {
+              "support": "migrated",
+              "locator": "steps[0] -> steps[1]",
+              "reason": "Derived solely from legacy array order, matching the old renderer; not reverified."
+            }
+          ]
+        },
+        {
+          "id": "legacy-edge-2",
+          "from": "compress",
+          "to": "reinject",
+          "kind": "sequence",
+          "evidence": [
+            {
+              "support": "migrated",
+              "locator": "steps[1] -> steps[2]",
+              "reason": "Derived solely from legacy array order, matching the old renderer; not reverified."
+            }
+          ]
+        },
+        {
+          "id": "legacy-edge-3",
+          "from": "reinject",
+          "to": "human-audit",
+          "kind": "sequence",
+          "evidence": [
+            {
+              "support": "migrated",
+              "locator": "steps[2] -> steps[3]",
+              "reason": "Derived solely from legacy array order, matching the old renderer; not reverified."
+            }
+          ]
+        }
+      ],
+      "coverage": {
+        "mode": "legacy_order_projection",
+        "unknowns": [
+          "Actual branching, parallelism, failures and retries have not been rechecked.",
+          "Legacy actor categories are placeholders; separate role instances were not reconstructed."
+        ]
+      },
+      "diagram_views": [
+        {
+          "id": "full",
+          "step_ids": [
+            "capture",
+            "compress",
+            "reinject",
+            "human-audit"
+          ],
+          "edge_ids": [
+            "legacy-edge-1",
+            "legacy-edge-2",
+            "legacy-edge-3"
+          ],
+          "file": "claude-mem-session-continuity.svg"
+        }
+      ]
     },
     {
       "id": "pimzino-spec-driven",
@@ -698,7 +1341,17 @@
             "acceptance criteria"
           ],
           "notes": "Typically started with /spec-create; human reviews stories before design.",
-          "evidence_url": "https://github.com/Pimzino/claude-code-spec-workflow"
+          "evidence_url": "https://github.com/Pimzino/claude-code-spec-workflow",
+          "actor_id": "agent",
+          "type": "action",
+          "evidence": [
+            {
+              "support": "migrated",
+              "locator": "steps[id=requirements]",
+              "reason": "Imported unchanged from legacy YAML; not independently checked.",
+              "source_id": "legacy-source-1"
+            }
+          ]
         },
         {
           "id": "design",
@@ -712,6 +1365,15 @@
           "outputs": [
             "architecture notes",
             "diagrams"
+          ],
+          "actor_id": "agent",
+          "type": "action",
+          "evidence": [
+            {
+              "support": "migrated",
+              "locator": "steps[id=design]",
+              "reason": "Imported unchanged from legacy YAML; not independently checked."
+            }
           ]
         },
         {
@@ -726,6 +1388,15 @@
           "outputs": [
             "task list",
             "optional auto-generated commands"
+          ],
+          "actor_id": "agent",
+          "type": "action",
+          "evidence": [
+            {
+              "support": "migrated",
+              "locator": "steps[id=tasks]",
+              "reason": "Imported unchanged from legacy YAML; not independently checked."
+            }
           ]
         },
         {
@@ -742,18 +1413,109 @@
             "code changes",
             "verification notes"
           ],
-          "notes": "Manual /spec-execute or generated task commands; human gates between risky tasks."
+          "notes": "Manual /spec-execute or generated task commands; human gates between risky tasks.",
+          "actor_id": "agent",
+          "type": "action",
+          "evidence": [
+            {
+              "support": "migrated",
+              "locator": "steps[id=implement]",
+              "reason": "Imported unchanged from legacy YAML; not independently checked."
+            }
+          ]
         }
       ],
       "sources": [
         {
           "label": "Pimzino/claude-code-spec-workflow",
           "url": "https://github.com/Pimzino/claude-code-spec-workflow",
-          "stars": 3860
+          "stars": 3860,
+          "id": "legacy-source-1",
+          "kind": "unknown",
+          "locator": "Legacy sources[]",
+          "reuse_status": "unknown"
         }
       ],
       "added": "2026-10-10",
-      "verified": "2026-10-10"
+      "verified": "2026-10-10",
+      "schema_version": 2,
+      "lifecycle": "published",
+      "evidence": {
+        "status": "unknown",
+        "method": "Legacy verified/maturity retained; no new source check or reproduction performed."
+      },
+      "actors": [
+        {
+          "id": "agent",
+          "kind": "agent",
+          "label": "agent"
+        }
+      ],
+      "edges": [
+        {
+          "id": "legacy-edge-1",
+          "from": "requirements",
+          "to": "design",
+          "kind": "sequence",
+          "evidence": [
+            {
+              "support": "migrated",
+              "locator": "steps[0] -> steps[1]",
+              "reason": "Derived solely from legacy array order, matching the old renderer; not reverified."
+            }
+          ]
+        },
+        {
+          "id": "legacy-edge-2",
+          "from": "design",
+          "to": "tasks",
+          "kind": "sequence",
+          "evidence": [
+            {
+              "support": "migrated",
+              "locator": "steps[1] -> steps[2]",
+              "reason": "Derived solely from legacy array order, matching the old renderer; not reverified."
+            }
+          ]
+        },
+        {
+          "id": "legacy-edge-3",
+          "from": "tasks",
+          "to": "implement",
+          "kind": "sequence",
+          "evidence": [
+            {
+              "support": "migrated",
+              "locator": "steps[2] -> steps[3]",
+              "reason": "Derived solely from legacy array order, matching the old renderer; not reverified."
+            }
+          ]
+        }
+      ],
+      "coverage": {
+        "mode": "legacy_order_projection",
+        "unknowns": [
+          "Actual branching, parallelism, failures and retries have not been rechecked.",
+          "Legacy actor categories are placeholders; separate role instances were not reconstructed."
+        ]
+      },
+      "diagram_views": [
+        {
+          "id": "full",
+          "step_ids": [
+            "requirements",
+            "design",
+            "tasks",
+            "implement"
+          ],
+          "edge_ids": [
+            "legacy-edge-1",
+            "legacy-edge-2",
+            "legacy-edge-3"
+          ],
+          "file": "pimzino-spec-driven.svg"
+        }
+      ]
     },
     {
       "id": "obra-superpowers-plan-execute",
@@ -795,7 +1557,17 @@
           "outputs": [
             "aligned goal"
           ],
-          "evidence_url": "https://github.com/obra/superpowers"
+          "evidence_url": "https://github.com/obra/superpowers",
+          "actor_id": "agent",
+          "type": "action",
+          "evidence": [
+            {
+              "support": "migrated",
+              "locator": "steps[id=brainstorm]",
+              "reason": "Imported unchanged from legacy YAML; not independently checked.",
+              "source_id": "legacy-source-1"
+            }
+          ]
         },
         {
           "id": "write-plan",
@@ -809,7 +1581,16 @@
           "outputs": [
             "plan document"
           ],
-          "notes": "/write-plan style skill — human approves before execution."
+          "notes": "/write-plan style skill — human approves before execution.",
+          "actor_id": "agent",
+          "type": "action",
+          "evidence": [
+            {
+              "support": "migrated",
+              "locator": "steps[id=write-plan]",
+              "reason": "Imported unchanged from legacy YAML; not independently checked."
+            }
+          ]
         },
         {
           "id": "execute",
@@ -823,7 +1604,16 @@
           "outputs": [
             "incremental diffs"
           ],
-          "notes": "Verification gates between steps; parallel subagents when tasks are independent."
+          "notes": "Verification gates between steps; parallel subagents when tasks are independent.",
+          "actor_id": "agent",
+          "type": "action",
+          "evidence": [
+            {
+              "support": "migrated",
+              "locator": "steps[id=execute]",
+              "reason": "Imported unchanged from legacy YAML; not independently checked."
+            }
+          ]
         },
         {
           "id": "review",
@@ -837,6 +1627,15 @@
           "outputs": [
             "review notes",
             "follow-ups"
+          ],
+          "actor_id": "agent",
+          "type": "action",
+          "evidence": [
+            {
+              "support": "migrated",
+              "locator": "steps[id=review]",
+              "reason": "Imported unchanged from legacy YAML; not independently checked."
+            }
           ]
         }
       ],
@@ -844,15 +1643,101 @@
         {
           "label": "obra/superpowers",
           "url": "https://github.com/obra/superpowers",
-          "stars": 297010
+          "stars": 297010,
+          "id": "legacy-source-1",
+          "kind": "unknown",
+          "locator": "Legacy sources[]",
+          "reuse_status": "unknown"
         },
         {
           "label": "Cited in awesome-claude-code-workflows",
-          "url": "https://github.com/ithiria894/awesome-claude-code-workflows"
+          "url": "https://github.com/ithiria894/awesome-claude-code-workflows",
+          "id": "legacy-source-2",
+          "kind": "unknown",
+          "locator": "Legacy sources[]",
+          "reuse_status": "unknown"
         }
       ],
       "added": "2026-10-10",
-      "verified": "2026-10-10"
+      "verified": "2026-10-10",
+      "schema_version": 2,
+      "lifecycle": "published",
+      "evidence": {
+        "status": "unknown",
+        "method": "Legacy verified/maturity retained; no new source check or reproduction performed."
+      },
+      "actors": [
+        {
+          "id": "agent",
+          "kind": "agent",
+          "label": "agent"
+        }
+      ],
+      "edges": [
+        {
+          "id": "legacy-edge-1",
+          "from": "brainstorm",
+          "to": "write-plan",
+          "kind": "sequence",
+          "evidence": [
+            {
+              "support": "migrated",
+              "locator": "steps[0] -> steps[1]",
+              "reason": "Derived solely from legacy array order, matching the old renderer; not reverified."
+            }
+          ]
+        },
+        {
+          "id": "legacy-edge-2",
+          "from": "write-plan",
+          "to": "execute",
+          "kind": "sequence",
+          "evidence": [
+            {
+              "support": "migrated",
+              "locator": "steps[1] -> steps[2]",
+              "reason": "Derived solely from legacy array order, matching the old renderer; not reverified."
+            }
+          ]
+        },
+        {
+          "id": "legacy-edge-3",
+          "from": "execute",
+          "to": "review",
+          "kind": "sequence",
+          "evidence": [
+            {
+              "support": "migrated",
+              "locator": "steps[2] -> steps[3]",
+              "reason": "Derived solely from legacy array order, matching the old renderer; not reverified."
+            }
+          ]
+        }
+      ],
+      "coverage": {
+        "mode": "legacy_order_projection",
+        "unknowns": [
+          "Actual branching, parallelism, failures and retries have not been rechecked.",
+          "Legacy actor categories are placeholders; separate role instances were not reconstructed."
+        ]
+      },
+      "diagram_views": [
+        {
+          "id": "full",
+          "step_ids": [
+            "brainstorm",
+            "write-plan",
+            "execute",
+            "review"
+          ],
+          "edge_ids": [
+            "legacy-edge-1",
+            "legacy-edge-2",
+            "legacy-edge-3"
+          ],
+          "file": "obra-superpowers-plan-execute.svg"
+        }
+      ]
     },
     {
       "id": "tw93-waza-think-check",
@@ -898,7 +1783,17 @@
             "decision-complete plan"
           ],
           "notes": "No scaffolding until the plan is approved.",
-          "evidence_url": "https://github.com/tw93/Waza"
+          "evidence_url": "https://github.com/tw93/Waza",
+          "actor_id": "agent",
+          "type": "action",
+          "evidence": [
+            {
+              "support": "migrated",
+              "locator": "steps[id=think]",
+              "reason": "Imported unchanged from legacy YAML; not independently checked.",
+              "source_id": "legacy-source-1"
+            }
+          ]
         },
         {
           "id": "implement",
@@ -911,6 +1806,15 @@
           ],
           "outputs": [
             "code diff"
+          ],
+          "actor_id": "agent",
+          "type": "action",
+          "evidence": [
+            {
+              "support": "migrated",
+              "locator": "steps[id=implement]",
+              "reason": "Imported unchanged from legacy YAML; not independently checked."
+            }
           ]
         },
         {
@@ -927,7 +1831,16 @@
             "findings",
             "ship/no-ship"
           ],
-          "notes": "Report-only by default; fixes need explicit repair authorization."
+          "notes": "Report-only by default; fixes need explicit repair authorization.",
+          "actor_id": "agent",
+          "type": "action",
+          "evidence": [
+            {
+              "support": "migrated",
+              "locator": "steps[id=check]",
+              "reason": "Imported unchanged from legacy YAML; not independently checked."
+            }
+          ]
         },
         {
           "id": "ship",
@@ -939,6 +1852,15 @@
           ],
           "outputs": [
             "commit / PR / release"
+          ],
+          "actor_id": "human",
+          "type": "action",
+          "evidence": [
+            {
+              "support": "migrated",
+              "locator": "steps[id=ship]",
+              "reason": "Imported unchanged from legacy YAML; not independently checked."
+            }
           ]
         }
       ],
@@ -946,11 +1868,322 @@
         {
           "label": "tw93/Waza",
           "url": "https://github.com/tw93/Waza",
-          "stars": 7222
+          "stars": 7222,
+          "id": "legacy-source-1",
+          "kind": "unknown",
+          "locator": "Legacy sources[]",
+          "reuse_status": "unknown"
         }
       ],
       "added": "2026-10-10",
-      "verified": "2026-10-10"
+      "verified": "2026-10-10",
+      "schema_version": 2,
+      "lifecycle": "published",
+      "evidence": {
+        "status": "unknown",
+        "method": "Legacy verified/maturity retained; no new source check or reproduction performed."
+      },
+      "actors": [
+        {
+          "id": "agent",
+          "kind": "agent",
+          "label": "agent"
+        },
+        {
+          "id": "human",
+          "kind": "human",
+          "label": "human"
+        }
+      ],
+      "edges": [
+        {
+          "id": "legacy-edge-1",
+          "from": "think",
+          "to": "implement",
+          "kind": "sequence",
+          "evidence": [
+            {
+              "support": "migrated",
+              "locator": "steps[0] -> steps[1]",
+              "reason": "Derived solely from legacy array order, matching the old renderer; not reverified."
+            }
+          ]
+        },
+        {
+          "id": "legacy-edge-2",
+          "from": "implement",
+          "to": "check",
+          "kind": "sequence",
+          "evidence": [
+            {
+              "support": "migrated",
+              "locator": "steps[1] -> steps[2]",
+              "reason": "Derived solely from legacy array order, matching the old renderer; not reverified."
+            }
+          ]
+        },
+        {
+          "id": "legacy-edge-3",
+          "from": "check",
+          "to": "ship",
+          "kind": "sequence",
+          "evidence": [
+            {
+              "support": "migrated",
+              "locator": "steps[2] -> steps[3]",
+              "reason": "Derived solely from legacy array order, matching the old renderer; not reverified."
+            }
+          ]
+        }
+      ],
+      "coverage": {
+        "mode": "legacy_order_projection",
+        "unknowns": [
+          "Actual branching, parallelism, failures and retries have not been rechecked.",
+          "Legacy actor categories are placeholders; separate role instances were not reconstructed."
+        ]
+      },
+      "diagram_views": [
+        {
+          "id": "full",
+          "step_ids": [
+            "think",
+            "implement",
+            "check",
+            "ship"
+          ],
+          "edge_ids": [
+            "legacy-edge-1",
+            "legacy-edge-2",
+            "legacy-edge-3"
+          ],
+          "file": "tw93-waza-think-check.svg"
+        }
+      ]
+    },
+    {
+      "id": "gstack-virtual-eng-team",
+      "title": "gstack Virtual Engineering Team",
+      "summary": "Opinionated Claude Code skill pack that role-plays CEO, design, eng, release, docs, and QA reviews — including autoplan pipelines that chain review phases with checklists and acceptance criteria.",
+      "domain": "agent-engineering",
+      "maturity": "verified",
+      "tools": [
+        "claude-code",
+        "skills"
+      ],
+      "model_tiers": [
+        "premium"
+      ],
+      "automation": "assisted",
+      "authors": [
+        "Garry Tan"
+      ],
+      "tags": [
+        "virtual-team",
+        "review-pipeline",
+        "skills"
+      ],
+      "not_for": [
+        "Solo experiments that do not want multi-role ceremony",
+        "Non-Claude-Code-only stacks without adaptation"
+      ],
+      "steps": [
+        {
+          "id": "intake",
+          "name": "Intake change request",
+          "actor": "human",
+          "human_gate": true,
+          "inputs": [
+            "idea or PR"
+          ],
+          "outputs": [
+            "work brief"
+          ],
+          "evidence_url": "https://github.com/garrytan/gstack",
+          "actor_id": "human",
+          "type": "action",
+          "evidence": [
+            {
+              "support": "migrated",
+              "locator": "steps[id=intake]",
+              "reason": "Imported unchanged from legacy YAML; not independently checked.",
+              "source_id": "legacy-source-1"
+            }
+          ]
+        },
+        {
+          "id": "autoplan",
+          "name": "Autoplan review chain",
+          "actor": "agent",
+          "human_gate": true,
+          "model_tier": "premium",
+          "inputs": [
+            "work brief"
+          ],
+          "outputs": [
+            "CEO / design / eng review artifacts"
+          ],
+          "notes": "Each phase has its own checklist; humans remain approval gates.",
+          "actor_id": "agent",
+          "type": "action",
+          "evidence": [
+            {
+              "support": "migrated",
+              "locator": "steps[id=autoplan]",
+              "reason": "Imported unchanged from legacy YAML; not independently checked."
+            }
+          ]
+        },
+        {
+          "id": "build",
+          "name": "Build under eng review norms",
+          "actor": "agent",
+          "human_gate": false,
+          "model_tier": "premium",
+          "inputs": [
+            "approved plan"
+          ],
+          "outputs": [
+            "implementation"
+          ],
+          "actor_id": "agent",
+          "type": "action",
+          "evidence": [
+            {
+              "support": "migrated",
+              "locator": "steps[id=build]",
+              "reason": "Imported unchanged from legacy YAML; not independently checked."
+            }
+          ]
+        },
+        {
+          "id": "qa-ship",
+          "name": "QA and ship checks",
+          "actor": "agent",
+          "human_gate": true,
+          "model_tier": "standard",
+          "inputs": [
+            "implementation"
+          ],
+          "outputs": [
+            "QA notes",
+            "release readiness"
+          ],
+          "actor_id": "agent",
+          "type": "action",
+          "evidence": [
+            {
+              "support": "migrated",
+              "locator": "steps[id=qa-ship]",
+              "reason": "Imported unchanged from legacy YAML; not independently checked."
+            }
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "label": "garrytan/gstack",
+          "url": "https://github.com/garrytan/gstack",
+          "stars": 135767,
+          "id": "legacy-source-1",
+          "kind": "unknown",
+          "locator": "Legacy sources[]",
+          "reuse_status": "unknown"
+        },
+        {
+          "label": "Cookbook citation",
+          "url": "https://github.com/ithiria894/awesome-claude-code-workflows",
+          "id": "legacy-source-2",
+          "kind": "unknown",
+          "locator": "Legacy sources[]",
+          "reuse_status": "unknown"
+        }
+      ],
+      "added": "2026-10-10",
+      "verified": "2026-10-10",
+      "schema_version": 2,
+      "lifecycle": "published",
+      "evidence": {
+        "status": "unknown",
+        "method": "Legacy verified/maturity retained; no new source check or reproduction performed."
+      },
+      "actors": [
+        {
+          "id": "human",
+          "kind": "human",
+          "label": "human"
+        },
+        {
+          "id": "agent",
+          "kind": "agent",
+          "label": "agent"
+        }
+      ],
+      "edges": [
+        {
+          "id": "legacy-edge-1",
+          "from": "intake",
+          "to": "autoplan",
+          "kind": "sequence",
+          "evidence": [
+            {
+              "support": "migrated",
+              "locator": "steps[0] -> steps[1]",
+              "reason": "Derived solely from legacy array order, matching the old renderer; not reverified."
+            }
+          ]
+        },
+        {
+          "id": "legacy-edge-2",
+          "from": "autoplan",
+          "to": "build",
+          "kind": "sequence",
+          "evidence": [
+            {
+              "support": "migrated",
+              "locator": "steps[1] -> steps[2]",
+              "reason": "Derived solely from legacy array order, matching the old renderer; not reverified."
+            }
+          ]
+        },
+        {
+          "id": "legacy-edge-3",
+          "from": "build",
+          "to": "qa-ship",
+          "kind": "sequence",
+          "evidence": [
+            {
+              "support": "migrated",
+              "locator": "steps[2] -> steps[3]",
+              "reason": "Derived solely from legacy array order, matching the old renderer; not reverified."
+            }
+          ]
+        }
+      ],
+      "coverage": {
+        "mode": "legacy_order_projection",
+        "unknowns": [
+          "Actual branching, parallelism, failures and retries have not been rechecked.",
+          "Legacy actor categories are placeholders; separate role instances were not reconstructed."
+        ]
+      },
+      "diagram_views": [
+        {
+          "id": "full",
+          "step_ids": [
+            "intake",
+            "autoplan",
+            "build",
+            "qa-ship"
+          ],
+          "edge_ids": [
+            "legacy-edge-1",
+            "legacy-edge-2",
+            "legacy-edge-3"
+          ],
+          "file": "gstack-virtual-eng-team.svg"
+        }
+      ]
     }
   ]
 }

@@ -1,0 +1,61 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><title>并行研究、反馈与引用整理 · review draft</title><style>body{background:#0c0f14;color:#f4efe6;font:16px system-ui;padding:24px}section{overflow:auto;margin:24px 0}a{color:#99ddd3}svg{display:block}p{max-width:900px}</style><h1>并行研究、反馈与引用整理</h1><p>LeadResearcher 保存计划，委派数量动态变化的研究子 Agent，汇总后决定是否继续研究，完成后交给 CitationAgent 整理引用并返回结果。并行集合保留为动态子流程，不假定固定两个研究者。</p><p>Draft · source_checked · human review pending · not reproduced</p><a href="https://www.anthropic.com/engineering/multi-agent-research-system">Primary source</a><h2>full</h2><section><svg xmlns="http://www.w3.org/2000/svg" width="1760" height="784" viewBox="0 0 1760 784" role="img" aria-labelledby="wf-anthropic-parallel-research-title wf-anthropic-parallel-research-desc">
+<title id="wf-anthropic-parallel-research-title">并行研究、反馈与引用整理 workflow diagram</title>
+<desc id="wf-anthropic-parallel-research-desc">{&quot;steps&quot;:[{&quot;id&quot;:&quot;plan&quot;,&quot;name&quot;:&quot;保存研究计划&quot;,&quot;actor&quot;:&quot;lead&quot;,&quot;type&quot;:&quot;action&quot;},{&quot;id&quot;:&quot;research&quot;,&quot;name&quot;:&quot;动态并行研究&quot;,&quot;actor&quot;:&quot;researchers&quot;,&quot;type&quot;:&quot;subprocess&quot;},{&quot;id&quot;:&quot;synthesize&quot;,&quot;name&quot;:&quot;汇总并判断&quot;,&quot;actor&quot;:&quot;lead&quot;,&quot;type&quot;:&quot;decision&quot;},{&quot;id&quot;:&quot;cite&quot;,&quot;name&quot;:&quot;定位引用来源&quot;,&quot;actor&quot;:&quot;citations&quot;,&quot;type&quot;:&quot;action&quot;},{&quot;id&quot;:&quot;answer&quot;,&quot;name&quot;:&quot;接收研究结果&quot;,&quot;actor&quot;:&quot;user&quot;,&quot;type&quot;:&quot;outcome&quot;}],&quot;edges&quot;:[{&quot;id&quot;:&quot;e1&quot;,&quot;from&quot;:&quot;plan&quot;,&quot;to&quot;:&quot;research&quot;,&quot;kind&quot;:&quot;sequence&quot;},{&quot;id&quot;:&quot;e2&quot;,&quot;from&quot;:&quot;research&quot;,&quot;to&quot;:&quot;synthesize&quot;,&quot;kind&quot;:&quot;sequence&quot;},{&quot;id&quot;:&quot;e3&quot;,&quot;from&quot;:&quot;synthesize&quot;,&quot;to&quot;:&quot;research&quot;,&quot;kind&quot;:&quot;feedback&quot;,&quot;condition&quot;:&quot;more research&quot;},{&quot;id&quot;:&quot;e4&quot;,&quot;from&quot;:&quot;synthesize&quot;,&quot;to&quot;:&quot;cite&quot;,&quot;kind&quot;:&quot;conditional&quot;,&quot;condition&quot;:&quot;sufficient information&quot;},{&quot;id&quot;:&quot;e5&quot;,&quot;from&quot;:&quot;cite&quot;,&quot;to&quot;:&quot;answer&quot;,&quot;kind&quot;:&quot;sequence&quot;}],&quot;coverage&quot;:{&quot;mode&quot;:&quot;documented_narrative_overview&quot;,&quot;unknowns&quot;:[&quot;动态研究子 Agent 的实际数量、各轮工具顺序与执行时长未知。&quot;,&quot;更多研究和停止的具体判断规则未公开。&quot;,&quot;中断、失败和引用无法定位时的完整处理未知。&quot;,&quot;此库未执行该系统，也未独立核验原文的效果数字。&quot;],&quot;inferences&quot;:[&quot;动态子 Agent 与内部搜索迭代合并为并行集合节点。&quot;]}}</desc>
+<defs><marker id="wf-anthropic-parallel-research-arrow" viewBox="0 0 8 8" refX="8" refY="4" markerWidth="8" markerHeight="8" markerUnits="userSpaceOnUse" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#7a7266"/></marker></defs>
+<rect x="0" y="0" width="1760" height="784" rx="4" fill="#f4efe6" stroke="#d9d0c1" />
+<text x="24" y="312" font-family='"IBM Plex Sans", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif' font-size="11" fill="#a1460f" >用户</text>
+<text x="24" y="328" font-family='"IBM Plex Sans", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif' font-size="11" fill="#5c6370" >human · user</text>
+<line x1="24" y1="280" x2="1736" y2="280" stroke="#d9d0c1"/>
+<text x="24" y="416" font-family='"IBM Plex Sans", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif' font-size="11" fill="#1e4fa8" >CitationAgent</text>
+<text x="24" y="432" font-family='"IBM Plex Sans", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif' font-size="11" fill="#5c6370" >agent · citations</text>
+<line x1="24" y1="384" x2="1736" y2="384" stroke="#d9d0c1"/>
+<text x="24" y="520" font-family='"IBM Plex Sans", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif' font-size="11" fill="#1e4fa8" >LeadResearcher</text>
+<text x="24" y="536" font-family='"IBM Plex Sans", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif' font-size="11" fill="#5c6370" >agent · lead</text>
+<line x1="24" y1="488" x2="1736" y2="488" stroke="#d9d0c1"/>
+<text x="24" y="624" font-family='"IBM Plex Sans", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif' font-size="11" fill="#1e4fa8" >动态研究子 Agent</text>
+<text x="24" y="640" font-family='"IBM Plex Sans", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif' font-size="11" fill="#5c6370" >agent · researchers</text>
+<line x1="24" y1="592" x2="1736" y2="592" stroke="#d9d0c1"/>
+<path id="wf-anthropic-parallel-research-edge-e1" data-edge-id="e1" data-from="plan" data-to="research" data-kind="sequence" d="M536 528L552 528L552 48L632 48L632 632L648 632" fill="none" stroke="#7a7266"  marker-end="url(#wf-anthropic-parallel-research-arrow)"><title>e1: plan → research (sequence)</title></path>
+<text x="24" y="52" font-family='"IBM Plex Sans", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif' font-size="11" fill="#5c6370" >e1 · sequence</text>
+<path id="wf-anthropic-parallel-research-edge-e2" data-edge-id="e2" data-from="research" data-to="synthesize" data-kind="sequence" d="M808 632L840 632L840 96L888 96L888 528L920 528" fill="none" stroke="#7a7266"  marker-end="url(#wf-anthropic-parallel-research-arrow)"><title>e2: research → synthesize (sequence)</title></path>
+<text x="24" y="100" font-family='"IBM Plex Sans", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif' font-size="11" fill="#5c6370" >e2 · sequence</text>
+<path id="wf-anthropic-parallel-research-edge-e3" data-edge-id="e3" data-from="synthesize" data-to="research" data-kind="feedback" d="M1080 528L1128 528L1128 144L600 144L600 648L648 648" fill="none" stroke="#7a7266" stroke-dasharray="4 4" marker-end="url(#wf-anthropic-parallel-research-arrow)"><title>e3: synthesize → research (feedback: more research)</title></path>
+<text x="24" y="148" font-family='"IBM Plex Sans", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif' font-size="11" fill="#5c6370" >e3 · more research</text>
+<path id="wf-anthropic-parallel-research-edge-e4" data-edge-id="e4" data-from="synthesize" data-to="cite" data-kind="conditional" d="M1080 544L1144 544L1144 192L1128 192L1128 424L1192 424" fill="none" stroke="#7a7266"  marker-end="url(#wf-anthropic-parallel-research-arrow)"><title>e4: synthesize → cite (conditional: sufficient information)</title></path>
+<text x="24" y="196" font-family='"IBM Plex Sans", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif' font-size="11" fill="#5c6370" >e4 · sufficient information</text>
+<path id="wf-anthropic-parallel-research-edge-e5" data-edge-id="e5" data-from="cite" data-to="answer" data-kind="sequence" d="M1352 424L1432 424L1432 240L1384 240L1384 320L1464 320" fill="none" stroke="#7a7266"  marker-end="url(#wf-anthropic-parallel-research-arrow)"><title>e5: cite → answer (sequence)</title></path>
+<text x="24" y="244" font-family='"IBM Plex Sans", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif' font-size="11" fill="#5c6370" >e5 · sequence</text>
+<g id="wf-anthropic-parallel-research-node-answer" data-node-id="answer">
+<rect x="1464" y="296" width="160" height="72" rx="4" fill="#f4efe6" stroke="#a1460f" data-node-box="true"/>
+<rect x="1464" y="296" width="4" height="72" rx="4" fill="#a1460f" stroke="none" />
+<text x="1480" y="320" font-family='"IBM Plex Sans", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif' font-size="13" fill="#0c0f14" data-node-label="true">接收研究结果</text>
+<text x="1480" y="356" font-family='"IBM Plex Sans", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif' font-size="11" fill="#5c6370" >OUTCOME</text>
+</g>
+<g id="wf-anthropic-parallel-research-node-cite" data-node-id="cite">
+<rect x="1192" y="400" width="160" height="72" rx="4" fill="#f4efe6" stroke="#1e4fa8" data-node-box="true"/>
+<rect x="1192" y="400" width="4" height="72" rx="4" fill="#1e4fa8" stroke="none" />
+<text x="1208" y="424" font-family='"IBM Plex Sans", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif' font-size="13" fill="#0c0f14" data-node-label="true">定位引用来源</text>
+<text x="1208" y="460" font-family='"IBM Plex Sans", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif' font-size="11" fill="#5c6370" >ACTION</text>
+</g>
+<g id="wf-anthropic-parallel-research-node-plan" data-node-id="plan">
+<rect x="376" y="504" width="160" height="72" rx="4" fill="#f4efe6" stroke="#1e4fa8" data-node-box="true"/>
+<rect x="376" y="504" width="4" height="72" rx="4" fill="#1e4fa8" stroke="none" />
+<text x="392" y="528" font-family='"IBM Plex Sans", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif' font-size="13" fill="#0c0f14" data-node-label="true">保存研究计划</text>
+<text x="392" y="564" font-family='"IBM Plex Sans", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif' font-size="11" fill="#5c6370" >ACTION</text>
+</g>
+<g id="wf-anthropic-parallel-research-node-research" data-node-id="research">
+<rect x="648" y="608" width="160" height="72" rx="4" fill="#f4efe6" stroke="#1e4fa8" data-node-box="true"/>
+<rect x="648" y="608" width="4" height="72" rx="4" fill="#1e4fa8" stroke="none" />
+<text x="664" y="632" font-family='"IBM Plex Sans", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif' font-size="13" fill="#0c0f14" data-node-label="true">动态并行研究</text>
+<text x="664" y="668" font-family='"IBM Plex Sans", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif' font-size="11" fill="#5c6370" >DYNAMIC PARALLEL</text>
+</g>
+<g id="wf-anthropic-parallel-research-node-synthesize" data-node-id="synthesize">
+<rect x="920" y="504" width="160" height="72" rx="4" fill="#f4efe6" stroke="#1e4fa8" data-node-box="true"/>
+<rect x="920" y="504" width="4" height="72" rx="4" fill="#1e4fa8" stroke="none" />
+<text x="936" y="528" font-family='"IBM Plex Sans", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif' font-size="13" fill="#0c0f14" data-node-label="true">汇总并判断</text>
+<text x="936" y="564" font-family='"IBM Plex Sans", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif' font-size="11" fill="#5c6370" >DECISION</text>
+</g>
+<text x="24" y="728" font-family='"IBM Plex Sans", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif' font-size="11" fill="#5c6370" >Coverage: documented_narrative_overview. 4 unknown items; see review report.</text>
+<text x="24" y="768" font-family='"IBM Plex Sans", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif' font-size="11" fill="#5c6370" >Dashed: inferred / unknown / migrated / feedback. Diamond: human gate.</text>
+</svg>
+</section><h2>Unknowns</h2><ul><li>动态研究子 Agent 的实际数量、各轮工具顺序与执行时长未知。</li><li>更多研究和停止的具体判断规则未公开。</li><li>中断、失败和引用无法定位时的完整处理未知。</li><li>此库未执行该系统，也未独立核验原文的效果数字。</li></ul></html>

@@ -1,0 +1,68 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "Synthetic feedback-loop",
+    "output": "feedback-loop.html",
+    "animation": "none"
+  },
+  "lanes": [
+    {
+      "id": "agent-0",
+      "label": "agent"
+    },
+    {
+      "id": "human-0",
+      "label": "human"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "s0",
+      "lane": "agent-0",
+      "col": 0,
+      "width": 180,
+      "type": "backend",
+      "label": "Write draft"
+    },
+    {
+      "id": "s1",
+      "lane": "agent-0",
+      "col": 1,
+      "width": 180,
+      "type": "backend",
+      "label": "Evaluate draft"
+    },
+    {
+      "id": "s2",
+      "lane": "human-0",
+      "col": 2,
+      "width": 180,
+      "type": "backend",
+      "label": "Return result"
+    }
+  ],
+  "edges": [
+    {
+      "id": "e0",
+      "from": "s0",
+      "to": "s1"
+    },
+    {
+      "id": "e1",
+      "from": "s1",
+      "to": "s0",
+      "label": "revise",
+      "role": "return",
+      "route": "up-channel",
+      "fromSide": "top",
+      "toSide": "top"
+    },
+    {
+      "id": "e2",
+      "from": "s1",
+      "to": "s2",
+      "label": "ready"
+    }
+  ]
+}

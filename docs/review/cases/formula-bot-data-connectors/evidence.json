@@ -1,0 +1,105 @@
+{
+  "sources": [
+    {
+      "id": "primary",
+      "label": "n8n official case study",
+      "url": "https://n8n.io/case-studies/formula-bot",
+      "kind": "practitioner_report",
+      "locator": "The flow works as follows",
+      "checked_at": "2026-10-13T09:28:20.592Z",
+      "content_hash": "aa7fe817478eab642cc2a54e04a25887a768e236a67c1bf55a5f8321e2cf82cf",
+      "reuse_status": "original_summary_only"
+    }
+  ],
+  "steps": [
+    {
+      "id": "connect",
+      "evidence": [
+        {
+          "source_id": "primary",
+          "locator": "The flow works as follows",
+          "support": "explicit"
+        }
+      ]
+    },
+    {
+      "id": "metadata",
+      "evidence": [
+        {
+          "source_id": "primary",
+          "locator": "The flow works as follows",
+          "support": "explicit"
+        }
+      ]
+    },
+    {
+      "id": "query",
+      "evidence": [
+        {
+          "source_id": "primary",
+          "locator": "The flow works as follows",
+          "support": "explicit"
+        }
+      ]
+    },
+    {
+      "id": "files",
+      "evidence": [
+        {
+          "source_id": "primary",
+          "locator": "The flow works as follows",
+          "support": "explicit"
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "id": "e1",
+      "from": "connect",
+      "to": "metadata",
+      "evidence": [
+        {
+          "source_id": "primary",
+          "locator": "The flow works as follows",
+          "support": "explicit"
+        }
+      ]
+    },
+    {
+      "id": "e2",
+      "from": "metadata",
+      "to": "query",
+      "evidence": [
+        {
+          "source_id": "primary",
+          "locator": "The flow works as follows",
+          "support": "explicit"
+        }
+      ]
+    },
+    {
+      "id": "e3",
+      "from": "query",
+      "to": "files",
+      "evidence": [
+        {
+          "source_id": "primary",
+          "locator": "The flow works as follows",
+          "support": "explicit"
+        }
+      ]
+    }
+  ],
+  "coverage": {
+    "mode": "documented_narrative_overview",
+    "unknowns": [
+      "连接器内部节点、参数和错误处理未披露。",
+      "查询失败、超时和重试策略未知。",
+      "没有原生模板或本地复现记录。"
+    ],
+    "inferences": [
+      "连接器选择与查询执行合并为动态子流程。"
+    ]
+  }
+}

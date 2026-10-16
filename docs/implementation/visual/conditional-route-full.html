@@ -1,0 +1,37 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><title>conditional-route-full</title><style>body{margin:0;background:#f4efe6}svg{display:block}</style><svg xmlns="http://www.w3.org/2000/svg" width="816" height="432" viewBox="0 0 816 432" role="img" aria-labelledby="wf-conditional-route-title wf-conditional-route-desc">
+<title id="wf-conditional-route-title">Synthetic conditional-route workflow diagram</title>
+<desc id="wf-conditional-route-desc">{&quot;steps&quot;:[{&quot;id&quot;:&quot;s0&quot;,&quot;name&quot;:&quot;Check request&quot;,&quot;actor&quot;:&quot;agent&quot;,&quot;type&quot;:&quot;decision&quot;},{&quot;id&quot;:&quot;s1&quot;,&quot;name&quot;:&quot;Accept request&quot;,&quot;actor&quot;:&quot;agent&quot;,&quot;type&quot;:&quot;action&quot;},{&quot;id&quot;:&quot;s2&quot;,&quot;name&quot;:&quot;Ask for details&quot;,&quot;actor&quot;:&quot;human&quot;,&quot;type&quot;:&quot;action&quot;}],&quot;edges&quot;:[{&quot;id&quot;:&quot;e0&quot;,&quot;from&quot;:&quot;s0&quot;,&quot;to&quot;:&quot;s1&quot;,&quot;kind&quot;:&quot;conditional&quot;,&quot;condition&quot;:&quot;complete&quot;},{&quot;id&quot;:&quot;e1&quot;,&quot;from&quot;:&quot;s0&quot;,&quot;to&quot;:&quot;s2&quot;,&quot;kind&quot;:&quot;conditional&quot;,&quot;condition&quot;:&quot;incomplete&quot;}],&quot;coverage&quot;:{&quot;mode&quot;:&quot;synthetic&quot;,&quot;unknowns&quot;:[&quot;Not a published case.&quot;]}}</desc>
+<defs><marker id="wf-conditional-route-arrow" viewBox="0 0 8 8" refX="8" refY="4" markerWidth="8" markerHeight="8" markerUnits="userSpaceOnUse" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#7a7266"/></marker></defs>
+<rect x="0" y="0" width="816" height="432" rx="4" fill="#f4efe6" stroke="#d9d0c1" />
+<text x="24" y="168" font-family='"IBM Plex Sans", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif' font-size="11" fill="#a1460f" >human</text>
+<text x="24" y="184" font-family='"IBM Plex Sans", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif' font-size="11" fill="#5c6370" >human · human</text>
+<line x1="24" y1="136" x2="792" y2="136" stroke="#d9d0c1"/>
+<text x="24" y="272" font-family='"IBM Plex Sans", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif' font-size="11" fill="#1e4fa8" >agent</text>
+<text x="24" y="288" font-family='"IBM Plex Sans", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif' font-size="11" fill="#5c6370" >agent · agent</text>
+<line x1="24" y1="240" x2="792" y2="240" stroke="#d9d0c1"/>
+<path id="wf-conditional-route-edge-e0" data-edge-id="e0" data-from="s0" data-to="s1" data-kind="conditional" d="M488 280L504 280L504 48L552 48L552 280L568 280" fill="none" stroke="#7a7266" stroke-dasharray="4 4" marker-end="url(#wf-conditional-route-arrow)"><title>e0: s0 → s1 (conditional: complete)</title></path>
+<text x="24" y="52" font-family='"IBM Plex Sans", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif' font-size="11" fill="#5c6370" >e0 · complete</text>
+<path id="wf-conditional-route-edge-e1" data-edge-id="e1" data-from="s0" data-to="s2" data-kind="conditional" d="M488 296L520 296L520 96L536 96L536 176L568 176" fill="none" stroke="#7a7266" stroke-dasharray="4 4" marker-end="url(#wf-conditional-route-arrow)"><title>e1: s0 → s2 (conditional: incomplete)</title></path>
+<text x="24" y="100" font-family='"IBM Plex Sans", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif' font-size="11" fill="#5c6370" >e1 · incomplete</text>
+<g id="wf-conditional-route-node-s0" data-node-id="s0">
+<rect x="328" y="256" width="160" height="72" rx="4" fill="#f4efe6" stroke="#1e4fa8" data-node-box="true"/>
+<rect x="328" y="256" width="4" height="72" rx="4" fill="#1e4fa8" stroke="none" />
+<text x="344" y="280" font-family='"IBM Plex Sans", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif' font-size="13" fill="#0c0f14" data-node-label="true">Check request</text>
+<text x="344" y="316" font-family='"IBM Plex Sans", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif' font-size="11" fill="#5c6370" >DECISION</text>
+</g>
+<g id="wf-conditional-route-node-s1" data-node-id="s1">
+<rect x="568" y="256" width="160" height="72" rx="4" fill="#f4efe6" stroke="#1e4fa8" data-node-box="true"/>
+<rect x="568" y="256" width="4" height="72" rx="4" fill="#1e4fa8" stroke="none" />
+<text x="584" y="280" font-family='"IBM Plex Sans", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif' font-size="13" fill="#0c0f14" data-node-label="true">Accept request</text>
+<text x="584" y="316" font-family='"IBM Plex Sans", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif' font-size="11" fill="#5c6370" >ACTION</text>
+</g>
+<g id="wf-conditional-route-node-s2" data-node-id="s2">
+<rect x="568" y="152" width="160" height="72" rx="4" fill="#f4efe6" stroke="#a1460f" data-node-box="true"/>
+<rect x="568" y="152" width="4" height="72" rx="4" fill="#a1460f" stroke="none" />
+<text x="584" y="176" font-family='"IBM Plex Sans", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif' font-size="13" fill="#0c0f14" data-node-label="true">Ask for details</text>
+<text x="584" y="212" font-family='"IBM Plex Sans", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif' font-size="11" fill="#5c6370" >ACTION</text>
+</g>
+<text x="24" y="376" font-family='"IBM Plex Sans", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif' font-size="11" fill="#5c6370" >Coverage: synthetic. 1 unknown items; see review report.</text>
+<text x="24" y="416" font-family='"IBM Plex Sans", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif' font-size="11" fill="#5c6370" >Dashed: inferred / unknown / migrated / feedback. Diamond: human gate.</text>
+</svg>
+</html>

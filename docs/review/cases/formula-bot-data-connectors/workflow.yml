@@ -1,0 +1,108 @@
+schema_version: 2
+id: formula-bot-data-connectors
+title: 按用户数据生成结构化结果
+summary: 用户在 Bubble 接入数据，n8n 读取连接和模式信息，Agent 按需求生成查询，结果处理后存入 S3
+  并返回文件。查询内部作为动态子流程保留，未虚构固定连接器顺序。
+domain: other
+tools:
+  - n8n
+lifecycle: draft
+added: 2026-10-13
+evidence:
+  status: source_checked
+  checked_at: 2026-10-13T09:28:20.592Z
+  method: Agent read the primary article and mapped narrative evidence; source
+    hash checked by CLI. No runtime execution, author confirmation or
+    independent outcome verification.
+actors:
+  - id: user
+    kind: human
+    label: 用户
+  - id: n8n
+    kind: tool
+    label: n8n
+  - id: query-agent
+    kind: agent
+    label: 查询 Agent
+sources:
+  - id: primary
+    label: n8n official case study
+    url: https://n8n.io/case-studies/formula-bot
+    kind: practitioner_report
+    locator: The flow works as follows
+    checked_at: 2026-10-13T09:28:20.592Z
+    content_hash: aa7fe817478eab642cc2a54e04a25887a768e236a67c1bf55a5f8321e2cf82cf
+    reuse_status: original_summary_only
+coverage:
+  mode: documented_narrative_overview
+  unknowns:
+    - 连接器内部节点、参数和错误处理未披露。
+    - 查询失败、超时和重试策略未知。
+    - 没有原生模板或本地复现记录。
+  inferences:
+    - 连接器选择与查询执行合并为动态子流程。
+steps:
+  - id: connect
+    name: 接入用户数据
+    actor_id: user
+    type: event
+    actor: human
+    evidence:
+      - source_id: primary
+        locator: The flow works as follows
+        support: explicit
+  - id: metadata
+    name: 读取连接信息
+    actor_id: n8n
+    type: action
+    notes: 这里只记录原文中的连接授权与模式信息类别，不导入任何认证信息。
+    actor: tool
+    evidence:
+      - source_id: primary
+        locator: The flow works as follows
+        support: explicit
+  - id: query
+    name: 动态生成并查询
+    actor_id: query-agent
+    type: subprocess
+    notes: SQL 或接口由需求和模式决定；连接器选择留在动态边界内。
+    actor: agent
+    evidence:
+      - source_id: primary
+        locator: The flow works as follows
+        support: explicit
+  - id: files
+    name: 存储并返回文件
+    actor_id: n8n
+    type: subprocess
+    notes: 处理、转换、S3 存储和返回是叙事概览，不展开未公开的内部节点。
+    actor: tool
+    evidence:
+      - source_id: primary
+        locator: The flow works as follows
+        support: explicit
+edges:
+  - from: connect
+    to: metadata
+    id: e1
+    kind: sequence
+    evidence:
+      - source_id: primary
+        locator: The flow works as follows
+        support: explicit
+  - from: metadata
+    to: query
+    id: e2
+    kind: sequence
+    evidence:
+      - source_id: primary
+        locator: The flow works as follows
+        support: explicit
+  - from: query
+    to: files
+    id: e3
+    kind: sequence
+    evidence:
+      - source_id: primary
+        locator: The flow works as follows
+        support: explicit

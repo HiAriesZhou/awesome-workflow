@@ -38,62 +38,62 @@ Static site build: `npm run build` → `dist/` (GitHub Pages).
 
 ## Agent Engineering
 
-- **[gstack Virtual Engineering Team](https://github.com/garrytan/gstack)** · ★135,767 — Opinionated Claude Code skill pack that role-plays CEO, design, eng, release, docs, and QA reviews — including autoplan pipelines that chain review phases with checklists and acceptance criteria.  
-  Tools: `claude-code`, `skills` · Maturity: `verified` · Automation: `assisted` · [YAML](workflows/gstack-virtual-eng-team.yml)
-
-  ![gstack Virtual Engineering Team workflow diagram](docs/diagrams/gstack-virtual-eng-team.svg)
-
-- **[Persistent Agent Memory Across Sessions](https://github.com/thedotmack/claude-mem)** · ★99,062 — Capture what the agent does during a session, compress with AI, and reinject relevant context into future sessions — a continuity workflow for Claude Code and other agents that otherwise forget between chats.  
-  Tools: `claude-code`, `mcp`, `skills`, `other` · Maturity: `verified` · Automation: `semi-auto` · [YAML](workflows/claude-mem-session-continuity.yml)
+- **[Persistent Agent Memory Across Sessions](https://github.com/thedotmack/claude-mem)** · ★99,062 — Capture what the agent does during a session, compress with AI, and reinject relevant context into future sessions — a continuity workflow for Claude Code and other agents that otherwise forget between chats.<br>
+  Tools: `claude-code`, `mcp`, `skills`, `other` · Publication: `published` · Evidence: `unknown` · Automation: `semi-auto` · [YAML](workflows/claude-mem-session-continuity.yml)
 
   ![Persistent Agent Memory Across Sessions workflow diagram](docs/diagrams/claude-mem-session-continuity.svg)
 
-- **[Superpowers Plan-Then-Execute](https://github.com/obra/superpowers)** · ★297,010 — Composable Claude Code plugin skills for brainstorming, writing a structured plan, executing step-by-step with verification gates, plus optional parallel subagent dispatch and review loops.  
-  Tools: `claude-code`, `skills` · Maturity: `verified` · Automation: `assisted` · [YAML](workflows/obra-superpowers-plan-execute.yml)
+- **[Superpowers Plan-Then-Execute](https://github.com/obra/superpowers)** · ★297,010 — Composable Claude Code plugin skills for brainstorming, writing a structured plan, executing step-by-step with verification gates, plus optional parallel subagent dispatch and review loops.<br>
+  Tools: `claude-code`, `skills` · Publication: `published` · Evidence: `unknown` · Automation: `assisted` · [YAML](workflows/obra-superpowers-plan-execute.yml)
 
   ![Superpowers Plan-Then-Execute workflow diagram](docs/diagrams/obra-superpowers-plan-execute.svg)
 
-- **[Waza Think → Implement → Check](https://github.com/tw93/Waza)** · ★7,222 — Engineering-habit skills for AI assistants: turn rough ideas into decision-complete plans (/think), implement, then review diffs and release readiness (/check) before shipping — without inventing a new platform.  
-  Tools: `skills`, `claude-code`, `codex`, `cursor` · Maturity: `verified` · Automation: `assisted` · [YAML](workflows/tw93-waza-think-check.yml)
+- **[Waza Think → Implement → Check](https://github.com/tw93/Waza)** · ★7,222 — Engineering-habit skills for AI assistants: turn rough ideas into decision-complete plans (/think), implement, then review diffs and release readiness (/check) before shipping — without inventing a new platform.<br>
+  Tools: `skills`, `claude-code`, `codex`, `cursor` · Publication: `published` · Evidence: `unknown` · Automation: `assisted` · [YAML](workflows/tw93-waza-think-check.yml)
 
   ![Waza Think → Implement → Check workflow diagram](docs/diagrams/tw93-waza-think-check.svg)
+
+- **[gstack Virtual Engineering Team](https://github.com/garrytan/gstack)** · ★135,767 — Opinionated Claude Code skill pack that role-plays CEO, design, eng, release, docs, and QA reviews — including autoplan pipelines that chain review phases with checklists and acceptance criteria.<br>
+  Tools: `claude-code`, `skills` · Publication: `published` · Evidence: `unknown` · Automation: `assisted` · [YAML](workflows/gstack-virtual-eng-team.yml)
+
+  ![gstack Virtual Engineering Team workflow diagram](docs/diagrams/gstack-virtual-eng-team.svg)
 
 
 ## AI Coding
 
-- **[Automated Security Review Pass](https://github.com/OneRedOak/claude-code-workflows)** · ★3,900 — On-demand and PR-tied security scanning inspired by Anthropic practice and OWASP Top 10, producing severity-classified findings with remediation hints.  
-  Tools: `claude-code`, `github-actions` · Maturity: `verified` · Automation: `semi-auto` · [YAML](workflows/oneredoak-security-review.yml)
+- **[Automated Security Review Pass](https://github.com/OneRedOak/claude-code-workflows)** · ★3,900 — On-demand and PR-tied security scanning inspired by Anthropic practice and OWASP Top 10, producing severity-classified findings with remediation hints.<br>
+  Tools: `claude-code`, `github-actions` · Publication: `published` · Evidence: `unknown` · Automation: `semi-auto` · [YAML](workflows/oneredoak-security-review.yml)
 
   ![Automated Security Review Pass workflow diagram](docs/diagrams/oneredoak-security-review.svg)
 
-- **[Bug Fix Loop (Report → Analyze → Fix → Verify)](https://github.com/Pimzino/claude-code-spec-workflow)** · ★3,860 — A short, gated loop for defects: document the bug, find root cause, implement, then verify — paired with the same Claude Code spec-workflow toolkit.  
-  Tools: `claude-code` · Maturity: `verified` · Automation: `assisted` · [YAML](workflows/pimzino-bugfix.yml)
+- **[Bug Fix Loop (Report → Analyze → Fix → Verify)](https://github.com/Pimzino/claude-code-spec-workflow)** · ★3,860 — A short, gated loop for defects: document the bug, find root cause, implement, then verify — paired with the same Claude Code spec-workflow toolkit.<br>
+  Tools: `claude-code` · Publication: `published` · Evidence: `unknown` · Automation: `assisted` · [YAML](workflows/pimzino-bugfix.yml)
 
   ![Bug Fix Loop (Report → Analyze → Fix → Verify) workflow diagram](docs/diagrams/pimzino-bugfix.svg)
 
-- **[Dual-Loop AI Code Review](https://github.com/OneRedOak/claude-code-workflows)** · ★3,900 — Automate routine PR review (syntax, completeness, style, bugs) with Claude Code slash commands plus GitHub Actions, freeing humans for architecture judgment.  
-  Tools: `claude-code`, `github-actions` · Maturity: `verified` · Automation: `semi-auto` · [YAML](workflows/oneredoak-code-review.yml)
+- **[Dual-Loop AI Code Review](https://github.com/OneRedOak/claude-code-workflows)** · ★3,900 — Automate routine PR review (syntax, completeness, style, bugs) with Claude Code slash commands plus GitHub Actions, freeing humans for architecture judgment.<br>
+  Tools: `claude-code`, `github-actions` · Publication: `published` · Evidence: `unknown` · Automation: `semi-auto` · [YAML](workflows/oneredoak-code-review.yml)
 
   ![Dual-Loop AI Code Review workflow diagram](docs/diagrams/oneredoak-code-review.svg)
 
-- **[Spec-Driven Feature Workflow](https://github.com/Pimzino/claude-code-spec-workflow)** · ★3,860 — Structure new features as Requirements → Design → Tasks → Implementation with Claude Code slash commands, document templates, and optional per-task agents.  
-  Tools: `claude-code`, `skills` · Maturity: `verified` · Automation: `assisted` · [YAML](workflows/pimzino-spec-driven.yml)
+- **[Spec-Driven Feature Workflow](https://github.com/Pimzino/claude-code-spec-workflow)** · ★3,860 — Structure new features as Requirements → Design → Tasks → Implementation with Claude Code slash commands, document templates, and optional per-task agents.<br>
+  Tools: `claude-code`, `skills` · Publication: `published` · Evidence: `unknown` · Automation: `assisted` · [YAML](workflows/pimzino-spec-driven.yml)
 
   ![Spec-Driven Feature Workflow workflow diagram](docs/diagrams/pimzino-spec-driven.svg)
 
 
 ## Design Review
 
-- **[Browser Design Review with Playwright MCP](https://github.com/OneRedOak/claude-code-workflows)** · ★3,900 — Front-end review loop that drives a real browser via Playwright MCP and specialized Claude Code agents to check UI consistency, a11y, and polish.  
-  Tools: `claude-code`, `playwright`, `mcp` · Maturity: `verified` · Automation: `assisted` · [YAML](workflows/oneredoak-design-review.yml)
+- **[Browser Design Review with Playwright MCP](https://github.com/OneRedOak/claude-code-workflows)** · ★3,900 — Front-end review loop that drives a real browser via Playwright MCP and specialized Claude Code agents to check UI consistency, a11y, and polish.<br>
+  Tools: `claude-code`, `playwright`, `mcp` · Publication: `published` · Evidence: `unknown` · Automation: `assisted` · [YAML](workflows/oneredoak-design-review.yml)
 
   ![Browser Design Review with Playwright MCP workflow diagram](docs/diagrams/oneredoak-design-review.svg)
 
 
 ## Repository Ops
 
-- **[GitHub Agentic Workflows (Markdown → Actions)](https://github.com/github/awesome-copilot/blob/main/docs/README.workflows.md)** · ★39,879 — Define repo automations in Markdown with YAML frontmatter, compile them with `gh aw` into lockfiles, and run coding agents inside GitHub Actions with guardrails.  
-  Tools: `github-actions`, `other` · Maturity: `verified` · Automation: `automated` · [YAML](workflows/github-agentic-workflows.yml)
+- **[GitHub Agentic Workflows (Markdown → Actions)](https://github.com/github/awesome-copilot/blob/main/docs/README.workflows.md)** · ★39,879 — Define repo automations in Markdown with YAML frontmatter, compile them with `gh aw` into lockfiles, and run coding agents inside GitHub Actions with guardrails.<br>
+  Tools: `github-actions`, `other` · Publication: `published` · Evidence: `unknown` · Automation: `automated` · [YAML](workflows/github-agentic-workflows.yml)
 
   ![GitHub Agentic Workflows (Markdown → Actions) workflow diagram](docs/diagrams/github-agentic-workflows.svg)
 
@@ -106,6 +106,8 @@ See [`schema/workflow.schema.json`](schema/workflow.schema.json). Validate + reg
 ```bash
 npm run build:data
 ```
+
+Legacy `maturity: verified` remains available for compatibility and is not proof of reproduction. Publication and evidence are separate in v2. See [the content pipeline](docs/implementation/pipeline.md) for source import and review packages; drafts and synthetic fixtures stay outside the published gallery.
 
 ## Contributing
 

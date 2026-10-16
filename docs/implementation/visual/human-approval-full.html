@@ -1,0 +1,41 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><title>human-approval-full</title><style>body{margin:0;background:#f4efe6}svg{display:block}</style><svg xmlns="http://www.w3.org/2000/svg" width="1056" height="536" viewBox="0 0 1056 536" role="img" aria-labelledby="wf-human-approval-title wf-human-approval-desc">
+<title id="wf-human-approval-title">Synthetic human-approval workflow diagram</title>
+<desc id="wf-human-approval-desc">{&quot;steps&quot;:[{&quot;id&quot;:&quot;s0&quot;,&quot;name&quot;:&quot;Submit request&quot;,&quot;actor&quot;:&quot;employee&quot;,&quot;type&quot;:&quot;action&quot;},{&quot;id&quot;:&quot;s1&quot;,&quot;name&quot;:&quot;Review request&quot;,&quot;actor&quot;:&quot;manager&quot;,&quot;type&quot;:&quot;approval&quot;},{&quot;id&quot;:&quot;s2&quot;,&quot;name&quot;:&quot;Apply change&quot;,&quot;actor&quot;:&quot;tool&quot;,&quot;type&quot;:&quot;action&quot;}],&quot;edges&quot;:[{&quot;id&quot;:&quot;e0&quot;,&quot;from&quot;:&quot;s0&quot;,&quot;to&quot;:&quot;s1&quot;,&quot;kind&quot;:&quot;sequence&quot;},{&quot;id&quot;:&quot;e1&quot;,&quot;from&quot;:&quot;s1&quot;,&quot;to&quot;:&quot;s2&quot;,&quot;kind&quot;:&quot;conditional&quot;,&quot;condition&quot;:&quot;approved&quot;}],&quot;coverage&quot;:{&quot;mode&quot;:&quot;synthetic&quot;,&quot;unknowns&quot;:[&quot;Not a published case.&quot;]}}</desc>
+<defs><marker id="wf-human-approval-arrow" viewBox="0 0 8 8" refX="8" refY="4" markerWidth="8" markerHeight="8" markerUnits="userSpaceOnUse" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#7a7266"/></marker></defs>
+<rect x="0" y="0" width="1056" height="536" rx="4" fill="#f4efe6" stroke="#d9d0c1" />
+<text x="24" y="168" font-family='"IBM Plex Sans", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif' font-size="11" fill="#a1460f" >Employee</text>
+<text x="24" y="184" font-family='"IBM Plex Sans", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif' font-size="11" fill="#5c6370" >human · employee</text>
+<line x1="24" y1="136" x2="1032" y2="136" stroke="#d9d0c1"/>
+<text x="24" y="272" font-family='"IBM Plex Sans", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif' font-size="11" fill="#a1460f" >Manager</text>
+<text x="24" y="288" font-family='"IBM Plex Sans", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif' font-size="11" fill="#5c6370" >human · manager</text>
+<line x1="24" y1="240" x2="1032" y2="240" stroke="#d9d0c1"/>
+<text x="24" y="376" font-family='"IBM Plex Sans", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif' font-size="11" fill="#4d6b14" >Automation</text>
+<text x="24" y="392" font-family='"IBM Plex Sans", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif' font-size="11" fill="#5c6370" >tool · tool</text>
+<line x1="24" y1="344" x2="1032" y2="344" stroke="#d9d0c1"/>
+<path id="wf-human-approval-edge-e0" data-edge-id="e0" data-from="s0" data-to="s1" data-kind="sequence" d="M488 176L504 176L504 48L552 48L552 280L568 280" fill="none" stroke="#7a7266" stroke-dasharray="4 4" marker-end="url(#wf-human-approval-arrow)"><title>e0: s0 → s1 (sequence)</title></path>
+<text x="24" y="52" font-family='"IBM Plex Sans", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif' font-size="11" fill="#5c6370" >e0 · sequence</text>
+<path id="wf-human-approval-edge-e1" data-edge-id="e1" data-from="s1" data-to="s2" data-kind="conditional" d="M736 280L760 280L760 96L776 96L776 384L808 384" fill="none" stroke="#7a7266" stroke-dasharray="4 4" marker-end="url(#wf-human-approval-arrow)"><title>e1: s1 → s2 (conditional: approved)</title></path>
+<text x="24" y="100" font-family='"IBM Plex Sans", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif' font-size="11" fill="#5c6370" >e1 · approved</text>
+<g id="wf-human-approval-node-s0" data-node-id="s0">
+<rect x="328" y="152" width="160" height="72" rx="4" fill="#f4efe6" stroke="#a1460f" data-node-box="true"/>
+<rect x="328" y="152" width="4" height="72" rx="4" fill="#a1460f" stroke="none" />
+<text x="344" y="176" font-family='"IBM Plex Sans", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif' font-size="13" fill="#0c0f14" data-node-label="true">Submit request</text>
+<text x="344" y="212" font-family='"IBM Plex Sans", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif' font-size="11" fill="#5c6370" >ACTION</text>
+</g>
+<g id="wf-human-approval-node-s1" data-node-id="s1">
+<rect x="568" y="256" width="160" height="72" rx="4" fill="#f4efe6" stroke="#a1460f" data-node-box="true"/>
+<rect x="568" y="256" width="4" height="72" rx="4" fill="#a1460f" stroke="none" />
+<text x="584" y="280" font-family='"IBM Plex Sans", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif' font-size="13" fill="#0c0f14" data-node-label="true">Review request</text>
+<text x="584" y="316" font-family='"IBM Plex Sans", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif' font-size="11" fill="#5c6370" >APPROVAL</text>
+<polygon points="728,272 736,280 728,288 720,280" fill="#0f766e"/>
+</g>
+<g id="wf-human-approval-node-s2" data-node-id="s2">
+<rect x="808" y="360" width="160" height="72" rx="4" fill="#f4efe6" stroke="#4d6b14" data-node-box="true"/>
+<rect x="808" y="360" width="4" height="72" rx="4" fill="#4d6b14" stroke="none" />
+<text x="824" y="384" font-family='"IBM Plex Sans", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif' font-size="13" fill="#0c0f14" data-node-label="true">Apply change</text>
+<text x="824" y="420" font-family='"IBM Plex Sans", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif' font-size="11" fill="#5c6370" >ACTION</text>
+</g>
+<text x="24" y="480" font-family='"IBM Plex Sans", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif' font-size="11" fill="#5c6370" >Coverage: synthetic. 1 unknown items; see review report.</text>
+<text x="24" y="520" font-family='"IBM Plex Sans", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif' font-size="11" fill="#5c6370" >Dashed: inferred / unknown / migrated / feedback. Diamond: human gate.</text>
+</svg>
+</html>

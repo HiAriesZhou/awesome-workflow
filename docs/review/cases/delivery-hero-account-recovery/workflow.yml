@@ -1,0 +1,111 @@
+schema_version: 2
+id: delivery-hero-account-recovery
+title: 直属经理批准的账号恢复
+summary: 员工账号锁定后，由直属经理批准恢复，再由 n8n 调用相关系统接口。此草稿只表达公开说明的成功路径；接口之间的顺序、拒绝与重试均未披露。
+domain: other
+tools:
+  - n8n
+lifecycle: draft
+added: 2026-10-13
+evidence:
+  status: source_checked
+  checked_at: 2026-10-13T09:28:01.476Z
+  method: Agent read the primary article and mapped narrative evidence; source
+    hash checked by CLI. No runtime execution, author confirmation or
+    independent outcome verification.
+actors:
+  - id: employee
+    kind: human
+    label: 员工
+  - id: manager
+    kind: human
+    label: 直属经理
+  - id: automation
+    kind: tool
+    label: n8n 自动化
+sources:
+  - id: primary
+    label: n8n official case study
+    url: https://n8n.io/case-studies/delivery-hero
+    kind: practitioner_report
+    locator: Solution
+    checked_at: 2026-10-13T09:28:01.476Z
+    content_hash: eca577a08477ea6a778fd247d8cde56d02d4c9a80194c756d2b3fbcbf3b5a137
+    reuse_status: original_summary_only
+coverage:
+  mode: documented_narrative_overview
+  unknowns:
+    - 请求界面、触发器与身份核验机制未披露。
+    - 经理拒绝、超时和不响应时的处理未知。
+    - 接口失败、部分恢复、重试次数和接口之间的拓扑未知。
+    - 没有取得可运行的原生 n8n JSON。
+  inferences:
+    - 需求到经理审批的连接是叙事整理。
+    - 多个恢复接口合并为一个子流程，未填补内部拓扑。
+steps:
+  - id: need
+    name: 需要恢复账号
+    actor_id: employee
+    type: event
+    notes: 锁定和恢复需求来自原文；新流程提交渠道未知。
+    actor: human
+    evidence:
+      - source_id: primary
+        locator: Challenge
+        support: explicit
+  - id: approve
+    name: 经理批准恢复
+    actor_id: manager
+    type: approval
+    human_gate: true
+    actor: human
+    evidence:
+      - source_id: primary
+        locator: Solution
+        support: explicit
+  - id: recover
+    name: 调用恢复接口
+    actor_id: automation
+    type: subprocess
+    notes: 原文提到 Okta、Jira、Google；合并为一个接口调用边界，未推断三者的顺序或并行。
+    actor: tool
+    evidence:
+      - source_id: primary
+        locator: Solution
+        support: explicit
+  - id: access
+    name: 恢复账号访问
+    actor_id: employee
+    type: outcome
+    actor: human
+    evidence:
+      - source_id: primary
+        locator: Results
+        support: explicit
+edges:
+  - from: need
+    to: approve
+    id: e1
+    kind: sequence
+    evidence:
+      - source_id: primary
+        locator: Solution
+        support: inferred
+        reason: 从账号恢复需求与经理审批的叙事关系整理；没有取得原生触发器定义。
+  - from: approve
+    to: recover
+    kind: conditional
+    condition: approved
+    id: e2
+    evidence:
+      - source_id: primary
+        locator: Solution
+        support: explicit
+  - from: recover
+    to: access
+    id: e3
+    kind: sequence
+    evidence:
+      - source_id: primary
+        locator: Results
+        support: explicit

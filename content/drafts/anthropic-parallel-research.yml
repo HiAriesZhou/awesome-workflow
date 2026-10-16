@@ -1,0 +1,139 @@
+schema_version: 2
+id: anthropic-parallel-research
+title: 并行研究、反馈与引用整理
+summary: LeadResearcher 保存计划，委派数量动态变化的研究子 Agent，汇总后决定是否继续研究，完成后交给 CitationAgent
+  整理引用并返回结果。并行集合保留为动态子流程，不假定固定两个研究者。
+domain: research
+tools:
+  - other
+lifecycle: draft
+added: 2026-10-13
+evidence:
+  status: source_checked
+  checked_at: 2026-10-13T09:28:22.092Z
+  method: Agent read the primary article and mapped narrative evidence; source
+    hash checked by CLI. No runtime execution, author confirmation or
+    independent outcome verification.
+actors:
+  - id: lead
+    kind: agent
+    label: LeadResearcher
+  - id: researchers
+    kind: agent
+    label: 动态研究子 Agent
+    multiplicity: dynamic
+  - id: citations
+    kind: agent
+    label: CitationAgent
+  - id: user
+    kind: human
+    label: 用户
+sources:
+  - id: primary
+    label: Anthropic engineering article
+    url: https://www.anthropic.com/engineering/multi-agent-research-system
+    kind: practitioner_report
+    locator: Architecture overview for Research
+    checked_at: 2026-10-13T09:28:22.092Z
+    content_hash: b2059d785ae34c94baed2033b6c2b88e9f0e1155eb8813a6562af2472634af17
+    reuse_status: original_summary_only
+coverage:
+  mode: documented_narrative_overview
+  unknowns:
+    - 动态研究子 Agent 的实际数量、各轮工具顺序与执行时长未知。
+    - 更多研究和停止的具体判断规则未公开。
+    - 中断、失败和引用无法定位时的完整处理未知。
+    - 此库未执行该系统，也未独立核验原文的效果数字。
+  inferences:
+    - 动态子 Agent 与内部搜索迭代合并为并行集合节点。
+steps:
+  - id: plan
+    name: 保存研究计划
+    actor_id: lead
+    type: action
+    actor: agent
+    evidence:
+      - source_id: primary
+        locator: Architecture overview for Research
+        support: explicit
+  - id: research
+    name: 动态并行研究
+    actor_id: researchers
+    type: subprocess
+    execution: dynamic_parallel
+    notes: 原文说明子 Agent 数量可变，每个研究者内部也迭代搜索；不展开为固定数量和固定工具步骤。
+    actor: agent
+    evidence:
+      - source_id: primary
+        locator: Architecture overview for Research
+        support: explicit
+  - id: synthesize
+    name: 汇总并判断
+    actor_id: lead
+    type: decision
+    actor: agent
+    evidence:
+      - source_id: primary
+        locator: Architecture overview for Research
+        support: explicit
+  - id: cite
+    name: 定位引用来源
+    actor_id: citations
+    type: action
+    actor: agent
+    evidence:
+      - source_id: primary
+        locator: Architecture overview for Research
+        support: explicit
+  - id: answer
+    name: 接收研究结果
+    actor_id: user
+    type: outcome
+    actor: human
+    evidence:
+      - source_id: primary
+        locator: Architecture overview for Research
+        support: explicit
+edges:
+  - from: plan
+    to: research
+    id: e1
+    kind: sequence
+    evidence:
+      - source_id: primary
+        locator: Architecture overview for Research
+        support: explicit
+  - from: research
+    to: synthesize
+    id: e2
+    kind: sequence
+    evidence:
+      - source_id: primary
+        locator: Architecture overview for Research
+        support: explicit
+  - from: synthesize
+    to: research
+    kind: feedback
+    condition: more research
+    id: e3
+    evidence:
+      - source_id: primary
+        locator: Architecture overview for Research
+        support: explicit
+  - from: synthesize
+    to: cite
+    kind: conditional
+    condition: sufficient information
+    id: e4
+    evidence:
+      - source_id: primary
+        locator: Architecture overview for Research
+        support: explicit
+  - from: cite
+    to: answer
+    id: e5
+    kind: sequence
+    evidence:
+      - source_id: primary
+        locator: Architecture overview for Research
+        support: explicit

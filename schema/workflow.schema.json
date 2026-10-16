@@ -8,12 +8,10 @@
     "title",
     "summary",
     "domain",
-    "maturity",
     "tools",
     "steps",
     "sources",
-    "added",
-    "verified"
+    "added"
   ],
   "additionalProperties": false,
   "properties": {
@@ -22,15 +20,34 @@
       "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
       "description": "Stable kebab-case id; filename should match id.yml"
     },
-    "title": { "type": "string", "minLength": 3, "maxLength": 120 },
-    "summary": { "type": "string", "minLength": 20, "maxLength": 400 },
+    "title": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 120
+    },
+    "summary": {
+      "type": "string",
+      "minLength": 20,
+      "maxLength": 400
+    },
     "domain": {
       "type": "string",
-      "enum": ["ai-coding", "agent-engineering", "repo-ops", "research", "design-review", "other"]
+      "enum": [
+        "ai-coding",
+        "agent-engineering",
+        "repo-ops",
+        "research",
+        "design-review",
+        "other"
+      ]
     },
     "maturity": {
       "type": "string",
-      "enum": ["draft", "verified", "archived"]
+      "enum": [
+        "draft",
+        "verified",
+        "archived"
+      ]
     },
     "tools": {
       "type": "array",
@@ -53,25 +70,46 @@
     },
     "model_tiers": {
       "type": "array",
-      "items": { "type": "string", "enum": ["premium", "standard", "cheap", "unknown"] },
-      "default": ["unknown"]
+      "items": {
+        "type": "string",
+        "enum": [
+          "premium",
+          "standard",
+          "cheap",
+          "unknown"
+        ]
+      },
+      "default": [
+        "unknown"
+      ]
     },
     "automation": {
       "type": "string",
-      "enum": ["manual", "assisted", "semi-auto", "automated"],
+      "enum": [
+        "manual",
+        "assisted",
+        "semi-auto",
+        "automated"
+      ],
       "description": "How much of the loop runs without a human"
     },
     "authors": {
       "type": "array",
-      "items": { "type": "string" }
+      "items": {
+        "type": "string"
+      }
     },
     "tags": {
       "type": "array",
-      "items": { "type": "string" }
+      "items": {
+        "type": "string"
+      }
     },
     "not_for": {
       "type": "array",
-      "items": { "type": "string" },
+      "items": {
+        "type": "string"
+      },
       "description": "Anti-examples / when not to use"
     },
     "steps": {
@@ -79,24 +117,102 @@
       "minItems": 2,
       "items": {
         "type": "object",
-        "required": ["id", "name", "actor"],
+        "required": [
+          "id",
+          "name",
+          "actor"
+        ],
         "additionalProperties": false,
         "properties": {
-          "id": { "type": "string" },
-          "name": { "type": "string" },
+          "id": {
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
           "actor": {
             "type": "string",
-            "enum": ["human", "agent", "tool", "ci"]
+            "enum": [
+              "human",
+              "agent",
+              "tool",
+              "ci"
+            ]
           },
-          "human_gate": { "type": "boolean", "default": false },
+          "human_gate": {
+            "type": "boolean",
+            "default": false
+          },
           "model_tier": {
             "type": "string",
-            "enum": ["premium", "standard", "cheap", "unknown"]
+            "enum": [
+              "premium",
+              "standard",
+              "cheap",
+              "unknown"
+            ]
           },
-          "inputs": { "type": "array", "items": { "type": "string" } },
-          "outputs": { "type": "array", "items": { "type": "string" } },
-          "notes": { "type": "string" },
-          "evidence_url": { "type": "string", "format": "uri" }
+          "inputs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "outputs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "notes": {
+            "type": "string"
+          },
+          "evidence_url": {
+            "type": "string",
+            "format": "uri"
+          },
+          "actor_id": {
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          "type": {
+            "enum": [
+              "action",
+              "event",
+              "outcome",
+              "approval",
+              "decision",
+              "fork",
+              "join",
+              "subprocess"
+            ]
+          },
+          "join_policy": {
+            "enum": [
+              "all",
+              "any",
+              "unknown"
+            ]
+          },
+          "phase": {
+            "type": "string",
+            "minLength": 1
+          },
+          "evidence": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/evidenceRef"
+            },
+            "minItems": 1
+          },
+          "execution": {
+            "enum": [
+              "single",
+              "dynamic_parallel"
+            ]
+          }
         }
       }
     },
@@ -105,16 +221,306 @@
       "minItems": 1,
       "items": {
         "type": "object",
-        "required": ["label", "url"],
+        "required": [
+          "label",
+          "url"
+        ],
         "additionalProperties": false,
         "properties": {
-          "label": { "type": "string" },
-          "url": { "type": "string", "format": "uri" },
-          "stars": { "type": "integer", "minimum": 0 }
+          "label": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string",
+            "format": "uri"
+          },
+          "stars": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "id": {
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          "kind": {
+            "enum": [
+              "tutorial",
+              "official_example",
+              "practitioner_report",
+              "implementation",
+              "unknown"
+            ]
+          },
+          "locator": {
+            "type": "string",
+            "minLength": 1
+          },
+          "revision": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "checked_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "content_hash": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "reuse_status": {
+            "enum": [
+              "pending",
+              "original_summary_only",
+              "licensed",
+              "forbidden",
+              "unknown"
+            ]
+          }
         }
       }
     },
-    "added": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
-    "verified": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" }
-  }
+    "added": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "verified": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "schema_version": {
+      "const": 2
+    },
+    "lifecycle": {
+      "enum": [
+        "candidate",
+        "draft",
+        "published",
+        "archived"
+      ]
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "enum": [
+            "unknown",
+            "source_checked",
+            "author_confirmed",
+            "reproduced"
+          ]
+        },
+        "checked_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "method": {
+          "type": "string",
+          "minLength": 1
+        },
+        "record": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "status",
+        "method"
+      ]
+    },
+    "actors": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          "kind": {
+            "enum": [
+              "human",
+              "agent",
+              "tool",
+              "ci"
+            ]
+          },
+          "label": {
+            "type": "string",
+            "minLength": 1
+          },
+          "multiplicity": {
+            "enum": [
+              "one",
+              "dynamic"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "kind",
+          "label"
+        ]
+      },
+      "minItems": 1
+    },
+    "edges": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          "from": {
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          "to": {
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          "kind": {
+            "enum": [
+              "sequence",
+              "conditional",
+              "parallel",
+              "feedback"
+            ]
+          },
+          "condition": {
+            "type": "string",
+            "minLength": 1
+          },
+          "evidence": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/evidenceRef"
+            },
+            "minItems": 1
+          }
+        },
+        "required": [
+          "id",
+          "from",
+          "to",
+          "kind",
+          "evidence"
+        ]
+      },
+      "minItems": 1
+    },
+    "coverage": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "mode": {
+          "type": "string",
+          "minLength": 1
+        },
+        "unknowns": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 0
+        },
+        "inferences": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 0
+        }
+      },
+      "required": [
+        "mode",
+        "unknowns"
+      ]
+    }
+  },
+  "definitions": {
+    "evidenceRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "source_id": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+        },
+        "locator": {
+          "type": "string",
+          "minLength": 1
+        },
+        "support": {
+          "enum": [
+            "explicit",
+            "inferred",
+            "unknown",
+            "migrated"
+          ]
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "support",
+        "locator"
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "required": [
+          "schema_version"
+        ]
+      },
+      "then": {
+        "required": [
+          "lifecycle",
+          "evidence",
+          "actors",
+          "edges",
+          "coverage"
+        ],
+        "properties": {
+          "steps": {
+            "items": {
+              "required": [
+                "actor_id",
+                "type",
+                "evidence"
+              ]
+            }
+          },
+          "sources": {
+            "items": {
+              "required": [
+                "id",
+                "kind",
+                "locator",
+                "reuse_status"
+              ]
+            }
+          }
+        }
+      },
+      "else": {
+        "required": [
+          "maturity",
+          "verified"
+        ]
+      }
+    }
+  ]
 }

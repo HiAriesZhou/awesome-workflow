@@ -1,45 +1,19 @@
 import type { Workflow } from '../lib/types'
 import { domainLabel, toolLabel } from '../lib/labels'
+import { WorkflowDiagram } from './WorkflowDiagram'
 
-export function WorkflowCard({
-  workflow,
-  active,
-  onSelect,
-}: {
-  workflow: Workflow
-  active: boolean
-  onSelect: () => void
-}) {
-  const topStars = Math.max(
-    0,
-    ...workflow.sources.map((s) => s.stars ?? 0)
-  )
-
+export function WorkflowCard({ workflow, onSelect }: { workflow: Workflow; onSelect: () => void }) {
   return (
-    <button
-      type="button"
-      className={`card${active ? ' active' : ''}`}
-      onClick={onSelect}
-      aria-pressed={active}
-    >
-      <div className="badges">
-        <span className="badge teal">{domainLabel[workflow.domain] ?? workflow.domain}</span>
-        <span className="badge">{workflow.maturity}</span>
-        {workflow.automation ? (
-          <span className="badge amber">{workflow.automation}</span>
-        ) : null}
-        {topStars > 0 ? (
-          <span className="badge">★ {topStars.toLocaleString('en-US')}</span>
-        ) : null}
+    <button type="button" className="gallery-item" onClick={onSelect} aria-label={`Explore ${workflow.title}`} aria-haspopup="dialog">
+      <div className="gallery-preview">
+        <div className="preview-topline"><span>{domainLabel[workflow.domain] || workflow.domain}</span><span>{workflow.steps.length} steps · {workflow.steps.filter(s => s.human_gate).length} approvals</span></div>
+        <WorkflowDiagram workflow={workflow} />
+        <span className="open-hint">Explore workflow ↗</span>
       </div>
-      <h3>{workflow.title}</h3>
-      <p>{workflow.summary}</p>
-      <div className="badges" style={{ marginTop: 12, marginBottom: 0 }}>
-        {workflow.tools.slice(0, 4).map((t) => (
-          <span className="badge" key={t}>
-            {toolLabel[t] ?? t}
-          </span>
-        ))}
+      <div className="gallery-caption">
+        <h2>{workflow.title}</h2>
+        <p className="gallery-author">{workflow.authors?.join(', ') || 'Author not recorded'}</p>
+        <div className="gallery-tools">{workflow.tools.map(t => <span key={t}>{toolLabel[t] || t}</span>)}</div>
       </div>
     </button>
   )
