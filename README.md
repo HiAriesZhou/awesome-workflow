@@ -5,7 +5,7 @@
 > **Not** a one-click workflow generator. **Not** a workflow execution engine.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Workflows](https://img.shields.io/badge/workflows-10-0d9488)](workflows/)
+[![Workflows](https://img.shields.io/badge/workflows-11-0d9488)](workflows/)
 [![Site](https://img.shields.io/badge/gallery-live-111827)](https://hiarieszhou.github.io/awesome-workflow/)
 
 ## Why this exists
@@ -37,6 +37,11 @@ Static site build: `npm run build` → `dist/` (GitHub Pages).
 
 
 ## Agent Engineering
+
+- **[Dual Claude Max + Device Fleet Hub](https://x.com/HiTw93/status/2110901581667516821)** — Tw93's public Ops habit for burning two Claude Max accounts plus ChatGPT Pro: always pick current top models, keep one Mac as the sole agent context hub, fan out computer-use across Windows VM / real PC / Android / iOS sim, run many parallel tabs, and close the loop with /loop intake plus weekly Waza skill distillation.<br>
+  Tools: `claude-code`, `codex`, `skills`, `mcp`, `other` · Publication: `published` · Evidence: `unknown` · Automation: `assisted` · [YAML](workflows/tw93-max-device-fleet.yml)
+
+  ![Dual Claude Max + Device Fleet Hub workflow diagram](docs/diagrams/tw93-max-device-fleet.svg)
 
 - **[Persistent Agent Memory Across Sessions](https://github.com/thedotmack/claude-mem)** · ★99,062 — Capture what the agent does during a session, compress with AI, and reinject relevant context into future sessions — a continuity workflow for Claude Code and other agents that otherwise forget between chats.<br>
   Tools: `claude-code`, `mcp`, `skills`, `other` · Publication: `published` · Evidence: `unknown` · Automation: `semi-auto` · [YAML](workflows/claude-mem-session-continuity.yml)
@@ -134,4 +139,4 @@ MIT © Aries Zhou and contributors.
 
 ---
 
-*Generated 2026-10-10 from 10 workflow files. Do not hand-edit the Contents section; edit YAML and run `npm run build:data`.*
+*Generated 2026-10-16 from 11 workflow files. Do not hand-edit the Contents section; edit YAML and run `npm run build:data`.*
