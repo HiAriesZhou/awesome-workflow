@@ -8,18 +8,51 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  # Supersede old PR checks; every main commit keeps its own run.
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.run_id }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
 jobs:
   check:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 2
+      - name: Identify documentation-only PR
+        id: docs
+        if: github.event_name == 'pull_request'
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: |
+          # README, diagrams and workflow recipes are product inputs, not skipped docs.
+          if ! git cat-file -e "$BASE_SHA^{commit}"; then
+            echo "only_docs=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          git diff --no-renames --name-only -z "$BASE_SHA" HEAD > "$RUNNER_TEMP/changed-paths"
+          only_docs=true
+          while IFS= read -r -d '' path; do
+            case "$path" in
+              AGENTS.md|CLAUDE.md|CONTRIBUTING.md|DECISIONS.md|docs/implementation/*.md) ;;
+              *) only_docs=false; break ;;
+            esac
+          done < "$RUNNER_TEMP/changed-paths"
+          echo "only_docs=$only_docs" >> "$GITHUB_OUTPUT"
       - uses: actions/setup-node@v4
+        if: steps.docs.outputs.only_docs != 'true'
         with:
           node-version: '22'
           cache: npm
-      - run: npm ci
+      - run: npm ci --no-audit --no-fund
+        if: steps.docs.outputs.only_docs != 'true'
       - run: npm run check
+        if: steps.docs.outputs.only_docs != 'true'
       - name: Generated files match workflows/*.yml
+        if: steps.docs.outputs.only_docs != 'true'
         run: |
           # porcelain also catches new untracked diagrams that git diff would miss
           stale=$(git status --porcelain -- README.md src/data docs/diagrams)
@@ -28,3 +61,6 @@ jobs:
             echo "::error::Generated files are stale. Run 'npm run build:data' and commit the result."
             exit 1
           fi
+      - name: Documentation verification complete
+        if: steps.docs.outputs.only_docs == 'true'
+        run: echo "Only contributor guidance changed; README and generated diagrams always receive full verification."
